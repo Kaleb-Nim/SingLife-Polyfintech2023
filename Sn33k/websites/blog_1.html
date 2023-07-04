@@ -1,0 +1,2135 @@
+<!DOCTYPE HTML>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8"/>
+<title>Blog</title>
+<meta content="Blog" name="title"/>
+<meta content="page-blog-article-listing-revamp" name="template"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="2023-07-03T04:16:03" property="article:published_time"/>
+<meta property="og:description"/>
+<meta content="Blog" property="og:title"/>
+<meta content="https://singlife.com/en/blog" property="og:url"/>
+<meta content="-b02vRVVpBFgRZKvXttdwpTkCQRiWgGljjRBxVCgdgI" name="google-site-verification"/>
+<link href="https://singlife.com/en/blog" rel="canonical"/>
+<link href="/etc.clientlibs/asl-common/clientlibs/clientlib-base/resources/logo/singlife-favicon.png" rel="icon" type="image/ico"/>
+<link href="/etc.clientlibs/asl-common/clientlibs/clientlib-base/resources/logo/singlife-favicon.png" rel="apple-touch-icon"/>
+<meta content="/etc.clientlibs/asl-common/clientlibs/clientlib-base/resources/logo/singlife-favicon.png" name="msapplication-TileImage"/>
+<meta content="#ffd900" name="msapplication-TileColor"/>
+<script>
+        window.digitalDataSubset = {"control":{"versionNum":1.7},"page":{"brand":"singlife","country":"sg","language":"en","loginStatus":"logged-out","siteID":"sg","type":"static","navLevel1":"personal","navLevel2":"blog"}};
+    </script>
+<link href="/etc.clientlibs/asl-public/clientlibs/clientlib-base.min.css" rel="stylesheet" type="text/css"/>
+<script async="" src="https://assets.adobedtm.com/92f5a7c23d20/cd005bf431fc/launch-3187dd5aa298.min.js"></script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    
+    })(window,document,'script','dataLayer','GTM-WC5JVBX');
+</script>
+</head>
+<body checkscrollanimation="" class="overflow-x-hidden theme-red" globalscrollnumber="window.pageYOffset;" visiblescrolllnumber="window.innerHeight" x-data="{
+      globalScrollNumber: 0,
+      visibleScrolllNumber: 0,
+      loadJsonPlayer(id, url) {
+        const player = document.getElementById(id);
+        player.addEventListener(&quot;rendered&quot;, (e) =&gt; {
+          player.load(url);
+        });
+        player.load(url);
+      },
+      checkScrollAnimation() {
+        let containers = document.getElementsByClassName('sl-scroll-animate');
+        for (let i = 0; i &lt; containers.length; i++) {
+          let container = containers[i];
+          let offsetArea = container.offsetTop + 200;
+          let isAnimated = false;
+          for (let j = 0; j &lt; container.classList.length; j++) {
+            if (container.classList[j] == container.dataset.animateClass) { isAnimated = true; }
+          }
+          // console.log(container.offsetTop, isAnimated);
+          if (!isAnimated &amp;&amp; (this.visibleScrolllNumber &gt; offsetArea)) {
+            container.classList.add(container.dataset.animateClass);
+          }
+        }
+      }
+    }" x-init="(()=&gt; {
+      globalScrollNumber = window.pageYOffset;
+      visibleScrolllNumber = window.innerHeight + globalScrollNumber;
+      checkScrollAnimation();
+    })()">
+<header class="sl-header" menushadow="(scrollNumber" scrollnumber="window.pageYOffset," stoppoint="$refs.stop.offsetTop" x-data="{
+      width: window.innerWidth,
+      scrollNumber: 0,
+      mobileScrollNumber: 0,
+      stopPoint: $refs.stop.offsetTop,
+      startPoint: $refs.start.offsetTop,
+      menuShadow: false,
+      menuMobileOpen: false,
+      menuShow: false,
+      menuLevel: 0,
+      menuProducts: false,
+      menuMobile1: false, menuMobile2: false, menuMobile3: false, menuMobile4: false, menuMobile5: false, menuMobile6: false, menuMobile7: false,
+      menuMobileLogin: false,
+      menuOpen: [false, false, false, false, false, false, false],
+      menuMainOpen: false,
+      menuLoginOpen: false,
+      menuSearchOpen: false,
+      menuForceShow: false,
+      toggleMenuMobile() {
+        this.menuMobile1 = false;
+        this.menuMobile2 = false;
+        this.menuMobile3 = false;
+        this.menuMobile4 = false;
+        this.menuMobile5 = false;
+        this.menuMobile6 = false;
+        this.menuMobile7 = false;
+        this.menuMobileLogin = false;
+        this.menuLevel = 1;
+        this.menuMobileOpen = this.menuMobileOpen ? this.closeMenuMobile() : true;
+      },
+      closeMenuMobile() {
+        this.menuMobileOpen = false;
+      },
+      toggleSearch() {
+        this.menuSearchOpen = !this.menuSearchOpen;
+        if (this.width &lt; 960) {
+          this.menuShadow = this.menuSearchOpen;
+        }
+      },
+      initHeaderForm() {
+        document.getElementById('headerSearchForm').addEventListener('submit',(e)=&gt;{
+          e.preventDefault();
+          let encodedSearch = encodeURIComponent(document.getElementById('q').value);
+          let actionValue = document.getElementById('headerSearchForm').action ? document.getElementById('headerSearchForm').action : '/en/search';
+          window.location.href = actionValue+'?q='+encodedSearch;
+        });
+      },
+      resetMenu() {
+        this.menuMainOpen = false;
+        if (!this.menuForceShow) this.menuOpen = [false, false, false, false, false, false, false];
+      },
+      menuIsOpen() {
+        for (var value of this.menuOpen) {
+          if (value) return true;
+        }
+        return false;
+      },
+      toggleMenu(index) {
+        if (!this.menuOpen[index]) this.resetMenu();
+        this.menuOpen[index] = this.menuOpen[index] ? false : true;
+        this.menuMainOpen = this.menuIsOpen();
+      },
+      hoverMenu(index, ref, self) {
+        if (!this.menuForceShow) {
+          if (!this.menuOpen[index]) this.resetMenu();
+          this.menuOpen[index] = true;
+          
+          
+          
+          this.menuOpen[3] = false;
+          
+          this.menuOpen[5] = false;
+          
+          this.menuMainOpen = this.menuIsOpen();
+          let maxLeft = document.documentElement.clientWidth - 500;
+          let parentOffLeft = document.getElementById('sl-main-menu').offsetLeft + self.offsetLeft;
+          let offLeft = (parentOffLeft-500) &gt;= 0 ? parentOffLeft+(self.offsetWidth/2) : 500;
+          //console.log('offset: '+parentOffLeft  + ' width: '+self.offsetWidth + ' maxLeft: ' +maxLeft);
+          if (offLeft &gt; maxLeft) { offLeft = maxLeft; }
+          $nextTick(() =&gt; {
+            document.getElementById('sl-menu-content').style.height = ref.offsetHeight + 'px';
+          });
+
+          //document.getElementById('sl-menu-sub-menu').style.left = offLeft + 'px';
+          document.getElementById('sl-main-menu-hover-line').style.left = self.offsetLeft+(self.offsetWidth/2)-24 + 'px';
+        }
+      },
+      hoverOutMenu() {
+        this.menuShow = false;
+        this.menuMainOpen = false;
+        document.getElementById('sl-menu-sub-menu').style.left = '';
+        if (!this.menuForceShow) this.menuOpen = [false, false, false, false, false, false, false];
+      },
+      closeMenu(index) {
+        this.menuOpen[index] = false;
+        this.menuMainOpen = false;
+        return false
+      }
+    }"> (stopPoint/2)) ? true : false;
+    " x-on:resize.window.debounce="width = window.innerWidth;"&gt;
+<div :class="{'sl-menu-shadow-dropdown': (menuMobileOpen || menuShadow), 'force-show-menu': menuForceShow}" class="sl-header-wrapper">
+<div class="sl-header-wrapper_container">
+<a :class="{'sl-mobile-block-hidden': (menuMobileOpen || menuLevel &gt; 1)}" class="sl-header-logo" href="/en">
+<img class="w-[189px]" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/logo/sl-logo-singlife.png"/></a>
+<div class="sl-main-menu" id="sl-main-menu">
+<a class="sl-main-menu-link group" menusearchopen='false;"' x-ref="menu1">
+<span :class="{'sl-main-menu-link-hover': menuOpen[0]}" class="sl-inner">Products</span>
+</a>
+<a class="sl-main-menu-link group" menusearchopen='false;"' x-ref="menu2">
+<span :class="{'sl-main-menu-link-hover': menuOpen[1]}" class="sl-inner">Promotions</span>
+</a>
+<a class="sl-main-menu-link group" menusearchopen='false;"' x-ref="menu3">
+<span :class="{'sl-main-menu-link-hover': menuOpen[2]}" class="sl-inner">Claims</span>
+</a>
+<a class="sl-main-menu-link group" href="/en/policy-servicing" menusearchopen='false;"' x-ref="menu4">
+<span :class="{'sl-main-menu-link-hover': menuOpen[3]}" class="sl-inner">Payments</span>
+</a>
+<a class="sl-main-menu-link group" menusearchopen='false;"' x-ref="menu5">
+<span :class="{'sl-main-menu-link-hover': menuOpen[4]}" class="sl-inner">About us</span>
+</a>
+<a class="sl-main-menu-link group active" href="/en/blog" menusearchopen='false;"' x-ref="menu6">
+<span :class="{'sl-main-menu-link-hover': menuOpen[5]}" class="sl-inner">Blog</span>
+</a>
+<a class="sl-main-menu-link group" menusearchopen='false;"' x-ref="menu7">
+<span :class="{'sl-main-menu-link-hover': menuOpen[6]}" class="sl-inner">Support</span>
+</a>
+<div :class="{'hide-opacity': !menuMainOpen}" class="sl-main-menu-hover-line hide-opacity" id="sl-main-menu-hover-line"></div>
+</div>
+<div :class="{'sl-hidden': !menuMainOpen}" class="sl-main-sub-menu sl-hidden" id="sl-menu-sub-menu" style="display: none;" x-show="menuMainOpen" x-transition:enter="transition ease-out duration-150" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-90" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 scale-90" x-transition:leave-start="opacity-100 scale-100">
+<div class="sl-menu-blank-wrapper" id="sl-menu-content"></div>
+<div :class="{'hide-opacity': !menuOpen[0]}" class="sl-menu-content-wrapper" x-ref="mainMenu1">
+<div class="sl-menu-content theme-purple sl-no-border">
+<h5 class="sl-section-label text-singlife-purple">INSURE</h5>
+<div>
+<label class="sl-main-sub-menu-label">Medical &amp; Life Insurance</label>
+<a class="sl-main-sub-menu-link" href="/en/life-insurance">Life Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/medical-insurance">Medical Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/critical-illness-insurance">Critical Illness Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/disability-insurance">Disability Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/maternity-care">Maternity Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/accident-insurance">Accident Insurance
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-purple">
+<h5 class="sl-section-label text-singlife-purple"> </h5>
+<div>
+<label class="sl-main-sub-menu-label">Lifestyle insurance</label>
+<a class="sl-main-sub-menu-link" href="/en/car-insurance">Car Insurance
+ </a>
+<a class="sl-main-sub-menu-link" href="/en/travel-insurance">Travel Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/home-insurance">Home Insurance
+</a>
+<label class="sl-main-sub-menu-label mt-10">Group Insurance scheme</label>
+<a class="sl-main-sub-menu-link" href="/en/mindef-and-mha/mindef-group-insurance">MINDEF
+</a>
+<a class="sl-main-sub-menu-link" href="/en/mindef-and-mha/mha-group-insurance">MHA
+</a>
+<a class="sl-main-sub-menu-link" href="/en/pogis">Public Officers
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-blue sl-no-label">
+<h5 class="sl-section-label text-singlife-blue">Invest</h5>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/savings">Savings
+</a>
+<a class="sl-main-sub-menu-link" href="/en/flexi-retirement">Retirement
+</a>
+<a class="sl-main-sub-menu-link" href="/en/investment-linked-plan">Investment-Linked Plans
+</a>
+<a class="sl-main-sub-menu-link" href="/en/investment-linked-plan/fund-performance-reports">Investment-Linked Plan Funds Reports
+</a>
+<a class="sl-main-sub-menu-link" href="/en/investment-linked-plan/resources">Fund Information
+</a>
+<a class="sl-main-sub-menu-link" href="/en/dollardex">Dollar Dex
+</a>
+<a class="sl-main-sub-menu-link" href="/en/navigator">Navigator
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-orange sl-no-label">
+<h5 class="sl-section-label text-singlife-orange">SAVE &amp; EARN</h5>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/singlife-account">Singlife Account
+</a>
+<a class="sl-main-sub-menu-link" href="/en/promotions/singlife-account-bonus-campaigns">3.5% p.a. Bonus Campaigns
+</a>
+</div>
+</div>
+</div>
+<div :class="{'hide-opacity': !menuOpen[1]}" class="sl-menu-content-wrapper" x-ref="mainMenu2">
+<div class="sl-menu-content theme-teal sl-no-label">
+<h5 class="sl-section-label text-singlife-teal">Promotions</h5>
+<p class="sl-section-caption">Enjoy these special savings when you purchase our plans.</p>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/promotions#tab/promotion:tag/medical-life-insurance">Medical &amp; Life Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/promotions#tab/promotion:tag/lifestyle-insurance">Lifestyle Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/promotions#tab/promotion:tag/mindef-mha-pogis">MINDEF, MHA &amp; POGIS
+</a>
+<a class="sl-main-sub-menu-link" href="/en/promotions#tab/promotion:category/singlife-save-invest">Save &amp; Invest
+</a>
+<a class="sl-main-sub-menu-link">
+</a>
+<a class="sl-main-sub-menu-link" href="/en/promotions">View all Promotions
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-orange sl-no-label">
+<h5 class="sl-section-label text-singlife-orange">Plan &amp; Earn</h5>
+<p class="sl-section-caption">Earn rewards as we tailor a holistic Better Plan just for you.</p>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/bettercoverforfamily">Better Cover for Your Family
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-purple sl-no-label">
+<h5 class="sl-section-label text-singlife-purple">Customer Rewards</h5>
+<p class="sl-section-caption">Rewards and perks for our Singlife customers.</p>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/rewards#tab/privileges">Privileges
+</a>
+<a class="sl-main-sub-menu-link" href="/en/rewards#tab/birthday">Birthday Offers
+</a>
+<a class="sl-main-sub-menu-link" href="/en/rewards#tab/mindef">MINDEF / MHA Exclusive
+</a>
+<a class="sl-main-sub-menu-link" href="/en/rewards#tab/digital-goods">Digital Goods
+</a>
+<a class="sl-main-sub-menu-link">
+</a>
+<a class="sl-main-sub-menu-link" href="/en/rewards">View all Rewards
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-grey">
+<h5 class="sl-section-label text-singlife-grey"> </h5>
+<div>
+</div>
+</div>
+</div>
+<div :class="{'hide-opacity': !menuOpen[2]}" class="sl-menu-content-wrapper" x-ref="mainMenu3">
+<div class="sl-menu-content theme-purple sl-no-label">
+<h5 class="sl-section-label text-singlife-purple">Individual Claims</h5>
+<div>
+<label class="sl-main-sub-menu-label">Life</label>
+<a class="sl-main-sub-menu-link" href="/en/claims/life/accident">Accident
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/life/critical-illness">Critical / Terminal Illness
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/life/death">Death
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/life/disability">Disability
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/life/maternity">Maternity
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-purple sl-no-label">
+<h5 class="sl-section-label text-singlife-purple"> </h5>
+<div>
+<label class="sl-main-sub-menu-label">Medical</label>
+<a class="sl-main-sub-menu-link" href="/en/claims/medical/medical-and-hospitalisation">Medical and Hospitalisation
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/medical/other-medical-benefits">Other Medical Benefits
+</a>
+<label class="sl-main-sub-menu-label mt-10">Lifestyle</label>
+<a class="sl-main-sub-menu-link" href="/en/claims/lifestyle/car">Car
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/lifestyle/home">Home
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/lifestyle/travel">Travel
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/lifestyle/personal-accident">Personal Accident
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-grey sl-no-label">
+<h5 class="sl-section-label text-singlife-grey">GROUP CLAIMS</h5>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/claims/group/mindef-and-mha">MINDEF &amp; MHA
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/group/pogis">Public Officers
+</a>
+<label class="sl-main-sub-menu-label mt-10">Employee Claims</label>
+<a class="sl-main-sub-menu-link" href="/en/claims/employee-benefits/corporate-insurance-claims">Corporate Plan
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/employee-benefits/claimconnect">ClaimConnect
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/employee-benefits/ebconnect">EBConnect
+</a>
+<a class="sl-main-sub-menu-link" href="/en/claims/employee-benefits/commercial-insurance-claims">Commercial Insurance Claims
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-grey-400 sl-no-label">
+<h5 class="sl-section-label text-grey-400">OTHERS</h5>
+<div>
+<a class="sl-main-sub-menu-link" href="https://singlife.com/en/business/group-insurance/group-hospital-and-surgical-insurance#pre-authorisation">Letter of Guarantee
+</a>
+<a class="sl-main-sub-menu-link" href="/en/medical-insurance/medicalspecialists">Medical Specialist
+</a>
+<a class="sl-main-sub-menu-link" href="/en/medical-insurance/medicalspecialists/pre-approval">Pre-Authorisation
+</a>
+</div>
+<a class="sl-main-sub-menu-link sl-link-fixed" href="/en/claims">View All Claims</a>
+</div>
+</div>
+<div :class="{'hide-opacity': !menuOpen[3]}" class="sl-menu-content-wrapper" x-ref="mainMenu4">
+<div class="sl-menu-content theme-grey">
+<h5 class="sl-section-label text-singlife-grey"> </h5>
+<div>
+</div>
+</div>
+<div class="sl-menu-content theme-grey">
+<h5 class="sl-section-label text-singlife-grey"> </h5>
+<div>
+</div>
+</div>
+<div class="sl-menu-content theme-grey">
+<h5 class="sl-section-label text-singlife-grey"> </h5>
+<div>
+</div>
+</div>
+<div class="sl-menu-content theme-grey">
+<h5 class="sl-section-label text-singlife-grey"> </h5>
+<div>
+</div>
+</div>
+</div>
+<div :class="{'hide-opacity': !menuOpen[4]}" class="sl-menu-content-wrapper" x-ref="mainMenu5">
+<div class="sl-menu-content theme-red sl-no-label">
+<h5 class="sl-section-label text-singlife-red">ABOUT SINGLIFE</h5>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/about-us">Our Brand Story
+</a>
+<a class="sl-main-sub-menu-link" href="/en/about-us/leadership-team">Leadership Team
+</a>
+<a class="sl-main-sub-menu-link" href="/en/about-us/corporate-governance">Corporate Governance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/about-us/newsroom">Newsroom
+</a>
+<a class="sl-main-sub-menu-link" href="/en/about-us/sustainability-strategy">Sustainability Strategy
+</a>
+<a class="sl-main-sub-menu-link" href="/en/about-us/investor-relations">Investor Relations
+</a>
+<a class="sl-main-sub-menu-link" href="/en/about-us/ecosystem">Ecosystem
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-blue sl-no-label">
+<h5 class="sl-section-label text-singlife-blue">CAREERS</h5>
+<div>
+<a class="sl-main-sub-menu-link" href="https://singlife.darwinbox.com/ms/candidate/careers" target="_blank">Corporate
+</a>
+<a class="sl-main-sub-menu-link" href="https://singlifefa.com/">Singlife Financial Advisers
+</a>
+<a class="sl-main-sub-menu-link" href="/en/careers/affinity-channel">Affinity Channel
+</a>
+<a class="sl-main-sub-menu-link" href="/en/careers">All Careers
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-blue sl-no-label">
+<h5 class="sl-section-label text-singlife-blue"> </h5>
+<div>
+</div>
+</div>
+<div class="sl-menu-content theme-grey">
+<h5 class="sl-section-label text-singlife-grey"> </h5>
+<div>
+</div>
+</div>
+</div>
+<div :class="{'hide-opacity': !menuOpen[5]}" class="sl-menu-content-wrapper" x-ref="mainMenu6">
+<div class="sl-menu-content theme-yellow sl-no-border sl-no-label">
+<h5 class="sl-section-label text-singlife-yellow">LIFESTUFF</h5>
+<p class="sl-section-caption">Personal tips, guides and expert advice to master every aspect of your life</p>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/blog/money">Money
+</a>
+<a class="sl-main-sub-menu-link" href="/en/blog/health">Health
+</a>
+<a class="sl-main-sub-menu-link" href="/en/blog/lifestyle">Lifestyle
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-purple sl-no-border sl-no-label">
+<h5 class="sl-section-label text-singlife-purple"> </h5>
+<p class="sl-section-caption sl-section-caption-space"></p>
+<div>
+</div>
+</div>
+<div class="sl-menu-content theme-purple sl-no-border sl-no-label">
+<h5 class="sl-section-label text-singlife-purple"> </h5>
+<div>
+</div>
+</div>
+<div class="sl-menu-content theme-grey">
+<h5 class="sl-section-label text-singlife-grey"> </h5>
+<div>
+</div>
+<a class="sl-main-sub-menu-link sl-link-fixed" href="/en/blog">View All</a>
+</div>
+</div>
+<div :class="{'hide-opacity': !menuOpen[6]}" class="sl-menu-content-wrapper" x-ref="mainMenu7">
+<div class="sl-menu-content theme-yellow sl-no-border sl-no-label">
+<h5 class="sl-section-label text-singlife-yellow">FORMS</h5>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/form-library#lifestyle-insurance&amp;personal-accident-insurance">Personal Accident Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/form-library#lifestyle-insurance&amp;car-insurance">Car Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/form-library#lifestyle-insurance&amp;travel-insurance">Travel Insurance
+</a>
+<a class="sl-main-sub-menu-link" href="/en/form-library#lifestyle-insurance&amp;home-insurance">Home Insurance
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-grey-400 sl-no-label">
+<h5 class="sl-section-label text-grey-400"> </h5>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/form-library#life-medical-savings-and-retirement">Life, Medical, Savings and Retirement
+</a>
+<a class="sl-main-sub-menu-link" href="/en/form-library#mindef-mha-pogis&amp;mindef">MINDEF
+</a>
+<a class="sl-main-sub-menu-link" href="/en/form-library#mindef-mha-pogis&amp;mha">MHA
+</a>
+<a class="sl-main-sub-menu-link" href="/en/form-library#mindef-mha-pogis&amp;pogis">Public Officers
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-grey-400 sl-no-label">
+<h5 class="sl-section-label text-grey-400">Resources</h5>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/useful-guides">Useful Guides
+</a>
+<a class="sl-main-sub-menu-link" href="/en/novel-coronavirus-notice">COVID-19 Advisory
+</a>
+<a class="sl-main-sub-menu-link" href="/en/payouts-via-paynow">Payouts via PayNow-NRIC/FIN
+</a>
+</div>
+</div>
+<div class="sl-menu-content theme-teal sl-no-label">
+<h5 class="sl-section-label text-singlife-teal">help</h5>
+<div>
+<a class="sl-main-sub-menu-link" href="/en/faq">FAQ
+</a>
+<a class="sl-main-sub-menu-link" href="/en/contact-us">Contact Us
+</a>
+<a class="sl-main-sub-menu-link" href="/en/policy-servicing">Policy Servicing
+</a>
+</div>
+</div>
+</div>
+<div class="bg-grey-600 flex flex-row items-center justify-center space-x-10">
+<a class="sl-menu-white-link" href="/en/claims" title="Claims">Claims</a>
+<a class="sl-menu-white-link" href="/en/contact-us" title="Contact Us">Contact Us</a>
+<a class="sl-menu-white-link" href="/en/faq/policy-servicing#premium-payments" title="Make Payments">Make Payments</a>
+<a class="sl-menu-white-link" href="/en/faq" title="FAQ">FAQ</a>
+</div>
+</div>
+<nav class="h-full flex-1 flex flex-wrap justify-end space-x-4 tablet-header:flex-none">
+<a :class="{'sl-mobile-flex-hidden': menuMobileOpen}" class="flex items-center" hoveroutmenu="" href="javascript:;">
+<img src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-search.svg"/></a><a class="sl-hamburger" href="javascript:;">
+<img :class="{'hidden': menuMobileOpen}" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-hamburger.svg"/>
+<img :class="{'hidden': !menuMobileOpen}" class="hidden" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-cross.svg"/>
+</a>
+<div class="sl-right-btn-wrapper">
+<a class="sl-main-menu-button" href="/business">Business</a>
+<div class="relative" false="">
+<button class="sl-main-menu-button ml-2" hoveroutmenu="" menusearchopen="false;" true="">Login</button>
+<div class="sl-header-login-menu-spacer" x-show="menuLoginOpen"></div>
+<div class="sl-header-login-menu" x-show="menuLoginOpen" x-transition:enter="transition ease-out duration-150" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-90" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 scale-90" x-transition:leave-start="opacity-100 scale-100">
+<div class="sl-menu-content-wrap login">
+<div class="sl-menu-content sl-no-label">
+<div class="sl-main-sub-menu-container">
+<h5 class="sl-main-sub-menu-label text-singlife-orange-800">Customer Portals</h5>
+</div>
+<div>
+<div class="sl-main-sub-menu-container">
+<a class="sl-main-sub-menu-link txt-singlife-red text-capital" href="https://mysinglife.singlife.com/" target="_blank">MYSINGLIFE
+<img class="arrow-menu-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/icon-menu-arrow.svg"/></a>
+<p class="sl-login-section-caption">Access your insurance and investment plans and update your profile</p>
+</div>
+<div class="sl-main-sub-menu-container">
+<a class="sl-main-sub-menu-link txt-singlife-red text-capital" href="https://online.singlife.com/" target="_blank">Singlife Customer Portal
+<img class="arrow-menu-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/icon-menu-arrow.svg"/></a>
+<p class="sl-login-section-caption">For Singlife Account, Sure Invest and all other plans</p>
+</div>
+</div>
+<div class="sl-main-sub-menu-container">
+<h5 class="sl-main-sub-menu-label text-singlife-orange-800">Corporate Portals</h5>
+</div>
+<div>
+<div class="sl-main-sub-menu-container">
+<a class="sl-main-sub-menu-link" href="https://claimconnect.singlife.com/eb/home/#/" target="_blank">ClaimConnect
+<img class="arrow-menu-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/icon-menu-arrow.svg"/></a>
+<p class="sl-login-section-caption">For corporate clients and insured members </p>
+</div>
+<div class="sl-main-sub-menu-container">
+<a class="sl-main-sub-menu-link" href="https://ebconnect.singlife.com/eb/homepage/#/" target="_blank">EBConnect
+<img class="arrow-menu-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/icon-menu-arrow.svg"/></a>
+<p class="sl-login-section-caption">HR Business partners and Intermediaries</p>
+</div>
+</div>
+</div>
+<div class="sl-menu-content sl-no-label">
+<div class="sl-main-sub-menu-container">
+<h5 class="sl-main-sub-menu-label text-singlife-grey">MINDEF, MHA, Public Officers</h5>
+<p class="sl-login-section-caption">Manage your group insurance details or upgrade coverage here</p>
+</div>
+<div>
+<div class="sl-main-sub-menu-container">
+<a class="sl-main-sub-menu-link" href="https://ebh.singlife.com/eb/mindef-mha/?existing=1" target="_blank">MINDEF Group Insurance<br/>Online
+<img class="arrow-menu-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/icon-menu-arrow.svg"/></a>
+<p class="sl-login-section-caption">For MINDEF Group Insurance Scheme customers</p>
+</div>
+<div class="sl-main-sub-menu-container">
+<a class="sl-main-sub-menu-link" href="https://ebh.singlife.com/eb/mindef-mha/?groupName=MHA&amp;existing=1" target="_blank">MHA Group Insurance Online
+<img class="arrow-menu-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/icon-menu-arrow.svg"/></a>
+<p class="sl-login-section-caption">For MHA Group Insurance Scheme customers</p>
+</div>
+<div class="sl-main-sub-menu-container">
+<a class="sl-main-sub-menu-link" href="https://ebh.singlife.com/eb/pogis/?existing=1" target="_blank">Public Officers Group Insurance Scheme Online
+<img class="arrow-menu-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/icon-menu-arrow.svg"/></a>
+<p class="sl-login-section-caption">For Public Officers Group Insurance Scheme (POGIS) customers</p>
+</div>
+</div>
+</div>
+<div class="sl-menu-content sl-no-label">
+<div class="sl-main-sub-menu-container">
+<h5 class="sl-main-sub-menu-label text-singlife-purple">Financial Advisers </h5>
+</div>
+<div>
+<div class="sl-main-sub-menu-container">
+<a class="sl-main-sub-menu-link" href="https://applogin.singlife.com/adviser/#/login" target="_blank">Singlife Online (SOL)
+<img class="arrow-menu-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/icon-menu-arrow.svg"/></a>
+<p class="sl-login-section-caption">For Singlife financial advisers</p>
+</div>
+<div class="sl-main-sub-menu-container">
+<a class="sl-main-sub-menu-link" href="https://applogin.singlife.com/SQS/login/" target="_blank">PocketSQS
+<img class="arrow-menu-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/icon-menu-arrow.svg"/></a>
+<p class="sl-login-section-caption">Access the online sales quotation system</p>
+</div>
+<div class="sl-main-sub-menu-container">
+<a class="sl-main-sub-menu-link" href="https://adviser.singlife.com/" target="_blank">Singlife Advisers
+<img class="arrow-menu-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/icon-menu-arrow.svg"/></a>
+<p class="sl-login-section-caption">For Singlife third-party financial representatives</p>
+</div>
+</div>
+<a class="sl-main-sub-menu-link sl-link-fixed" href="/en/login">View All Logins</a>
+</div>
+</div>
+<div class="bg-grey-600 flex flex-row items-center justify-center space-x-10">
+<a class="sl-menu-white-link" href="/en/claims" title="Claims">Claims</a>
+<a class="sl-menu-white-link" href="/en/contact-us" title="Contact Us">Contact Us</a>
+<a class="sl-menu-white-link" href="/en/faq/policy-servicing#premium-payments" title="Make Payments">Make Payments</a>
+<a class="sl-menu-white-link" href="/en/faq" title="FAQ">FAQ</a>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+</div>
+<form action="/en/search" class="sl-header-search" data-json-url="/en/blog/jcr:content.asl.search-autocomplete.json" id="headerSearchForm" method="GET" role="search" style="display: none;" x-data="search_box" x-init="initHeaderForm()" x-show="menuSearchOpen" x-transition:enter="transition ease-out duration-150" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="opacity-0 scale-90" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 scale-90" x-transition:leave-start="opacity-100 scale-100">
+<input autocomplete="off" class="sl-header-search-input" id="q" name="q" placeholder="Search products, questions and more..." type="text" x-ref="searchInput"/>
+<span class="sl-header-search-predictive" x-text="suggestion"></span>
+<div class="sl-header-search-action">
+<button class="sl-header-search-btn" type="submit">
+<div class="text-center flex items-center">Search</div>
+</button>
+<button class="sl-header-search-close" false="" type="button">
+<img src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-red-cross.svg"/>
+</button>
+</div>
+</form>
+<div :class="{'hidden': !menuMobileOpen &amp;&amp; ((width &lt;= 960) &amp;&amp; !menuSearchOpen) || (width &gt; 960) }" class="bg-overlay fixed h-full w-full z-10 hidden"></div>
+<div :class="{'hidden': !menuMobileOpen, 'block': menuMobileOpen}" class="sl-mobile-menu hidden" x-ref="start">
+<div :class="{'shadow-dropdown': mobileScrollNumber &gt; 10}" class="sl-mobile-nav-wrapper">
+<nav class="h-10 flex-1 flex flex-wrap justify-end space-x-4"><a class="sl-hamburger" href="javascript:;"><img :class="{'hidden': !menuMobileOpen}" class="hidden" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-cross.svg"/></a></nav>
+</div>
+<div :class="{'hidden': (menuLevel != 1)}" class="sl-mobile-main-menu hidden" x-ref="stop">
+<div class="sl-menu-inner-wrapper pt-10">
+<a class="sl-menu-link" href="#" menumobile1='!menuMobile1;"'>Products
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="#" menumobile2='!menuMobile2;"'>Promotions
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="#" menumobile3='!menuMobile3;"'>Claims
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/policy-servicing">Payments
+</a>
+<a class="sl-menu-link" href="#" menumobile5='!menuMobile5;"'>About us
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/blog">Blog
+</a>
+<a class="sl-menu-link" href="#" menumobile7='!menuMobile7;"'>Support
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<hr class="sl-menu-inner-hr"/>
+<a class="sl-menu-link" href="#" menumobilelogin='!menuMobileLogin;"'>Login
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims">Claims
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/contact-us">Contact Us
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/faq/policy-servicing#premium-payments">Make Payments
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/faq">FAQ
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<p class="text-center mt-5 text-description">Looking for corporate solutions?</p>
+<a class="sl-text-link" href="/business">Business Solutions</a>
+<div class="bg-grey-100 px-6 py-9 mt-10">
+<p class="uppercase text-label text-singlife-red-300 font-bold">Promo</p>
+<p class="text-card-sub-header font-semibold mt-1">Up to 35% OFF Singlife Car Insurance</p>
+<p class="mt-2">For MINDEF/MHA/POGIS policyholders, get an additional 15% off on top of any existing promo.</p>
+<a class="sl-btn sl-btn-secondary py-4 mt-10" href="/en/car-insurance">Up to 35% OFF Singlife Car Insurance</a>
+</div>
+<div class="bg-white px-6 py-8">
+<a class="sl-btn sl-btn-primary" href="/en/singlife-account#singlife-account-app">Get the Singlife App</a>
+</div>
+</div>
+<div :class="{'hidden': !menuMobile1}" class="sl-sub-menu hidden">
+<a class="sl-menu-link sl-menu-link-back" href="#" menumobile1='!menuMobile1;"'>
+<div class="h-6 w-6 sl-chevron sl-chevron-reverse">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+<span>Products</span>
+</a>
+<label class="sl-menu-label theme-purple">INSURE</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/life-insurance">Life Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/medical-insurance">Medical Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/critical-illness-insurance">Critical Illness Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/disability-insurance">Disability Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/maternity-care">Maternity Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/accident-insurance">Accident Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+<hr class="sl-menu-inner-hr"/>
+<a class="sl-menu-link" href="/en/car-insurance">Car Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/travel-insurance">Travel Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/home-insurance">Home Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<hr class="sl-menu-inner-hr"/>
+<a class="sl-menu-link" href="/en/mindef-and-mha/mindef-group-insurance">MINDEF
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/mindef-and-mha/mha-group-insurance">MHA
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/pogis">Public Officers
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-blue">Invest</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/savings">Savings
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/flexi-retirement">Retirement
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/investment-linked-plan">Investment-Linked Plans
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/investment-linked-plan/fund-performance-reports">Investment-Linked Plan Funds Reports
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/investment-linked-plan/resources">Fund Information
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/dollardex">Dollar Dex
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/navigator">Navigator
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-orange">SAVE &amp; EARN</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/singlife-account">Singlife Account
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/promotions/singlife-account-bonus-campaigns">3.5% p.a. Bonus Campaigns
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+</div>
+<div :class="{'hidden': !menuMobile2}" class="sl-sub-menu hidden">
+<a class="sl-menu-link sl-menu-link-back" href="#" menumobile2='!menuMobile2;"'>
+<div class="h-6 w-6 sl-chevron sl-chevron-reverse">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+<span>Promotions</span>
+</a>
+<label class="sl-menu-label theme-teal">Promotions</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/promotions#tab/promotion:tag/medical-life-insurance">Medical &amp; Life Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/promotions#tab/promotion:tag/lifestyle-insurance">Lifestyle Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/promotions#tab/promotion:tag/mindef-mha-pogis">MINDEF, MHA &amp; POGIS
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/promotions#tab/promotion:category/singlife-save-invest">Save &amp; Invest
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link">
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/promotions">View all Promotions
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-orange">Plan &amp; Earn</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/bettercoverforfamily">Better Cover for Your Family
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<hr class="sl-menu-inner-hr"/>
+</div>
+<label class="sl-menu-label theme-purple">Customer Rewards</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/rewards#tab/privileges">Privileges
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/rewards#tab/birthday">Birthday Offers
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/rewards#tab/mindef">MINDEF / MHA Exclusive
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/rewards#tab/digital-goods">Digital Goods
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link">
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/rewards">View all Rewards
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+</div>
+</div>
+<div :class="{'hidden': !menuMobile3}" class="sl-sub-menu hidden">
+<a class="sl-menu-link sl-menu-link-back" href="#" menumobile3='!menuMobile3;"'>
+<div class="h-6 w-6 sl-chevron sl-chevron-reverse">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+<span>Claims</span>
+</a>
+<label class="sl-menu-label theme-purple">Individual Claims</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/claims/life/accident">Accident
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/life/critical-illness">Critical / Terminal Illness
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/life/death">Death
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/life/disability">Disability
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/life/maternity">Maternity
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+<hr class="sl-menu-inner-hr"/>
+<a class="sl-menu-link" href="/en/claims/medical/medical-and-hospitalisation">Medical and Hospitalisation
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/medical/other-medical-benefits">Other Medical Benefits
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<hr class="sl-menu-inner-hr"/>
+<a class="sl-menu-link" href="/en/claims/lifestyle/car">Car
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/lifestyle/home">Home
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/lifestyle/travel">Travel
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/lifestyle/personal-accident">Personal Accident
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-grey">GROUP CLAIMS</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/claims/group/mindef-and-mha">MINDEF &amp; MHA
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/group/pogis">Public Officers
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<hr class="sl-menu-inner-hr"/>
+<a class="sl-menu-link" href="/en/claims/employee-benefits/corporate-insurance-claims">Corporate Plan
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/employee-benefits/claimconnect">ClaimConnect
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/employee-benefits/ebconnect">EBConnect
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/claims/employee-benefits/commercial-insurance-claims">Commercial Insurance Claims
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-grey-400">OTHERS</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="https://singlife.com/en/business/group-insurance/group-hospital-and-surgical-insurance#pre-authorisation">Letter of Guarantee
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/medical-insurance/medicalspecialists">Medical Specialist
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/medical-insurance/medicalspecialists/pre-approval">Pre-Authorisation
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<a class="sl-text-link" href="/en/claims">View All Claims</a>
+</div>
+<div :class="{'hidden': !menuMobile4}" class="sl-sub-menu hidden">
+<a class="sl-menu-link sl-menu-link-back" href="#" menumobile4='!menuMobile4;"'>
+<div class="h-6 w-6 sl-chevron sl-chevron-reverse">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+<span>Payments</span>
+</a>
+<div class="sl-menu-inner-wrapper" s="">
+<hr class="sl-menu-inner-hr"/>
+<hr class="sl-menu-inner-hr"/>
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+</div>
+</div>
+<div :class="{'hidden': !menuMobile5}" class="sl-sub-menu hidden">
+<a class="sl-menu-link sl-menu-link-back" href="#" menumobile5='!menuMobile5;"'>
+<div class="h-6 w-6 sl-chevron sl-chevron-reverse">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+<span>About us</span>
+</a>
+<label class="sl-menu-label theme-red">ABOUT SINGLIFE</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/about-us">Our Brand Story
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/about-us/leadership-team">Leadership Team
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/about-us/corporate-governance">Corporate Governance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/about-us/newsroom">Newsroom
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/about-us/sustainability-strategy">Sustainability Strategy
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/about-us/investor-relations">Investor Relations
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/about-us/ecosystem">Ecosystem
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-blue">CAREERS</label>
+<div class="sl-menu-inner-wrapper">
+<hr class="sl-menu-inner-hr"/>
+<a class="sl-menu-link" href="https://singlife.darwinbox.com/ms/candidate/careers">Corporate
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="https://singlifefa.com/">Singlife Financial Advisers
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/careers/affinity-channel">Affinity Channel
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/careers">All Careers
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+<hr class="sl-menu-inner-hr"/>
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+</div>
+</div>
+<div :class="{'hidden': !menuMobile6}" class="sl-sub-menu hidden">
+<a class="sl-menu-link sl-menu-link-back" href="#" menumobile6='!menuMobile6;"'>
+<div class="h-6 w-6 sl-chevron sl-chevron-reverse">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+<span>Blog</span>
+</a>
+<label class="sl-menu-label theme-yellow">LIFESTUFF</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/blog/money">Money
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/blog/health">Health
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/blog/lifestyle">Lifestyle
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+<hr class="sl-menu-inner-hr"/>
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+</div>
+<a class="sl-text-link" href="/en/blog">View All</a>
+</div>
+<div :class="{'hidden': !menuMobile7}" class="sl-sub-menu hidden">
+<a class="sl-menu-link sl-menu-link-back" href="#" menumobile7='!menuMobile7;"'>
+<div class="h-6 w-6 sl-chevron sl-chevron-reverse">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+<span>Support</span>
+</a>
+<label class="sl-menu-label theme-yellow">FORMS</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/form-library#lifestyle-insurance&amp;personal-accident-insurance">Personal Accident Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/form-library#lifestyle-insurance&amp;car-insurance">Car Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/form-library#lifestyle-insurance&amp;travel-insurance">Travel Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/form-library#lifestyle-insurance&amp;home-insurance">Home Insurance
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<div class="sl-menu-inner-wrapper" s="">
+<hr class="sl-menu-inner-hr"/>
+<a class="sl-menu-link" href="/en/form-library#life-medical-savings-and-retirement">Life, Medical, Savings and Retirement
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/form-library#mindef-mha-pogis&amp;mindef">MINDEF
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/form-library#mindef-mha-pogis&amp;mha">MHA
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/form-library#mindef-mha-pogis&amp;pogis">Public Officers
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-grey-400">Resources</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/useful-guides">Useful Guides
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/novel-coronavirus-notice">COVID-19 Advisory
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/payouts-via-paynow">Payouts via PayNow-NRIC/FIN
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-teal">help</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="/en/faq">FAQ
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/contact-us">Contact Us
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="/en/policy-servicing">Policy Servicing
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+</div>
+<div :class="{'hidden': !menuMobileLogin}" class="sl-sub-menu hidden">
+<a class="sl-menu-link sl-menu-link-back" href="#" menumobilelogin='!menuMobileLogin;"'>
+<div class="h-6 w-6 sl-chevron sl-chevron-reverse">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+<span>Login</span>
+</a>
+<label class="sl-menu-label theme-orange-800">Customer Portals</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="https://mysinglife.singlife.com/" target="_blank">MYSINGLIFE
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="https://online.singlife.com/" target="_blank">Singlife Customer Portal
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-orange-800">Corporate Portals</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="https://claimconnect.singlife.com/eb/home/#/" target="_blank">ClaimConnect
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="https://ebconnect.singlife.com/eb/homepage/#/" target="_blank">EBConnect
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-grey">MINDEF, MHA, Public Officers</label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="https://ebh.singlife.com/eb/mindef-mha/?existing=1" target="_blank">MINDEF Group Insurance<br/>Online
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="https://ebh.singlife.com/eb/mindef-mha/?groupName=MHA&amp;existing=1" target="_blank">MHA Group Insurance Online
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="https://ebh.singlife.com/eb/pogis/?existing=1" target="_blank">Public Officers Group Insurance Scheme Online
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<label class="sl-menu-label theme-purple">Financial Advisers </label>
+<div class="sl-menu-inner-wrapper">
+<a class="sl-menu-link" href="https://applogin.singlife.com/adviser/#/login" target="_blank">Singlife Online (SOL)
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="https://applogin.singlife.com/SQS/login/" target="_blank">PocketSQS
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+<a class="sl-menu-link" href="https://adviser.singlife.com/" target="_blank">Singlife Advisers
+<div class="h-6 w-6 sl-chevron">
+<img class="relative h-3" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-chevron.svg"/>
+</div>
+</a>
+</div>
+<a class="sl-text-link" href="/en/login">View All Logins</a>
+</div>
+</div>
+</header>
+<div class="sl-notification">
+<div class="sl-notification-wrapper">
+<div class="sl-notification-item theme-grey" data-session-option="1" data-session-time="1" style="display: none;" x-data="notificationCookie" x-init="$nextTick(() =&gt; { nextTick() })" x-show="show" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 scale-90" x-transition:leave-start="opacity-100 scale-100">
+<div class="sl-notification-line"></div>
+<img alt="sl-icon-cookie" class="sl-notification-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-cookie.png"/>
+<button class="sl-notification-close">
+<img alt="sl-icon-close-small-black" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-close-small-black.svg"/>
+</button>
+<p>This site uses cookies to provide you with a better user experience. By continuing, you accept our <a href="/en/cookie-policy" target="_self">cookie policy</a>.</p>
+</div>
+</div>
+</div>
+<div class="cmp-container" id="container-0ed23e007f">
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12">
+<div class="blog-carousel aem-GridColumn aem-GridColumn--default--12">
+<div class="hero-banner-only">
+<div class="sl-banner sl-banner-product" x-data="{pageNumber: 1}">
+<div class="sl-banner-layer sl-banner-curve-mask">
+<div :class="{'opacity-100': pageNumber == 1,'item-1' : true}" class="sl-banner-gradient opacity-100 item-1" else="" if="" x-data="banner_gradient" x-init="initGaspAnimation(1);">
+<svg class="sl-banner-gradient-circle-1" fill="none" viewbox="0 0 1186 550" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_2812_67225)">
+<path d="M872 563a344 344 0 1 1-688 0 344 344 0 0 1 688 0Z" fill="currentColor" fill-opacity=".3"></path>
+</g>
+</svg>
+<svg class="sl-banner-gradient-circle-2" fill="none" viewbox="0 0 1570 550" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_2812_67226)">
+<circle cx="785.41" cy="580.5" fill="currentColor" fill-opacity="0.8" r="470.5"></circle>
+</g>
+</svg>
+<svg class="sl-banner-gradient-circle-3" fill="none" viewbox="0 0 1425 550" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_2812_67227)">
+<path d="M1110.91 572C1110.91 791.809 932.719 970 712.91 970C493.101 970 314.91 791.809 314.91 572C314.91 352.191 493.101 174 712.91 174C932.719 174 1110.91 352.191 1110.91 572Z" fill="currentColor" fill-opacity="0.8"></path>
+</g>
+</svg>
+</div>
+<div class="sl-banner-clouds">
+<div class="sl-banner-cloud-group sl-banner-cloud-1"><svg class="sl-banner-cloud-group-1" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg class="sl-banner-cloud-group-2" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+</div>
+<div class="sl-banner-cloud-group sl-banner-cloud-2"><svg class="sl-banner-cloud-group-1" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg class="sl-banner-cloud-group-2" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+</div>
+<div class="sl-banner-cloud-group sl-banner-cloud-3"><svg class="sl-banner-cloud-group-1" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg class="sl-banner-cloud-group-2" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+</div>
+</div>
+</div>
+<br/><br/>
+<div class="sl-banner sl-banner-product" x-data="{pageNumber: 1}">
+<div class="sl-banner-layer sl-banner-curve-mask">
+<div :class="{'opacity-100': pageNumber == 1,'item-1' : true}" class="sl-banner-gradient opacity-100 item-1" else="" if="" x-data="banner_gradient" x-init="initGaspAnimation(1);">
+<svg class="sl-banner-gradient-circle-1" fill="none" viewbox="0 0 1186 550" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_2812_67225)">
+<path d="M872 563a344 344 0 1 1-688 0 344 344 0 0 1 688 0Z" fill="currentColor" fill-opacity=".3"></path>
+</g>
+</svg>
+<svg class="sl-banner-gradient-circle-2" fill="none" viewbox="0 0 1570 550" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_2812_67226)">
+<circle cx="785.41" cy="580.5" fill="currentColor" fill-opacity="0.8" r="470.5"></circle>
+</g>
+</svg>
+<svg class="sl-banner-gradient-circle-3" fill="none" viewbox="0 0 1425 550" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_2812_67227)">
+<path d="M1110.91 572C1110.91 791.809 932.719 970 712.91 970C493.101 970 314.91 791.809 314.91 572C314.91 352.191 493.101 174 712.91 174C932.719 174 1110.91 352.191 1110.91 572Z" fill="currentColor" fill-opacity="0.8"></path>
+</g>
+</svg>
+</div>
+<div class="sl-banner-clouds">
+<div class="sl-banner-cloud-group sl-banner-cloud-1"><svg class="sl-banner-cloud-group-1" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg class="sl-banner-cloud-group-2" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+</div>
+<div class="sl-banner-cloud-group sl-banner-cloud-2"><svg class="sl-banner-cloud-group-1" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg class="sl-banner-cloud-group-2" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+</div>
+<div class="sl-banner-cloud-group sl-banner-cloud-3"><svg class="sl-banner-cloud-group-1" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg class="sl-banner-cloud-group-2" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sl-newsroom-banner blog" data-json="" data-json-url="/en/blog/jcr:content/root/promo_carousel_banne.asl.data.blog-carousel.json" data-load-from-url="true" x-data="newsroomBanner" x-init="initData()">
+<div class="container" x-data="dynamic_container">
+<div class="sl-newsroom-banner-title-desc-container">
+</div>
+<div class="sl-newsroom-banner-container" x-init="swiper = new Swiper($refs.containerNewsroomBanner, {
+          loop: false,
+          speed: 800,
+          slidesPerView: 'auto',
+          slideToClickedSlide: false,
+          allowTouchMove: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          breakpoints: {
+            320: {
+              spaceBetween: 16,
+              centeredSlides: false
+            },
+            960: {
+              spaceBetween: 69,
+              centeredSlides: true,
+            }
+          }
+        });
+        swiper.on('slideChangeTransitionEnd', function (target) {
+          current = target.realIndex;
+        });
+        swiper.on('activeIndexChange', function () {
+          swiper.params.autoplay.delay = 8000;
+        });">
+<div class="swiper-container" x-ref="containerNewsroomBanner">
+<div class="swiper-wrapper">
+<template x-for="post in carouselsData">
+<div class="swiper-slide"><a :class="post.url == '' || post.url == null ? 'no-cursor' : ''" :href="post.url == '' || post.url == null ? 'javascript:;' : post.url" :target="post.openNewTab" class="sl-newsroom-banner bg-gradient"><img :alt="post.alt" :src="post.image" class="banner-img"/>
+<div class="sl-newsroom-banner-content">
+<div :class="[post.tagColor, post.tagTitle == '' ? 'hide-label' : '' ]" class="sl-newsroom-banner-content_label" x-text="post.tagTitle"></div>
+<div class="sl-newsroom-banner-content_title" x-html="post.heading"></div>
+<div :class="post.subHeading == '' ? 'hide-subtitle' : ''" class="sl-newsroom-banner-content_subtitle" x-html="post.subHeading"></div>
+<div :class="post.url == '' || post.btnLabel == '' ? 'hide-btn' : ''" class="sl-newsroom-banner-content_learn-more-btn" post.btnlabel="" post.heading="" x-text="post.btnLabel">
+<img alt="right-icon-white" class="sl-secondary-btn-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/right-icon-white.svg"/>
+</div>
+</div>
+</a></div>
+</template>
+</div>
+<div class="swiper-pagination"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="components-container aem-GridColumn aem-GridColumn--default--12">
+<div class="sl-container">
+<div class="sl-gradient-container">
+<div class="sl-banner-gradient opacity-100" x-data="banner_gradient"><svg class="sl-banner-gradient-circle-1" fill="none" viewbox="0 0 1186 550" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_2812_67225)">
+<path d="M872 563a344 344 0 1 1-688 0 344 344 0 0 1 688 0Z" fill="currentColor" fill-opacity=".3"></path>
+</g>
+</svg>
+<svg class="sl-banner-gradient-circle-2" fill="none" viewbox="0 0 1570 550" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_2812_67226)">
+<circle cx="785.41" cy="580.5" fill="currentColor" fill-opacity="0.8" r="470.5"></circle>
+</g>
+</svg>
+<svg class="sl-banner-gradient-circle-3" fill="none" viewbox="0 0 1425 550" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_2812_67227)">
+<path d="M1110.91 572C1110.91 791.809 932.719 970 712.91 970C493.101 970 314.91 791.809 314.91 572C314.91 352.191 493.101 174 712.91 174C932.719 174 1110.91 352.191 1110.91 572Z" fill="currentColor" fill-opacity="0.8"></path>
+</g>
+</svg>
+</div>
+<div class="sl-banner-clouds">
+<div class="sl-banner-cloud-group sl-banner-cloud-1"><svg class="sl-banner-cloud-group-3" fill="none" height="74" viewbox="0 0 195 74" width="195" xmlns="http://www.w3.org/2000/svg">
+<path d="M-17.6751 48.5303C-55.0632 37.0948 -54.5776 59.7793 -74 74H195C194.223 55.2875 171.369 49.2233 160.04 48.5303C157.709 21.9169 124.756 15.9566 108.57 16.3031C112.94 -16.1102 55.6444 6.24075 37.6787 27.8772C5.826 14.5705 -11.201 34.4959 -17.6751 48.5303Z"></path>
+</svg></div>
+<div class="sl-banner-cloud-group sl-banner-cloud-2"><svg class="sl-banner-cloud-group-1" fill="none" height="47" viewbox="0 0 130 47" width="130" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.1796 30.4131C9.13796 23.2467 9.37226 37.4626 0 46.3745H129.806C129.431 34.6477 118.403 30.8474 112.936 30.4131C111.811 13.735 95.9094 9.99973 88.0992 10.2169C90.208 -10.096 62.5598 3.91097 53.8905 17.4701C38.52 9.13109 30.3036 21.618 27.1796 30.4131Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg class="sl-banner-cloud-group-2" fill="none" height="35" viewbox="0 0 96 35" width="96" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.5423 22.609C7.40365 17.3901 7.57428 27.7428 0.749023 34.2328H95.2789C95.0059 25.6928 86.9748 22.9253 82.9934 22.609C82.1744 10.4633 70.5942 7.74315 64.9065 7.90129C66.4422 -6.89139 46.3076 3.30907 39.9943 13.1834C28.8008 7.11057 22.8174 16.204 20.5423 22.609Z" fill="white"></path>
+</svg>
+</div>
+<div class="sl-banner-cloud-group sl-banner-cloud-3"><svg class="sl-banner-cloud-group-1" fill="none" height="47" viewbox="0 0 131 47" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M103.1 30.4131C121.141 23.2467 120.907 37.4626 130.279 46.3745H0.473495C0.848389 34.6477 11.8764 30.8474 17.3436 30.4131C18.4683 13.735 34.3699 9.99973 42.1801 10.2169C40.0713 -10.096 67.7195 3.91097 76.3888 17.4701C91.7593 9.13109 99.9757 21.618 103.1 30.4131Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg class="sl-banner-cloud-group-2" fill="none" height="35" viewbox="0 0 95 35" width="95" xmlns="http://www.w3.org/2000/svg">
+<path d="M74.737 22.609C87.8756 17.3901 87.705 27.7428 94.5303 34.2328H0.000411987C0.273422 25.6928 8.3045 22.9253 12.2859 22.609C13.1049 10.4633 24.6851 7.74315 30.3728 7.90129C28.8371 -6.89139 48.9717 3.30907 55.285 13.1834C66.4785 7.11057 72.4619 16.204 74.737 22.609Z" fill="white"></path>
+</svg>
+</div>
+<div class="sl-banner-cloud-group sl-banner-cloud-4"><svg class="sl-banner-cloud-group-1" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg class="sl-banner-cloud-group-2" fill="none" height="37" viewbox="0 0 131 37" width="131" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.5208 23.9525C9.3152 18.5726 9.61926 29.4672 0.222277 36.3565L130.961 35.5445C130.528 26.5586 119.402 23.7148 113.894 23.4161C112.681 10.6399 96.6472 7.87649 88.7818 8.09179C90.8085 -7.49053 63.0286 3.41829 54.3619 13.8652C38.8409 7.56971 30.6253 17.1919 27.5208 23.9525Z" fill="white" opacity="0.7"></path>
+</svg>
+</div>
+<div class="sl-banner-cloud-group sl-banner-cloud-5"><svg class="sl-banner-cloud-group-4" fill="none" height="38" viewbox="0 0 144 38" width="144" xmlns="http://www.w3.org/2000/svg">
+<path d="M113.848 24.9209C133.863 19.0487 133.603 30.6975 144 38H0C0.415878 28.3909 12.6498 25.2768 18.7148 24.9209C19.9625 11.2546 37.6029 8.19394 46.2672 8.37187C43.9278 -8.27283 74.5993 3.20471 84.2166 14.3153C101.268 7.48216 110.383 17.7141 113.848 24.9209Z"></path>
+</svg></div>
+<div class="sl-banner-cloud-group sl-banner-cloud-6"><svg class="sl-banner-cloud-group-3" fill="none" height="48" viewbox="0 0 183 48" width="183" xmlns="http://www.w3.org/2000/svg">
+<path d="M144.682 31.4791C170.117 24.0615 169.787 38.7757 183 48H0C0.528519 35.8622 16.0758 31.9286 23.7834 31.4791C25.369 14.2164 47.787 10.3502 58.7979 10.575C55.8249 -10.4499 94.8033 4.04806 107.025 18.0825C128.695 9.45115 140.278 22.3757 144.682 31.4791Z"></path>
+</svg></div>
+</div>
+</div>
+<div class="our-pick">
+<div class="container" x-data="dynamic_container">
+<h1 class="blog-our-picks_header">Our picks</h1>
+<div class="blog-our-picks_container" data-json="" data-json-url="/en/blog/jcr:content/root/components_container/content/our_pick_copy.asl.data.blog.our-pick.json" data-load-from-url="true" x-data="blog_our_picks">
+<div class="blog-our-picks_spotlight-list"><template x-for="item in ourPicksList.slice(0,2)">
+<div class="blog-our-picks_spotlight-item"><img :src="item.image" alt="our-pick-spotlight-cover" class="blog-our-picks_spotlight-cover"/>
+<div class="blog-our-picks_spotlight-content"><span :class="item.tagColor" class="blog-our-picks_category" x-text="item.tagTitle"></span>
+<h4 class="blog-our-picks_spotlight-title" x-text="item.title"></h4><a :href="item.url" :target="item.openNewTab &amp;&amp; '_blank'" class="blog-our-picks_spotlight-readmore"><span x-text="item.btnLabel"></span><img src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-arrow-right-white.svg"/></a>
+</div>
+</div>
+</template>
+</div>
+<div class="blog-our-picks_listing"><template x-for="item in ourPicksList.slice(2,ourPicksList.length)">
+<div class="blog-our-picks_item"><span :class="item.tagColor" class="blog-our-picks_category" x-text="item.tagTitle"></span><a :href="item.url" class="blog-our-picks_item-title" target="item.openNewTab &amp;&amp; '_blank'" x-text="item.title"></a></div>
+</template>
+</div>
+</div>
+</div>
+</div>
+<div class="space">
+<div class="sl-section-spacer space-48"></div>
+</div>
+<div class="colorsarticle listofcard">
+<div class="sl-scroll-animate" data-animate-class="show-component">
+<div class="sl-cards-overlap-wrapper">
+<div class="sl-articles-container container" x-data="{ swiper: null, current: 0 }" x-init="swiper = new Swiper($refs.container, {
+                slidesPerView: 'auto',
+                spaceBetween: 24,
+                speed: 800,
+                breakpoints: {
+                  360: {
+                    slideToClickedSlide: true,
+                  },
+                  1200: {
+                    slideToClickedSlide: false,
+                  }
+                }
+              });
+              swiper.on('slideChangeTransitionEnd', function (target) {
+                current = target.realIndex;
+              });
+              ">
+<div class="sl-articles-container_title">
+<div class="sl-card-heading">
+<p style="text-align: center;">What's new</p>
+</div>
+</div>
+<div class="wiper-container" x-ref="container">
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<div class="sl-article-container sl-article_theme-blue" data-url="/en/blog/money/2023/why-you-need-to-buy-travel-insurance" x-data="article" x-ref="card">
+<div class="sl-article-content">
+<p class="sl-article-timer">
+<span>Insurance</span>
+</p>
+<p class="sl-article-description">Here’s why you need to buy travel insurance upon confirming your holiday</p>
+</div>
+<img alt="Did you know that it’s best practice to buy your travel insurance immediately after booking flights and accommodation?" class="sl-article-images" src="/content/dam/public/sg/images/blog/2023/buy-travel-insurance/travel-insurance486x480px.jpg"/>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="sl-article-container sl-article_theme-green" data-url="/en/blog/money/2023/do-you-need-maternity-insurance-if-you-have-medical-insurance" x-data="article" x-ref="card">
+<div class="sl-article-content">
+<p class="sl-article-timer">
+<span>Insurance</span>
+</p>
+<p class="sl-article-description">Do you need maternity insurance if you have medical insurance?</p>
+</div>
+<img alt="If you’re an expectant mum (or dad), this simple guide to understanding the differences between these two plans will help you decide if you really need them both. " class="sl-article-images" src="/content/dam/public/sg/images/blog/2023/maternity-insurance-vs-medical-insurance/maternity-vs-medical-insurance-in-article-main.jpg"/>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="sl-article-container sl-article_theme-orange" data-url="/en/blog/health/2023/is-your-running-pain-normal-or-a-sign-of-injury" x-data="article" x-ref="card">
+<div class="sl-article-content">
+<p class="sl-article-timer">
+<span>Conditions</span>
+</p>
+<p class="sl-article-description">Is your running pain normal or a sign of injury? </p>
+</div>
+<img alt="Ignoring pain due to running could slow down healing or make a minor injury worse. So, when should you keep going and when should you stop?" class="sl-article-images" src="/content/dam/public/sg/images/blog/2023/running-pain/running-pain-main.jpg"/>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="sl-article-container sl-article_theme-purple" data-url="/en/blog/lifestyle/2023/eco-friendly-ways-to-keep-your-home-cool" x-data="article" x-ref="card">
+<div class="sl-article-content">
+<p class="sl-article-timer">
+<span>Features</span>
+</p>
+<p class="sl-article-description">Eco-friendly ways to keep your home cool when the mercury rises</p>
+</div>
+<img alt="Don’t let the heat get you down. Chill out with our five tips for keeping your home cool without harming the planet." class="sl-article-images" src="/content/dam/public/sg/images/blog/2023/eco-friendly-ways-to-keep-your-home-cool/article-detail-page-486x480px.png"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="space">
+<div class="sl-section-spacer space-48"></div>
+</div>
+<div class="cardcarousel">
+<div class="sl-scroll-animate" data-animate-class="show-component">
+<div class="sl-cards-overlap-wrapper">
+<div class="card-content-left-carousel-container" x-data="{ swiper: null, current: 0 }" x-init="swiper = new Swiper($refs.containerCardLefts, {
+                        loop: false,
+                        speed: 800,
+                        slidesPerView: 'auto',
+                        autoplay: {
+                          delay: 8000,
+                          disableOnInteraction: false
+                        },
+                        slideToClickedSlide: true,
+                        pagination: {
+                          el: '.swiper-pagination',
+                          clickable: true,
+                        },
+                        breakpoints: {
+                          320: {
+                            spaceBetween: 16,
+                            centeredSlides: false
+                          },
+                          960: {
+                            spaceBetween: 69,
+                            centeredSlides: true,
+                          }
+                        }
+                      });
+                      swiper.on('slideChangeTransitionEnd', function (target) {
+                        current = target.realIndex;
+                      });
+                      swiper.on('activeIndexChange', function () {
+                        swiper.params.autoplay.delay = 8000;
+                      });
+                    ">
+<div class="sl-card-heading">
+<p style="text-align: center;">Trending</p>
+</div>
+<div class="swiper-container" x-ref="containerCardLefts">
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<div class="sl-card-left-content overflow-hidden sl-card-left-content_theme-pink" data-url="/en/blog/money/2020/what-to-avoid-doing-investments-losing-money" x-data="cardLeftContent" x-ref="card">
+<div class="sl-card-left-content_left">
+<div class="sl-card-left-content_tags">
+<div class="sl-tag sl-tag-grey"><span>INVESTING</span></div>
+</div>
+<p class="sl-card-left-content_title">What to do if your investments are losing money</p>
+<p class="sl-card-left-content_subtitle">Ways to deal with and recover from a stock market loss.</p>
+<a class="sl-secondary-button sl-card-left-content_button" href="/en/blog/money/2020/what-to-avoid-doing-investments-losing-money">Learn more</a>
+</div>
+<div class="sl-card-left-content_right"><img src="/content/dam/public/sg/images/blog/2022/what-to-do-investments-losing-money/article-detail-what-to-do-investments-losing-money.jpg"/></div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="sl-card-left-content overflow-hidden sl-card-left-content_theme-blue" data-url="/en/blog/money/2023/health-insurance-and-cancer-coverage-in-singapore" x-data="cardLeftContent" x-ref="card">
+<div class="sl-card-left-content_left">
+<div class="sl-card-left-content_tags">
+<div class="sl-tag sl-tag-grey"><span>INSURANCE</span></div>
+</div>
+<p class="sl-card-left-content_title">Health insurance and cover coverage in Singapore</p>
+<p class="sl-card-left-content_subtitle">Your quick and updated guide to cancer coverage under MediShield Life and Integrated Shield Plans.</p>
+<a class="sl-secondary-button sl-card-left-content_button" href="/en/blog/money/2023/health-insurance-and-cancer-coverage-in-singapore">Learn more</a>
+</div>
+<div class="sl-card-left-content_right"><img src="/content/dam/public/sg/images/blog/2023/health-insurance-and-cancer-coverage/health-insurance-486x480.jpg"/></div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="sl-card-left-content overflow-hidden sl-card-left-content_theme-pink" data-url="/en/blog/money/2015/what-insurance-should-i-buy-for-my-children" x-data="cardLeftContent" x-ref="card">
+<div class="sl-card-left-content_left">
+<div class="sl-card-left-content_tags">
+<div class="sl-tag sl-tag-grey"><span>INSURANCE</span></div>
+</div>
+<p class="sl-card-left-content_title">What insurance should I get for my children?</p>
+<p class="sl-card-left-content_subtitle">And a baby completes the family! Now that you're considering insurance planning to protect your newborn, where do you start?</p>
+<a class="sl-secondary-button sl-card-left-content_button" href="/en/blog/money/2015/what-insurance-should-i-buy-for-my-children">Learn more</a>
+</div>
+<div class="sl-card-left-content_right"><img src="/content/dam/public/sg/images/blog/2022/what-insurance-should-i-buy-for-children/article-detail-what-insurance-should-i-buy-for-children.jpg"/></div>
+</div>
+</div>
+</div>
+<div class="swiper-pagination" x-show="swiper.slides.length &gt; 1"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="latest-video">
+<div class="blog-latest-videos_session" false="" showvideoplayer="true;" videoplayersrc="$event.detail.videosrc;" videoplayertitle="$event.detail.videotitle;" x-data="{showVideoPlayer: false, videoPlayerSrc: '', videoPlayerTitle: ''}" x-init="
+      $watch(&quot;showVideoPlayer&quot;, async value =&gt; {
+        await $nextTick();
+        if(value) $refs.videoPlayerContainer.classList.remove('hidden');
+        else $refs.videoPlayerContainer.classList.add('hidden')
+      })
+    ">
+<div class="blog-latest-videos_container" data-json="" data-json-url="/en/blog/jcr:content/root/components_container/content/latest_video.asl.data.blog.latest-video-listing.json" data-load-from-url="true" x-data="blog_latest_videos">
+<h1 class="blog-latest-videos_heading" x-text="latestVideos.title"></h1>
+<div class="blog-latest-videos_main">
+<div class="blog-latest-videos_main-hero">
+<template x-for="(video, idx) in latestVideos.videos.slice(0,1)">
+<div class="blog-latest-videos_item" video.title="" video.url="" videosrc:="" videotitle:="">
+<div class="blog-latest-videos_item-thumbmail"> <img :src="video.image" alt="" x-show="video.image"/>
+<div class="blog-latest-videos_item-play-button"><img alt="" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-play-rounded.svg"/></div>
+</div>
+<div class="blog-latest-videos_item-description"><span :class="video.tagColor" class="blog-latest-videos_item-tag" x-text="video.tagTitle"></span>
+<p class="blog-latest-videos_item-title" x-text="video.title"></p>
+</div>
+</div>
+</template>
+</div>
+<div class="blog-latest-videos_grid spotlight">
+<template x-for="(video, idx) in latestVideos.videos">
+<div class="blog-latest-videos_item" video.title="" video.url="" videosrc:="" videotitle:="">
+<div class="blog-latest-videos_item-thumbmail"> <img :src="video.image" alt="" x-show="video.image"/>
+<div class="blog-latest-videos_item-play-button"><img alt="" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-play-rounded.svg"/></div>
+</div>
+<div class="blog-latest-videos_item-description"><span :class="video.tagColor" class="blog-latest-videos_item-tag" x-text="video.tagTitle"></span>
+<p class="blog-latest-videos_item-title" x-text="video.title"></p>
+</div>
+</div>
+</template>
+</div>
+</div>
+<template x-for="folderVideo in latestVideos.folderVideos">
+<div class="blog-latest-videos_sub-row" x-show="isExpand">
+<div class="blog-latest-videos_sub-row-header">
+<h1 x-text="folderVideo.folderName"></h1><a :href="folderVideo.viewAllUrl" :target="'_blank' &amp;&amp; folderVideo.isOpenNewTab" class="blog-latest-videos_sub-row-link" x-show="folderVideo.viewAllLabel">
+<p x-text="folderVideo.viewAllLabel"></p><img alt="sl-arrow-right-white" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-arrow-right-white.svg"/>
+</a>
+</div>
+<div class="blog-latest-videos_grid">
+<template x-for="video in folderVideo.videos">
+<div class="blog-latest-videos_item" video.title="" video.url="" videosrc:="" videotitle:="">
+<div class="blog-latest-videos_item-thumbmail"> <img :src="video.image" alt="" x-show="video.image"/>
+<div class="blog-latest-videos_item-play-button"><img alt="sl-play-rounded" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-play-rounded.svg"/></div>
+</div>
+<div class="blog-latest-videos_item-description">
+<p class="blog-latest-videos_item-title" x-text="video.title"></p>
+</div>
+</div>
+</template>
+</div>
+</div>
+</template>
+<button class="blog-latest-videos_loadmore-button needtomakechange" x-show="latestVideos.folderLoadMore">
+<p x-text="isExpand ? latestVideos.collapseLabel : latestVideos.loadMoreLabel"></p>
+<div :class="{'rotate-180': isExpand}" class="blog-latest-videos_loadmore-button-icon"><img alt="" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-chevron-down-outline-white.svg"/></div>
+</button>
+</div>
+<div class="blog-latest-videos_video-player hidden" x-ref="videoPlayerContainer">
+<div class="blog-latest-videos_video-player-title" x-text="videoPlayerTitle"></div>
+<div class="blog-latest-videos_video-player-content">
+<button><img src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-close-white.svg"/></button>
+<video controls="controls" x-ref="videoplayer">
+<source :src="videoPlayerSrc" type="video/mp4"/>
+</video>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sign-up aem-GridColumn aem-GridColumn--default--12">
+<div class="blog-sign-up-now_container">
+<div class="blog-sign-up-now_background">
+<div class="background-ellipse-left"></div>
+<div class="background-ellipse-center"></div>
+<div class="background-ellipse-right"></div>
+<div class="cloud-group cloud-group-1"><svg fill="none" height="47" viewbox="0 0 130 47" width="130" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.2767 30.4131C9.23506 23.2467 9.46937 37.4626 0.0971069 46.3745H129.903C129.528 34.6477 118.5 30.8474 113.033 30.4131C111.908 13.735 96.0066 9.99973 88.1963 10.2169C90.3051 -10.096 62.6569 3.91097 53.9876 17.4701C38.6171 9.13109 30.4007 21.618 27.2767 30.4131Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg fill="none" height="35" viewbox="0 0 96 35" width="96" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.5283 22.5226C7.38968 17.3037 7.56031 27.6563 0.735046 34.1463H95.2649C94.9919 25.6064 86.9608 22.8388 82.9794 22.5226C82.1604 10.3769 70.5802 7.65673 64.8925 7.81486C66.4282 -6.97781 46.2937 3.22264 39.9803 13.097C28.7869 7.02415 22.8034 16.1176 20.5283 22.5226Z" fill="white"></path>
+</svg>
+</div>
+<div class="cloud-group cloud-group-2"><svg fill="none" height="47" viewbox="0 0 130 47" width="130" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.2767 30.4131C9.23506 23.2467 9.46937 37.4626 0.0971069 46.3745H129.903C129.528 34.6477 118.5 30.8474 113.033 30.4131C111.908 13.735 96.0066 9.99973 88.1963 10.2169C90.3051 -10.096 62.6569 3.91097 53.9876 17.4701C38.6171 9.13109 30.4007 21.618 27.2767 30.4131Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg fill="none" height="35" viewbox="0 0 96 35" width="96" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.5283 22.5226C7.38968 17.3037 7.56031 27.6563 0.735046 34.1463H95.2649C94.9919 25.6064 86.9608 22.8388 82.9794 22.5226C82.1604 10.3769 70.5802 7.65673 64.8925 7.81486C66.4282 -6.97781 46.2937 3.22264 39.9803 13.097C28.7869 7.02415 22.8034 16.1176 20.5283 22.5226Z" fill="white"></path>
+</svg>
+</div>
+<div class="cloud-single"><svg fill="none" height="47" viewbox="0 0 179 47" width="179" xmlns="http://www.w3.org/2000/svg">
+<path d="M141.52 30.8233C166.399 23.5602 166.076 37.9679 179 47H0C0.516968 35.115 15.7244 31.2634 23.2636 30.8233C24.8145 13.9202 46.7425 10.1346 57.5127 10.3547C54.6047 -10.2322 92.731 3.96372 104.686 17.7058C125.882 9.25425 137.212 21.9096 141.52 30.8233Z" fill="#FFE9EC"></path>
+</svg>
+<svg fill="none" height="74" viewbox="0 0 269 74" width="269" xmlns="http://www.w3.org/2000/svg">
+<path d="M56.3249 48.5303C18.9368 37.0948 19.4224 59.7793 0 74H269C268.223 55.2875 245.369 49.2233 234.04 48.5303C231.709 21.9169 198.756 15.9566 182.57 16.3031C186.94 -16.1102 129.644 6.24075 111.679 27.8772C79.826 14.5705 62.799 34.4959 56.3249 48.5303Z" fill="#FA8F8C" opacity="0.6"></path>
+</svg>
+<svg fill="none" height="48" viewbox="0 0 183 48" width="183" xmlns="http://www.w3.org/2000/svg">
+<path d="M144.682 31.4791C170.117 24.0615 169.787 38.7757 183 48H0C0.528519 35.8622 16.0758 31.9286 23.7834 31.4791C25.369 14.2164 47.787 10.3502 58.7979 10.575C55.8249 -10.4499 94.8033 4.04806 107.025 18.0825C128.695 9.45115 140.278 22.3757 144.682 31.4791Z" fill="#FA8F8C" opacity="0.6"></path>
+</svg>
+<svg fill="none" height="38" viewbox="0 0 144 38" width="144" xmlns="http://www.w3.org/2000/svg">
+<path d="M113.848 24.9209C133.863 19.0487 133.603 30.6975 144 38H0C0.415878 28.3909 12.6498 25.2768 18.7148 24.9209C19.9625 11.2546 37.6029 8.19394 46.2672 8.37187C43.9278 -8.27283 74.5993 3.20471 84.2166 14.3153C101.268 7.48216 110.383 17.7141 113.848 24.9209Z" fill="#FFE9EC"></path>
+</svg>
+<svg fill="none" height="70" viewbox="0 0 267 70" width="267" xmlns="http://www.w3.org/2000/svg">
+<path d="M55.7128 45.7548C18.731 34.9734 19.2113 56.3605 0 69.768H266.077C265.308 52.1256 242.703 46.4082 231.496 45.7548C229.191 20.6635 196.596 15.0441 180.586 15.3708C184.909 -15.1889 128.236 5.88385 110.465 26.2829C78.9585 13.7372 62.1166 32.5231 55.7128 45.7548Z" fill="#FFE9EC"></path>
+</svg>
+</div>
+</div>
+<div class="blog-sign-up-now_content">
+<div class="blog-sign-up-now_header">
+<h1>Show some love to your inbox</h1>
+<h4>Subscribe for all the secrets to living your best financial life in Singapore now!</h4>
+</div>
+<form class="blog-sign-up-now_input" data-api-key="" data-url="/en/blog/jcr:content/root/sign_up_copy_copy_co.asl.data.popup-form.json" data-url-fail-animation="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/images/sl-animate-fail.json" data-url-success-animation="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/images/sl-animate-success.json" name="signUpNowForm" onsubmit="event.preventDefault()" x-data="blog_sign_up_form" x-ref="signUpNowForm">
+<div class="blog-sign-up-now_input-row">
+<input name="formId" type="hidden" value="MoneybanterEmailSubscription" x-init="initField($el)"/>
+<input name="is_a2" type="hidden" value="false" x-init="initField($el)"/>
+<input name="is_ac" type="hidden" value="false" x-init="initField($el)"/>
+<input name="emailTo" type="hidden" value="moneybanter_sg@singlife.com" x-init="initField($el)"/>
+<div class="input-group" x-data="{fieldName:'email'}">
+<input :class="fieldName in fields &amp;&amp; fields[fieldName].error &amp;&amp; 'error'" data-check-validation="true" data-custom-regex='^(([^&lt;&gt;()[\]\.,;:\s@\"]+(\.[^&lt;&gt;()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' data-custom-regex-error="Please key in a valid email address" data-error-message="Please key in a valid email address" name="email" type="text" x-init="initField($el)"/><span x-show="fieldName in fields &amp;&amp; fields[fieldName].error &amp;&amp; 'error'" x-text="fields[fieldName].message"></span>
+</div>
+<button type="submit">Sign up now</button>
+</div>
+<div class="sl-reachout-form_result" x-show="status != 'idle'">
+<div class="sl-success-message" x-show="status == 'success'">
+<lottie-player autoplay="autoplay" background="transparent" class="mx-auto flex items-center" id="sl-success" mode="normal" speed="1" src="" style="width:150px;height:150px"></lottie-player>
+<p>Thank you for your submission. </p>
+<div class="description"></div>
+</div>
+<div class="sl-error-message" x-show="status == 'fail'">
+<lottie-player autoplay="autoplay" background="transparent" class="mx-auto flex items-center" id="sl-fail" mode="normal" speed="1" src="" style="width:150px;height:150px"></lottie-player>
+<p>Sorry, there seems to be a problem with this page. Please refresh and try again in a few minutes.</p>
+<div class="description"></div>
+</div>
+</div>
+</form>
+<div class="blog-sign-up-now_note"><p>By clicking “Sign Up Now”, you consent to Singapore Life Ltd. (“Singlife”) and Singlife related companies contacting you to provide you with information concerning Singlife and Singlife related companies’ products and services and special offers which may be of interest to you. For details of Singlife's Data Protection Policy, please refer to singlife.com/pdpa. To withdraw your consent at any time, please call Singlife at <a href="tel:+65%206827%209933" target="_blank">+65 6827 9933</a>.</p>
+</div>
+</div>
+</div>
+<div data-session-option="2" data-session-time="1" data-showpopupafter="9" x-data="blog_signup_popup">
+<div class="sl-modal-container" id="blogSignUp" x-data="{
+    isOpen: false,
+    dataModal: {},
+    openModal(event) {
+    const idModal = event.detail.id;
+    if ( idModal === $el.id) {
+    this.isOpen = true;
+    this.dataModal = event.detail.data || {};
+    }
+    },
+    closeModal() {
+    this.$dispatch('close-modal', { id: $el.id });
+    this.isOpen = false;
+    }
+    }">
+<div :class="isOpen &amp;&amp; 'sl-modal-active'" class="sl-modal" x-show="isOpen">
+<div class="sl-modal-overlay"></div>
+<div class="sl-modal-content">
+<div class="blog-sign-up-now_popup">
+<div class="blog-sign-up-now_container">
+<button class="blog-sign-up-now_popup-close"><img alt="signup-popup-close-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-icon-cross-white.svg"/></button>
+<div class="blog-sign-up-now_background">
+<div class="background-ellipse-left"></div>
+<div class="background-ellipse-center"></div>
+<div class="background-ellipse-right"></div>
+<div class="cloud-group cloud-group-1"><svg fill="none" height="47" viewbox="0 0 130 47" width="130" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.2767 30.4131C9.23506 23.2467 9.46937 37.4626 0.0971069 46.3745H129.903C129.528 34.6477 118.5 30.8474 113.033 30.4131C111.908 13.735 96.0066 9.99973 88.1963 10.2169C90.3051 -10.096 62.6569 3.91097 53.9876 17.4701C38.6171 9.13109 30.4007 21.618 27.2767 30.4131Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg fill="none" height="35" viewbox="0 0 96 35" width="96" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.5283 22.5226C7.38968 17.3037 7.56031 27.6563 0.735046 34.1463H95.2649C94.9919 25.6064 86.9608 22.8388 82.9794 22.5226C82.1604 10.3769 70.5802 7.65673 64.8925 7.81486C66.4282 -6.97781 46.2937 3.22264 39.9803 13.097C28.7869 7.02415 22.8034 16.1176 20.5283 22.5226Z" fill="white"></path>
+</svg>
+</div>
+<div class="cloud-group cloud-group-2"><svg fill="none" height="47" viewbox="0 0 130 47" width="130" xmlns="http://www.w3.org/2000/svg">
+<path d="M27.2767 30.4131C9.23506 23.2467 9.46937 37.4626 0.0971069 46.3745H129.903C129.528 34.6477 118.5 30.8474 113.033 30.4131C111.908 13.735 96.0066 9.99973 88.1963 10.2169C90.3051 -10.096 62.6569 3.91097 53.9876 17.4701C38.6171 9.13109 30.4007 21.618 27.2767 30.4131Z" fill="white" opacity="0.7"></path>
+</svg>
+<svg fill="none" height="35" viewbox="0 0 96 35" width="96" xmlns="http://www.w3.org/2000/svg">
+<path d="M20.5283 22.5226C7.38968 17.3037 7.56031 27.6563 0.735046 34.1463H95.2649C94.9919 25.6064 86.9608 22.8388 82.9794 22.5226C82.1604 10.3769 70.5802 7.65673 64.8925 7.81486C66.4282 -6.97781 46.2937 3.22264 39.9803 13.097C28.7869 7.02415 22.8034 16.1176 20.5283 22.5226Z" fill="white"></path>
+</svg>
+</div>
+<div class="cloud-single"><svg fill="none" height="47" viewbox="0 0 179 47" width="179" xmlns="http://www.w3.org/2000/svg">
+<path d="M141.52 30.8233C166.399 23.5602 166.076 37.9679 179 47H0C0.516968 35.115 15.7244 31.2634 23.2636 30.8233C24.8145 13.9202 46.7425 10.1346 57.5127 10.3547C54.6047 -10.2322 92.731 3.96372 104.686 17.7058C125.882 9.25425 137.212 21.9096 141.52 30.8233Z" fill="#FFE9EC"></path>
+</svg>
+<svg fill="none" height="74" viewbox="0 0 269 74" width="269" xmlns="http://www.w3.org/2000/svg">
+<path d="M56.3249 48.5303C18.9368 37.0948 19.4224 59.7793 0 74H269C268.223 55.2875 245.369 49.2233 234.04 48.5303C231.709 21.9169 198.756 15.9566 182.57 16.3031C186.94 -16.1102 129.644 6.24075 111.679 27.8772C79.826 14.5705 62.799 34.4959 56.3249 48.5303Z" fill="#FA8F8C" opacity="0.6"></path>
+</svg>
+<svg fill="none" height="48" viewbox="0 0 183 48" width="183" xmlns="http://www.w3.org/2000/svg">
+<path d="M144.682 31.4791C170.117 24.0615 169.787 38.7757 183 48H0C0.528519 35.8622 16.0758 31.9286 23.7834 31.4791C25.369 14.2164 47.787 10.3502 58.7979 10.575C55.8249 -10.4499 94.8033 4.04806 107.025 18.0825C128.695 9.45115 140.278 22.3757 144.682 31.4791Z" fill="#FA8F8C" opacity="0.6"></path>
+</svg>
+<svg fill="none" height="38" viewbox="0 0 144 38" width="144" xmlns="http://www.w3.org/2000/svg">
+<path d="M113.848 24.9209C133.863 19.0487 133.603 30.6975 144 38H0C0.415878 28.3909 12.6498 25.2768 18.7148 24.9209C19.9625 11.2546 37.6029 8.19394 46.2672 8.37187C43.9278 -8.27283 74.5993 3.20471 84.2166 14.3153C101.268 7.48216 110.383 17.7141 113.848 24.9209Z" fill="#FFE9EC"></path>
+</svg>
+<svg fill="none" height="70" viewbox="0 0 267 70" width="267" xmlns="http://www.w3.org/2000/svg">
+<path d="M55.7128 45.7548C18.731 34.9734 19.2113 56.3605 0 69.768H266.077C265.308 52.1256 242.703 46.4082 231.496 45.7548C229.191 20.6635 196.596 15.0441 180.586 15.3708C184.909 -15.1889 128.236 5.88385 110.465 26.2829C78.9585 13.7372 62.1166 32.5231 55.7128 45.7548Z" fill="#FFE9EC"></path>
+</svg>
+</div>
+</div>
+<div class="blog-sign-up-now_content">
+<div class="blog-sign-up-now_header">
+<h1>Show some love to your inbox</h1>
+<h4>Subscribe for all the secrets to living your best financial life in Singapore now!</h4>
+</div>
+<form class="blog-sign-up-now_input" data-api-key="" data-url="/en/blog/jcr:content/root/sign_up_copy_copy_co.asl.data.popup-form.json" data-url-fail-animation="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/images/sl-animate-fail.json" data-url-success-animation="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/images/sl-animate-success.json" name="signUpNowForm" onsubmit="event.preventDefault()" x-data="blog_sign_up_form" x-ref="signUpNowForm">
+<div class="blog-sign-up-now_input-row">
+<input name="formId" type="hidden" value="MoneybanterEmailSubscription" x-init="initField($el)"/>
+<input name="is_a2" type="hidden" value="false" x-init="initField($el)"/>
+<input name="is_ac" type="hidden" value="false" x-init="initField($el)"/>
+<input name="emailTo" type="hidden" value="moneybanter_sg@singlife.com" x-init="initField($el)"/>
+<div class="input-group" x-data="{fieldName:'email'}">
+<input :class="fieldName in fields &amp;&amp; fields[fieldName].error &amp;&amp; 'error'" data-check-validation="true" data-custom-regex='^(([^&lt;&gt;()[\]\.,;:\s@\"]+(\.[^&lt;&gt;()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' data-custom-regex-error="Please key in a valid email address" data-error-message="Please key in a valid email address" name="email" type="text" x-init="initField($el)"/><span x-show="fieldName in fields &amp;&amp; fields[fieldName].error &amp;&amp; 'error'" x-text="fields[fieldName].message"></span>
+</div>
+<button type="submit">Sign up now</button>
+</div>
+<div class="sl-reachout-form_result" x-show="status != 'idle'">
+<div class="sl-success-message" x-show="status == 'success'">
+<lottie-player autoplay="autoplay" background="transparent" class="mx-auto flex items-center" id="sl-success" mode="normal" speed="1" src="" style="width:150px;height:150px"></lottie-player>
+<p>Thank you for your submission. </p>
+<div class="description"></div>
+</div>
+<div class="sl-error-message" x-show="status == 'fail'">
+<lottie-player autoplay="autoplay" background="transparent" class="mx-auto flex items-center" id="sl-fail" mode="normal" speed="1" src="" style="width:150px;height:150px"></lottie-player>
+<p>Sorry, there seems to be a problem with this page. Please refresh and try again in a few minutes.</p>
+<div class="description"></div>
+</div>
+</div>
+</form>
+<div class="blog-sign-up-now_note"><p>By clicking “Sign Up Now”, you consent to Singapore Life Ltd. (“Singlife”) and Singlife related companies contacting you to provide you with information concerning Singlife and Singlife related companies’ products and services and special offers which may be of interest to you. For details of Singlife's Data Protection Policy, please refer to singlife.com/pdpa. To withdraw your consent at any time, please call Singlife at <a href="tel:+65%206827%209933" target="_blank">+65 6827 9933</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sl-scroll-animate" data-animate-class="show-component">
+<footer class="sl-footer">
+<div class="sl-footer_back-top">
+<a href="javascript:;" target="_self" title="Back To Top" x-data="backTop">
+<img alt="" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-back-top.svg"/>
+</a>
+</div>
+<div class="sl-footer_content">
+<nav class="sl-breadcrumb sl-footer_breadcrumb">
+<ol>
+<li><a href="/en" target="_blank"><span class="sl-breadcrumb_item">Singlife</span></a>
+</li>
+<li><img alt="sl-chevron-right-white" class="sl-breadcrumb_item-icon" src="/etc.clientlibs/asl-public/clientlibs/clientlib-base/resources/assets/icons/sl-chevron-right-white.svg"/>
+</li>
+<li><a href="/en/blog" target="_blank"><span class="sl-breadcrumb_item">Blog</span></a>
+</li>
+</ol>
+</nav>
+<div class="sl-footer_categories">
+<div class="sl-footer_categrory">
+<a><p class="sl-footer_categrory-title">About us</p></a>
+<ul>
+<li class="sl-footer_categrory-item"><a href="/en/about-us" target="_blank"><span>About us</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/contact-us/partners"><span>Our Partners</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/about-us/newsroom"><span>Newsroom</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/careers"><span>Careers</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/about-us/investor-relations"><span>Investor Relations</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/about-us/ecosystem"><span>Ecosystem</span></a>
+</li>
+</ul>
+</div>
+<div class="sl-footer_categrory">
+<a><p class="sl-footer_categrory-title">Insure</p></a>
+<ul>
+<li class="sl-footer_categrory-item"><a href="/en/life-insurance"><span>Life Insurance</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/medical-insurance"><span>Medical Insurance</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/critical-illness-insurance"><span>Critical Illness Insurance</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/disability-insurance"><span>Disability Insurance</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/maternity-care"><span>Maternity Insurance</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/accident-insurance"><span>Accident Insurance</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/car-insurance"><span>Car Insurance</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/travel-insurance"><span>Travel Insurance</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/home-insurance"><span>Home Insurance</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/mindef-and-mha"><span>MINDEF &amp; MHA</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/pogis"><span>Public Officers</span></a>
+</li>
+</ul>
+</div>
+<div class="sl-footer_categrory">
+<a><p class="sl-footer_categrory-title">Save and Invest</p></a>
+<ul>
+<li class="sl-footer_categrory-item"><a href="/en/singlife-account"><span>Singlife Account</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/investment-linked-plan/sure-invest"><span>Singlife Sure Invest</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/investment-linked-plan/savvy-invest"><span>Singlife Savvy Invest</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/savings"><span>Savings</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/flexi-retirement"><span>Retirement</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/dollardex"><span>DollarDex</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/navigator"><span>Navigator </span></a>
+</li>
+</ul>
+</div>
+<div class="sl-footer_categrory">
+<a><p class="sl-footer_categrory-title">Useful Links</p></a>
+<ul>
+<li class="sl-footer_categrory-item"><a href="/en/common-reporting-standard"><span>Common Reporting Standard</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/fatca"><span>FATCA</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/fair-dealing"><span>Fair Dealing</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/contact-us"><span>Contact Us</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/form-library"><span>Forms</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/faq"><span>FAQ</span></a>
+</li>
+<li class="sl-footer_categrory-item"><a href="/en/claims"><span>Claims</span></a>
+</li>
+<li class="sl-footer_categrory-item-social">
+<p>Follow Us</p>
+<div class="sl-footer_categrory-item-social-icons">
+<a class="mr-5" href="https://www.instagram.com/singlife/" target="_blank" title="Instagram">
+<img alt="instagram" src="/content/dam/public/revamp/Vector(18).png"/></a>
+<a href="https://www.facebook.com/SinglifeSG" title="Facebook">
+<img alt="facebook" src="/content/dam/public/revamp/Vector(19).png"/></a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sl-footer_links">
+<div class="sl-footer_links-col">
+<a class="sl-footer_links-col-item" href="/en/terms-and-conditions" target="_blank"><span>Terms and Conditions</span></a>
+<a class="sl-footer_links-col-item" href="/en/pdpa"><span>Data Protection Notice</span></a>
+<a class="sl-footer_links-col-item" href="/en/cookie-policy"><span>Cookie Policy</span></a>
+</div>
+<div class="sl-footer_links-col">
+<a class="sl-footer_links-col-item" href="/en/security-practices"><span>Security Practices</span></a>
+<a class="sl-footer_links-col-item" href="/en/about-us/investor-relations"><span>Investor Relations / Public Disclosure</span></a>
+<a class="sl-footer_links-col-item" href="/en/speak-out-policy"><span>Speak Out Policy </span></a>
+<a class="sl-footer_links-col-item"><span></span></a>
+</div>
+</div>
+<div class="sl-footer_information">
+<p> © 2023 Singapore Life Ltd. | Company Reg.No.: 196900499K | GST Reg.No.: MR-8500166-8</p>
+</div>
+</div>
+</footer>
+</div>
+<div class="blog-sticky-bar fadeIn" x-data="blogStickyBar">
+<div class="blog-sticky-bar_inner">
+<div class="container" x-data="dynamic_container">
+<div class="blog-sticky-bar_buttons">
+<a class="purple" href="/en/blog/health" target="_self">Health</a>
+<a class="green" href="/en/blog/money" target="_self">Money</a>
+<a class="red" href="/en/blog/lifestyle" target="_self">Lifestyle</a>
+</div>
+</div>
+</div>
+</div>
+<div x-data="blog_click_tracking"></div>
+<script src="/etc.clientlibs/core/wcm/components/commons/site/clientlibs/container.min.js"></script>
+<script src="/etc.clientlibs/asl-public/clientlibs/clientlib-base.min.js"></script>
+<script crossorigin="anonymous" data-cf-beacon='{"rayId":"7e0df1cd48758944","version":"2023.4.0","b":1,"token":"bee632762b8a4fd28048bc850133c5b1","si":100}' defer="" integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw==" src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"></script>
+</body>
+</html>
