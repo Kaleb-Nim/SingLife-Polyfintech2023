@@ -24,3 +24,6 @@ cd Sn3kk
 wget --version
 wget -r -np -nd -A.html,.txt,.tmp -P websites https://singlife.com/en
 C:\Users\kalebnim\AppData\Roaming\wget\wget.exe -r -np -nd -A.html,.txt,.tmp -P websites https://singlife.com/en
+
+
+C:\Users\kalebnim\AppData\Roaming\wget\wget.exe -r -np -nd -A.html,.txt,.tmp -P websites https://singlife.com/en/blog
