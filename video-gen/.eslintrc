@@ -1,0 +1,12 @@
+{
+	"extends": "@remotion",
+	"overrides": [
+		{
+			"files": ["**/*.tsx"],
+			"rules": {
+				"react/react-in-jsx-scope": "off",
+				"camelcase": "off"
+			}
+		}
+	]
+}
