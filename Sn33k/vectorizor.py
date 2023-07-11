@@ -36,6 +36,7 @@ def init_pinecone(api_key, index_name, dimension):
 
 # Create embeddings and populate the index
 def create_and_index_embeddings(data, model, index):
+    print(data)
     batch_size = 32
     for i in range(0, len(data), batch_size):
         text_batch = [item["text"] for item in data[i:i+batch_size]]
