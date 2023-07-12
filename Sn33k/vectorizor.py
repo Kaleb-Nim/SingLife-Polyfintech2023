@@ -43,7 +43,12 @@ def create_and_index_embeddings(data, model, index):
         ids_batch = [str(n) for n in range(i, i+min(batch_size, len(data)-i))]
         res = openai.Embedding.create(input=text_batch, engine=model)
         embeds = [record["embedding"] for record in res["data"]]
-        to_upsert = zip(ids_batch, embeds)
+
+        # prep metadata and upsert batch
+        meta = [{'text': line} for line in text_batch]
+
+        to_upsert = zip(ids_batch, embeds, meta)
+        
         index.upsert(vectors=list(to_upsert))
 
 if __name__ == "__main__":

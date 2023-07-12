@@ -169,3 +169,9 @@ cython_debug/
 
 node_modules/
 .vscode/settings.json
+
+# all 7z files
+*.7z
+
+# all pdfs in pdf   
+Sn33k/pdfs
