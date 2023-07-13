@@ -175,3 +175,5 @@ node_modules/
 
 # all pdfs in pdf   
 Sn33k/pdfs
+
+custom_llm/wandb
