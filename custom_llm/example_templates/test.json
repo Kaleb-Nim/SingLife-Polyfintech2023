@@ -1,0 +1,55 @@
+{
+  "memory": null,
+  "verbose": true,
+  "tags": null,
+  "metadata": null,
+  "prompt": {
+    "input_variables": ["documents", "query"],
+    "output_parser": null,
+    "partial_variables": {},
+    "template": "Goal:Generate 15-30sec video script based on custom knowledge base (Information below) and user query. Two components 1.Scene assets descriptions 2.Subtitle script \\n    Custom knowledge base:{documents}\\nUsing the above information, generate a video script that addresses this user query: {query}. Video style/format: Funny and sarcastic",
+    "template_format": "f-string",
+    "validate_template": true,
+    "_type": "prompt"
+  },
+  "llm": {
+    "model_name": "gpt-3.5-turbo-0613",
+    "model": "gpt-3.5-turbo-0613",
+    "request_timeout": null,
+    "max_tokens": null,
+    "stream": false,
+    "n": 1,
+    "temperature": 0.0,
+    "_type": "openai-chat"
+  },
+  "output_key": "function",
+  "output_parser": { "args_only": true },
+  "return_final_only": true,
+  "llm_kwargs": {
+    "functions": [
+      {
+        "name": "output_formatter",
+        "description": "Output formatter. Should always be used to format your response to the user.",
+        "parameters": {
+          "title": "generate_video_script",
+          "description": "Generates 15-30sec video script based on custom knowledge base. Two components 1.Scene assets descriptions 2.Subtitle script",
+          "type": "array",
+          "properties": {
+            "scene": {
+              "title": "Scene",
+              "description": "Scene description for video. Should be visual and general",
+              "type": "string"
+            },
+            "subtitles": {
+              "title": "Subtitles",
+              "description": "Funny and sarcastic video subtitles script for video",
+              "type": "string"
+            }
+          },
+          "required": ["scene", "subtitles"]
+        }
+      }
+    ],
+    "function_call": { "name": "output_formatter" }
+  }
+}
