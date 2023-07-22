@@ -90,6 +90,10 @@ class Singlife:
         self.gpt3_model = ChatOpenAI(model_name="gpt-3.5-turbo-0613", temperature=0)
         self.gpt4_model = ChatOpenAI(model_name="gpt-4-0613", temperature=0)
         self.current_model = self.gpt3_model
+        print(f'Model successfully loaded: {self.current_model}', flush=True)
+
+        # Hard code the json schema for now since there's only one currently
+        self.json_schema = self._set_json_schema()
 
 
     def generateScript(self, query: str, video_style: str = "Funny and sarcastic", model_name: str = 'gpt-3.5-turbo-0613'):
@@ -124,7 +128,7 @@ class Singlife:
             raise Exception(f"Error running overall_chain: {e}")
         
         return result
-
+    
     def _set_current_model(self, model_name: str):
         """
         Purpose:
