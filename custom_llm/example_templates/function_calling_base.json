@@ -1,0 +1,19 @@
+{
+  "title": "generate_video_script",
+  "description": "Generates 15-30sec video script based on custom knowledge base. Two components 1.Scene assets descriptions 2.Subtitle script",
+  "type": "object",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "scene": {
+        "type": "string",
+        "description": "Scene description for video should be visual and general"
+      },
+      "subtitles": {
+        "type": "string",
+        "description": "Funny and sarcastic video subtitles script for video"
+      }
+    },
+    "required": ["scene", "subtitles"]
+  }
+}
