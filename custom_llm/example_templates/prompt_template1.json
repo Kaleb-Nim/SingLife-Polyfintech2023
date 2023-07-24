@@ -1,5 +1,5 @@
-[
-  [
+{
+  "list_of_scenes":[
     {
       "scene": "family trip skiing",
       "subtitles": [
@@ -47,4 +47,4 @@
       ]
     }
   ]
-]
+}
