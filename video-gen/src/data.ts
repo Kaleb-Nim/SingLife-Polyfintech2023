@@ -1,7 +1,6 @@
 export const formatted = [
 	{
-		scene:
-			'A family dressed in winter gear, standing in front of a snowy mountain landscape in Japan. They are smiling and holding ski equipment.',
+		scene: 'diving in the ocean',
 		subtitles: [
 			'Are you ready for an unforgettable family ski trip to Japan?',
 			"Ensure your adventure is worry-free with Singlife's travel insurance!",
