@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.3.1",
+    "node-fetch": "^2.6.12",
     "pptxgenjs": "^3.12.0"
   }
 }

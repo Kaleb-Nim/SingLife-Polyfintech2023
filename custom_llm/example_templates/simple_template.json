@@ -1,0 +1,24 @@
+[
+    {
+      "name": "output_formatter",
+      "description": "Output formatter. Should always be used to format your response to the user.",
+      "parameters": {
+        "title": "generate_video_script",
+        "description": "Generates 15-30sec video script based on custom knowledge base. Two components 1.Scene assets descriptions 2.Subtitle script",
+        "type": "array",
+        "properties": {
+          "scene": {
+            "title": "Scene",
+            "description": "Scene description for video. Should be visual and general",
+            "type": "string"
+          },
+          "subtitles": {
+            "title": "Subtitles",
+            "description": "Funny and sarcastic video subtitles script for video",
+            "type": "string"
+          }
+        },
+        "required": ["scene", "subtitles"]
+      }
+    }
+  ]
