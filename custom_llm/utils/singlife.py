@@ -108,7 +108,7 @@ class Singlife:
         Returns:
         """
         # Set the current model
-        # self._set_current_model(model_name=model_name)
+        self._set_current_model(model_name=model_name)
 
         # Set the video prompt style
         self._set_video_prompt_style(video_style=video_style)
@@ -239,9 +239,40 @@ class Singlife:
 
         try:
             video_prompt = PromptTemplate(
-                template="""Goal:Generate 15-30sec video script based on custom knowledge base (Information below) and user query. Two components 1.Scene assets descriptions 2.Subtitle script 
-                Custom knowledge base:{result}\n\nUsing the above information, generate a video script that addresses this user query:\n\n"{query}".\nReturn the generated video script in the style/format: """+video_style,
-                input_variables= ["result", "query"]
+                template="""Goal:Generate 15-30sec video script based on custom knowledge base (Information below) and user query. Two components 1.Scene assets descriptions 2.Subtitle script.\n\nCustom knowledge base:{result}\nEnd of Custom Knowledge base.Example Format output: dict(
+                "list_of_scenes":[
+                dict(
+                    "scene": "Scene description1...",
+                    "subtitles": [
+                    "text of video subtitles1...",
+                    "text of video subtitles2..."
+                    ]
+                ),
+                dict(
+                    "scene": "Scene description2...",
+                    "subtitles": [
+                    "text of video subtitles3...",
+                    "text of video subtitles4..."
+                    ]
+                ),
+                dict(
+                    "scene": "Scene description3...",
+                    "subtitles": [
+                    "text of video subtitles5...",
+                    "text of video subtitles6..."
+                    ]
+                ),
+                dict(
+                    "scene": "Scene description4...",
+                    "subtitles": [
+                    "text of video subtitles7...",
+                    "text of video subtitles8..."
+                    ]
+                ),
+                ]
+            )\n\nUsing the above information in Custom knowledge base, generate a video script, video length: 15-30seconds, that addresses this user query:\n"{query}".\n\nReturn the generated video script in the style/format:"""+video_style,
+                input_variables= ["result", "query"],
+                validate_template=False
             )
         except Exception as e:
             raise Exception(f"Error creating video_prompt: {e}]\n\n Type video_prompt_style must be (str)")
@@ -261,31 +292,33 @@ class Singlife:
 
         # Define the json schema
         json_schema = {
-            "title": "generate_video_script",
-            "description": "Generates 15-30sec video script based on custom knowledge base. Two components 1.Scene descriptions 2.Subtitle script",
-            "type": "object",
-            "properties": {
-                "list_of_video_chunk": {
-                "type": "array",
-                "description": "List of video_chunk to be included in the video, one video chunk should last 3-5 seconds and is a dictionary with keys: 1. Scene  2. Subtitle",
-                "items": {
-                    "type": "object"
-                },
-                "properties": {
-                    "scene": {
-                    "type": "string",
-                    "description": "Scene description for video should be visual and general"
-                    },
-                    "subtitles": {
-                    "type": "string",
-                    "description": "Funny and sarcastic video subtitles script for video"
-                    }
-                },
-                "required": ["scene", "subtitles"]
-                }
+    "name": "format_video_script",
+    "description": "Formats to a 15-30sec video script.",
+    "type": "object",
+    "properties": {
+      "list_of_scenes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "scene": {
+              "type": "string",
+              "description": "Scene description for video should be visual and general. Maximum 5 words"
             },
-            "required": ["list_of_video_chunk"]
+            "subtitles": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "video subtitles script for video"
+              }
+            }
+          },
+          "required": ["scene", "subtitles"]
         }
+      }
+    },
+    "required": ["list_of_scenes"]
+  }
 
         self.json_schema = json_schema
 

@@ -12,7 +12,7 @@ from io import StringIO
 st.set_page_config(page_title="AVA", page_icon=":robot_face:")
 st.markdown("<h1 style='text-align: center;'>AVA - a totally harmless chatbot 😬</h1>", unsafe_allow_html=True)
 
-# @st.cache_resource
+@st.cache_resource
 def init_singlife_class():
     # Usually u just have to init with this line, werid streamlit thingy to cache 
     singlife = Singlife()
@@ -74,12 +74,12 @@ container = st.container()
 
 with container:
     with st.form(key='my_form', clear_on_submit=True):
-        user_input = st.text_area("You:", key='input', height=100,value="I am travelling to Japan for a ski trip with my family next week.What kind of travel insurance coverage do we need?")
+        user_input = st.text_area("You:", key='input', height=100,placeholder ="I am travelling to Japan for a ski trip with my family next week.What kind of travel insurance coverage do we need?")
         submit_button = st.form_submit_button(label='Send')
 
     if submit_button and user_input:
 
-        with st.spinner(f"Running LLM"):
+        with st.spinner(f"Running LLM on query: {user_input}"):
             # st.write(f'🧾 Logs')
             with st.expander(f"🧾 Logs"):
                 output = st.empty()
@@ -87,6 +87,13 @@ with container:
 
                     # This is how to use the class
                     results = singlife.generateScript(query=user_input, model_name=model, video_style=video_style)
+                    st.write(results)
+                    st.write(f'Type of Results: {type(results)}')
+
+        # Display the json output
+        st.write(f'Results: {results}')
+        st.write(f'Type of Results: {type(results)}')
+
 
         st.session_state['past'].append(user_input)
         st.session_state['generated'].append(results)
@@ -100,5 +107,4 @@ if st.session_state['generated']:
             message(st.session_state["past"][i], is_user=True, key=str(i) + '_user')
             message(st.session_state["generated"][i], key=str(i))
             st.write(
-                f"Model used: {st.session_state['model_name'][i]}; Number of tokens: {st.session_state['total_tokens'][i]}; Cost: ${st.session_state['cost'][i]:.5f}")
-            counter_placeholder.write(f"Total cost of this conversation: ${st.session_state['total_cost']:.5f}")
+                f"Model used: {st.session_state['model_name'][i]};")
