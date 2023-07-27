@@ -96,7 +96,7 @@ class Singlife:
         self.json_schema = self._set_json_schema()
 
 
-    def generateScript(self, query: str, video_style: str = "Funny and sarcastic", model_name: str = 'gpt-3.5-turbo-0613'):
+    def generateScript(self, query: str, video_style: str = "Funny and sarcastic", model_name: str = 'gpt-3.5-turbo-0613',callbacks=None):
         """
         Main class method to generate video script from query
 
@@ -109,6 +109,7 @@ class Singlife:
         """
         # Set the current model
         self._set_current_model(model_name=model_name)
+        print(f'Current model used: {self.current_model}', flush=True)
 
         # Set the video prompt style
         self._set_video_prompt_style(video_style=video_style)
@@ -239,7 +240,7 @@ class Singlife:
 
         try:
             video_prompt = PromptTemplate(
-                template="""Goal:Generate 15-30sec video script based on custom knowledge base (Information below) and user query. Two components 1.Scene assets descriptions 2.Subtitle script.\n\nCustom knowledge base:{result}\nEnd of Custom Knowledge base.Example Format output: dict(
+                template="""Goal:Generate 15-30sec video script based on custom knowledge base (Information below) and user query. Two components 1.Scene assets descriptions 2.Subtitle script.\n\n------------------Custom knowledge base:------------------\n{result}\n------------------End of Custom Knowledge base.------------------\nExample Format output: dict(
                 "list_of_scenes":[
                 dict(
                     "scene": "Scene description1...",
