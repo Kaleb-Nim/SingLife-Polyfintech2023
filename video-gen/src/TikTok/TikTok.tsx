@@ -44,7 +44,7 @@ export const TikTok: React.FC<z.infer<typeof myCompSchema>> = ({prompt}) => {
 							size: 'small',
 						})
 						.then((res) => {
-							return res.videos[res.videos.length - 1]
+							return res.videos[0]
 						})
 				)
 			}
@@ -68,7 +68,7 @@ export const TikTok: React.FC<z.infer<typeof myCompSchema>> = ({prompt}) => {
 		() =>
 			formatted.map((vid) => {
 				const fps = 30
-				const wpm = 275
+				const wpm = 230
 				const new_subtitles = JSON.parse(JSON.stringify(vid.subtitles))
 				for (let i = 0; i < vid.subtitles.length; i++) {
 					const subtitle = vid.subtitles[i]
@@ -89,6 +89,9 @@ export const TikTok: React.FC<z.infer<typeof myCompSchema>> = ({prompt}) => {
 			}),
 		[formatted]
 	)
+	React.useEffect(() => {
+		console.log('meow', formatted_with_frames)
+	}, [formatted_with_frames])
 	if (!formatted_with_frames.length) {
 		return null
 	}
@@ -97,72 +100,69 @@ export const TikTok: React.FC<z.infer<typeof myCompSchema>> = ({prompt}) => {
 		<AbsoluteFill style={{backgroundColor: '#363636'}}>
 			<Audio src={staticFile('ski.mp3')} volume={4} />
 			<Audio loop src={staticFile('bg.mp3')} volume={0.02} />
-			<TransitionSeries>
-				{formatted_with_frames.map((vid, index) => {
-					const wpm = 145
-					const {link, subtitles} = vid
-					const all_subtitles = subtitles
-						.map((subtitle: {text: string}) => subtitle.text)
-						.join(' ')
-					const word_count = all_subtitles.split(' ').length
-					const total_duration = Math.ceil((word_count / wpm) * 60)
-					return (
-						<>
-							<TransitionSeries.Sequence
-								key={index}
-								durationInFrames={fps * total_duration}
-							>
-								<>
-									<Video key={index} muted src={link} />
-									{subtitles.map(
-										(
-											subtitle: {
-												text: string
-												start_frame: number
-												end_frame: number
-											},
-											idx: number
-										) => {
-											return (
-												<div
-													key={idx}
+			{/* <TransitionSeries> */}
+			{formatted_with_frames.map((vid, index) => {
+				const wpm = 145
+				const {link, subtitles} = vid
+				const all_subtitles = subtitles
+					.map((subtitle: {text: string}) => subtitle.text)
+					.join(' ')
+				const word_count = all_subtitles.split(' ').length
+				const total_duration = Math.ceil((word_count / wpm) * 60)
+				return (
+					<>
+						<Sequence key={index} durationInFrames={fps * total_duration}>
+							<>
+								<Video key={index} muted src={link} />
+								{subtitles.map(
+									(
+										subtitle: {
+											text: string
+											start_frame: number
+											end_frame: number
+										},
+										idx: number
+									) => {
+										return (
+											<div
+												key={idx}
+												style={{
+													position: 'absolute',
+													bottom: '5%',
+													paddingInline: '10%',
+													width: '100%',
+													color: 'white',
+													fontSize: 30,
+													display:
+														frame >= subtitle.start_frame &&
+														frame <= subtitle.end_frame
+															? 'block'
+															: 'none',
+												}}
+											>
+												<h1
 													style={{
-														position: 'absolute',
-														bottom: '5%',
-														paddingInline: '10%',
-														width: '100%',
-														color: 'white',
-														fontSize: 30,
-														display:
-															frame >= subtitle.start_frame &&
-															frame <= subtitle.end_frame
-																? 'block'
-																: 'none',
+														textShadow: '2px 2px 20px #000000',
 													}}
 												>
-													<h1
-														style={{
-															textShadow: '2px 2px 20px #000000',
-														}}
-													>
-														{subtitle.text}
-													</h1>
-												</div>
-											)
-										}
-									)}
-								</>
-							</TransitionSeries.Sequence>
-							{index < formatted_with_frames.length - 1 && (
+													{subtitle.text}
+												</h1>
+											</div>
+										)
+									}
+								)}
+							</>
+						</Sequence>
+						{/* {index < formatted_with_frames.length - 1 && (
 								<TransitionSeries.Transition
 									durationInFrames={30}
 									transitionComponent={(props) => <SlidingDoors {...props} />}
 								/>
-							)}
-						</>
-					)
-				})}
-			</TransitionSeries>
+							)} */}
+					</>
+				)
+			})}
+			{/* </TransitionSeries> */}
 			<Sequence from={fps * 41}>
 				<Video src={staticFile('end.mp4')} />
 			</Sequence>

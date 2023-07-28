@@ -1,102 +1,103 @@
 // export const formatted = [
 // 	{
-// 		scene: 'diving in the ocean',
+// 		scene:
+// 			'A family packing their ski gear with excitement, a map of Japan in the background.',
 // 		subtitles: [
-// 			'Are you ready for an unforgettable family ski trip to Japan?',
-// 			"Ensure your adventure is worry-free with Singlife's travel insurance!",
-// 		],
-// 	},
-// 	{
-// 		scene: 'Close-up of the Singlife travel insurance policy document.',
-// 		subtitles: [
-// 			'Our comprehensive travel insurance plans cater to your needs.',
-// 			'Peace of mind throughout your journey.',
-// 		],
-// 	},
-// 	{
-// 		scene: 'Split-screen showcasing different coverage benefits.',
-// 		subtitles: [
-// 			'From emergency medical expenses to trip cancellation protection.',
-// 			'Singlife has you covered.',
-// 		],
-// 	},
-// 	{
-// 		scene: 'The family excitedly boarding a ski lift.',
-// 		subtitles: [
-// 			'Enjoy the slopes with confidence.',
-// 			'Specialized coverage for winter sports activities.',
-// 		],
-// 	},
-// 	{
-// 		scene: 'A skier performing a jump in mid-air.',
-// 		subtitles: [
-// 			'Carve through the powder with peace of mind.',
-// 			"Don't let unexpected events ruin your ski trip.",
+// 			"So, you're off to Japan for a ski trip, huh? Don't forget your toothbrush... or your travel insurance!",
 // 		],
 // 	},
 // 	{
 // 		scene:
-// 			'The family gathered around a cozy fireplace in a traditional Japanese lodge.',
-// 		subtitles: ["Trust Singlife to safeguard your family's adventure."],
-// 	},
-// 	{
-// 		scene: 'Singlife logo and contact information displayed.',
+// 			'A cartoonish depiction of a person skiing and suddenly falling, with a helicopter coming to the rescue.',
 // 		subtitles: [
-// 			'Explore our travel insurance plans on our website.',
-// 			'Call us today for more information.',
+// 			"Imagine this: you're skiing, you take a tumble, and bam! You need a helicopter ride. Good thing your insurance covers that, right?",
 // 		],
 // 	},
-
 // 	{
 // 		scene:
-// 			'The family raising their ski poles in celebration, with a breathtaking mountain backdrop.',
+// 			'A person lying in a hospital bed, looking at a calendar with the return date crossed out.',
 // 		subtitles: [
-// 			'Singlife, protecting your family’s ski adventures.',
-// 			'Create unforgettable memories together.',
+// 			"Oh, and if you're having too much fun (or not) and need to extend your stay, your insurance has got you covered.",
+// 		],
+// 	},
+// 	{
+// 		scene:
+// 			'A person looking at their expensive ski gear with a worried expression.',
+// 		subtitles: [
+// 			"Brought your fancy gear? Make sure your policy covers that too. You wouldn't want to lose your precious skis, would you?",
+// 		],
+// 	},
+// 	{
+// 		scene:
+// 			'A person sneezing into a tissue, with a COVID-19 symbol floating around.',
+// 		subtitles: [
+// 			"And let's not forget our uninvited friend, COVID-19. Make sure your policy covers any trip interruptions or medical treatment.",
+// 		],
+// 	},
+// 	{
+// 		scene:
+// 			"A person comparing two insurance plans, labeled 'Elite' and 'Classic'.",
+// 		subtitles: [
+// 			"Choose wisely, my friend. The 'Elite' for the business mogul, or the 'Classic' for the basics. Either way, stay safe and have fun!",
 // 		],
 // 	},
 // ]
+
 export const formatted = [
 	{
 		scene:
-			'A family packing their ski gear with excitement, a map of Japan in the background.',
+			'A person sitting at a desk with papers and a calculator, surrounded by retirement savings guides and financial charts.',
 		subtitles: [
-			"So, you're off to Japan for a ski trip, huh? Don't forget your toothbrush... or your travel insurance!",
+			"So, you're planning for your future, huh? Getting that S$1.5 million payout at 60 is an excellent goal! But how can you make it happen?",
 		],
 	},
 	{
 		scene:
-			'A cartoonish depiction of a person skiing and suddenly falling, with a helicopter coming to the rescue.',
+			'A person browsing a financial planning website on a laptop, with a cup of coffee beside them.',
 		subtitles: [
-			"Imagine this: you're skiing, you take a tumble, and bam! You need a helicopter ride. Good thing your insurance covers that, right?",
+			"Imagine this: you find the perfect financial plan that helps you achieve your dream payout. It's like a tailored suit, but for your retirement!",
 		],
 	},
 	{
 		scene:
-			'A person lying in a hospital bed, looking at a calendar with the return date crossed out.',
+			'A person talking to a friendly financial advisor, with a whiteboard filled with investment options in the background.',
 		subtitles: [
-			"Oh, and if you're having too much fun (or not) and need to extend your stay, your insurance has got you covered.",
+			"And if you're unsure about where to start, don't worry! A reliable financial advisor can guide you towards the best investment strategies.",
 		],
 	},
 	{
 		scene:
-			'A person looking at their expensive ski gear with a worried expression.',
+			'A person happily celebrating with friends in front of a house, symbolizing achieving their retirement goal.',
 		subtitles: [
-			"Brought your fancy gear? Make sure your policy covers that too. You wouldn't want to lose your precious skis, would you?",
+			"Picture this: you're 60 years old, surrounded by loved ones, celebrating your success. You've reached your S$1.5 million payout!",
 		],
 	},
 	{
 		scene:
-			'A person sneezing into a tissue, with a COVID-19 symbol floating around.',
+			'A person exercising and staying fit, with a gym and health-related posters in the background.',
 		subtitles: [
-			"And let's not forget our uninvited friend, COVID-19. Make sure your policy covers any trip interruptions or medical treatment.",
+			"But wait, achieving your financial goals isn't just about investments. Taking care of your health is equally important! A healthy lifestyle ensures a brighter future.",
 		],
 	},
 	{
 		scene:
-			"A person comparing two insurance plans, labeled 'Elite' and 'Classic'.",
+			'A person exploring various investment options like stocks, real estate, and retirement funds.',
 		subtitles: [
-			"Choose wisely, my friend. The 'Elite' for the business mogul, or the 'Classic' for the basics. Either way, stay safe and have fun!",
+			'Explore different investment paths, like stocks, real estate, or retirement funds. Diversifying your portfolio increases your chances of hitting that S$1.5 million mark!',
+		],
+	},
+	{
+		scene:
+			'A person with a travel brochure, planning for an enjoyable retirement.',
+		subtitles: [
+			'And when you reach your goal, the world is your oyster! Plan for an enjoyable retirement filled with adventures and new experiences.',
+		],
+	},
+	{
+		scene:
+			'A person peacefully relaxing under a palm tree on a beautiful beach.',
+		subtitles: [
+			"Imagine this: sipping coconut water, feeling the warm sun on your skin, and living your best life in retirement. It's all possible with the right financial planning!",
 		],
 	},
 ]
