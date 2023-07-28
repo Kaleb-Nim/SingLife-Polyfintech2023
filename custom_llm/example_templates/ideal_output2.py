@@ -47,31 +47,31 @@ dict(
  dict(
                 "list_of_scenes":[
                 dict(
-                    "scene": "family...",
+                    "scene": "Scene description1...",
                     "subtitles": [
-                    "Are you...",
-                    "Ensure your..."
+                    "text of video subtitles1...",
+                    "text of video subtitles2..."
                     ]
                 ),
                 dict(
-                    "scene": "insurance policy...",
+                    "scene": "Scene description2...",
                     "subtitles": [
-                    "Our comprehensive...",
-                    "Peace of mind throughout your journey."
+                    "text of video subtitles3...",
+                    "text of video subtitles4..."
                     ]
                 ),
                 dict(
-                    "scene": "beach...",
+                    "scene": "Scene description3...",
                     "subtitles": [
-                    "Escape to.....",
-                    "Experience..."
+                    "text of video subtitles5...",
+                    "text of video subtitles6..."
                     ]
                 ),
                 dict(
-                    "scene": "exploring...",
+                    "scene": "Scene description4...",
                     "subtitles": [
-                    "Embark...",
-                    "Uncover the..."
+                    "text of video subtitles7...",
+                    "text of video subtitles8..."
                     ]
                 ),
                 ]
