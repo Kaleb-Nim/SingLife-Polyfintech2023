@@ -3,8 +3,6 @@ from langchain import LLMChain, OpenAI, SerpAPIWrapper
 from langchain.agents import AgentExecutor, Tool, ZeroShotAgent
 
 from lcserve import serving
-
-
 @serving
 def ask(input: str) -> str:
     search = SerpAPIWrapper()
