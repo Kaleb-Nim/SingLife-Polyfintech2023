@@ -46,58 +46,42 @@
 export const formatted = [
 	{
 		scene:
-			'A person sitting at a desk with papers and a calculator, surrounded by retirement savings guides and financial charts.',
+			'A cartoon family sitting around a table, looking confused with piles of insurance papers.',
 		subtitles: [
-			"So, you're planning for your future, huh? Getting that S$1.5 million payout at 60 is an excellent goal! But how can you make it happen?",
+			'So, you want to buy health insurance for your family, huh? Easy peasy...not!',
+			"It's like trying to solve a Rubik's cube blindfolded.",
 		],
 	},
 	{
 		scene:
-			'A person browsing a financial planning website on a laptop, with a cup of coffee beside them.',
+			'A financial adviser representative pops up from behind the table, wearing a superhero cape.',
 		subtitles: [
-			"Imagine this: you find the perfect financial plan that helps you achieve your dream payout. It's like a tailored suit, but for your retirement!",
+			"But don't worry! Our financial adviser representative is here, like a superhero from the world of finance.",
+			"They'll help you understand if the product is a perfect fit or a square peg in a round hole.",
 		],
 	},
 	{
 		scene:
-			'A person talking to a friendly financial advisor, with a whiteboard filled with investment options in the background.',
+			'The family looking at options like MediShield Life, Integrated Shield Plan (IP), and IP Rider on a computer screen.',
 		subtitles: [
-			"And if you're unsure about where to start, don't worry! A reliable financial advisor can guide you towards the best investment strategies.",
+			"You've got options like MediShield Life, Integrated Shield Plan, and IP Rider. Sounds fancy, right?",
+			"But remember, it's not about the fanciest name, it's about what suits your family's needs.",
 		],
 	},
 	{
 		scene:
-			'A person happily celebrating with friends in front of a house, symbolizing achieving their retirement goal.',
+			'The family using the Insurance Estimator on the CPF website and the Budget Calculator on the MoneySENSE website.',
 		subtitles: [
-			"Picture this: you're 60 years old, surrounded by loved ones, celebrating your success. You've reached your S$1.5 million payout!",
+			"Use the Insurance Estimator and Budget Calculator. They're like your personal crystal balls for insurance.",
+			"Just remember, if you can't pay the premiums, your policy will vanish faster than a magician's rabbit.",
 		],
 	},
 	{
 		scene:
-			'A person exercising and staying fit, with a gym and health-related posters in the background.',
+			'The family looking relieved, with the financial adviser representative giving a thumbs up.',
 		subtitles: [
-			"But wait, achieving your financial goals isn't just about investments. Taking care of your health is equally important! A healthy lifestyle ensures a brighter future.",
-		],
-	},
-	{
-		scene:
-			'A person exploring various investment options like stocks, real estate, and retirement funds.',
-		subtitles: [
-			'Explore different investment paths, like stocks, real estate, or retirement funds. Diversifying your portfolio increases your chances of hitting that S$1.5 million mark!',
-		],
-	},
-	{
-		scene:
-			'A person with a travel brochure, planning for an enjoyable retirement.',
-		subtitles: [
-			'And when you reach your goal, the world is your oyster! Plan for an enjoyable retirement filled with adventures and new experiences.',
-		],
-	},
-	{
-		scene:
-			'A person peacefully relaxing under a palm tree on a beautiful beach.',
-		subtitles: [
-			"Imagine this: sipping coconut water, feeling the warm sun on your skin, and living your best life in retirement. It's all possible with the right financial planning!",
+			'So, take a deep breath, do your homework, and remember, the right insurance is out there.',
+			"And hey, it's protected under the Policy Owners' Protection Scheme. So, you're covered, literally!",
 		],
 	},
 ]

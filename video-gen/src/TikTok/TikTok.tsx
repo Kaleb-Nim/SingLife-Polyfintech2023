@@ -98,7 +98,7 @@ export const TikTok: React.FC<z.infer<typeof myCompSchema>> = ({prompt}) => {
 
 	return (
 		<AbsoluteFill style={{backgroundColor: '#363636'}}>
-			<Audio src={staticFile('ski.mp3')} volume={4} />
+			{/* <Audio src={staticFile('ski.mp3')} volume={4} /> */}
 			<Audio loop src={staticFile('bg.mp3')} volume={0.02} />
 			{/* <TransitionSeries> */}
 			{formatted_with_frames.map((vid, index) => {

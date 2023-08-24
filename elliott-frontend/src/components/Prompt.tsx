@@ -53,7 +53,7 @@ const Prompt = () => {
           setTextContent(pipedText);
         }
       }, 12);
-    }, 10000);
+    }, 35000);
   };
 
   const { toast } = useToast();
@@ -68,7 +68,7 @@ const Prompt = () => {
   return (
     <div
       id="prompt"
-      className="h-screen translate-y-full flex items-center justify-center w-full"
+      className="flex items-center justify-center w-full h-screen translate-y-full"
     >
       <Card className="w-[40vw]">
         <CardHeader>
@@ -93,12 +93,12 @@ const Prompt = () => {
               }}
             />
             <Button disabled={loading} className="mt-4" type="submit">
-              {loading && <Loader2 className="animate-spin mr-2" />}
+              {loading && <Loader2 className="mr-2 animate-spin" />}
               Generate
               {!loading && <ChevronRight />}
             </Button>
             {loading && (
-              <div className="mt-2 text-sm text-slate-400 font-normal">
+              <div className="mt-2 text-sm font-normal text-slate-400">
                 Video is being generated... this may take a few minutes...
               </div>
             )}
@@ -111,14 +111,14 @@ const Prompt = () => {
               <video
                 autoPlay
                 controls
-                src="https://imgur.com/xSnj7KR.mp4"
+                src="/video1.mp4"
                 className="h-[500px]"
               ></video>
               <div className="flex flex-col ml-6">
                 <span className="text-sm text-gray-500">
                   Share with others:
                 </span>
-                <div className="flex mt-2 gap-2">
+                <div className="flex gap-2 mt-2">
                   <Button
                     variant={"outline"}
                     onClick={() => copyLink("https://imgur.com/xSnj7KR.mp4")}
@@ -144,7 +144,7 @@ const Prompt = () => {
                 </div>
                 <p
                   dangerouslySetInnerHTML={{ __html: textContent }}
-                  className="text-sm text-gray-500 mt-4"
+                  className="mt-4 text-sm text-gray-500"
                 ></p>
               </div>
             </div>
