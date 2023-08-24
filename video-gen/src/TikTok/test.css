@@ -1,0 +1,3 @@
+div:has(> video) {
+	justify-content: center;
+}

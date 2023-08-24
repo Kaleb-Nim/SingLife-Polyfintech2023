@@ -177,3 +177,4 @@ node_modules/
 Sn33k/pdfs
 
 custom_llm/wandb
+*.mp3

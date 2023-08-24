@@ -13,3 +13,9 @@ Main repo for Singlife Polyfintech 2023.
   * AI-voice Over
   * Complie both together
 4. Web application showcase
+
+
+# How To Run Backend
+```bash
+lc-serve deploy local --app endpoints:app
+```
