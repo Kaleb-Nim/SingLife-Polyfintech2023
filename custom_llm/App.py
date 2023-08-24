@@ -2,23 +2,24 @@ import openai
 import streamlit as st
 from streamlit_chat import message
 from utils.singlife import Singlife
+from utils.video_gen import VideoGenerator, generate
 
 # For displaying the output of print() in Streamlit
 from contextlib import contextmanager, redirect_stdout
 from io import StringIO
 
-
 # Setting page title and header
 st.set_page_config(page_title="AVA", page_icon=":robot_face:")
 st.markdown("<h1 style='text-align: center;'>SINGen -Your personal video GPT 😬</h1>", unsafe_allow_html=True)
 
-@st.cache_resource
-def init_singlife_class():
-    # Usually u just have to init with this line, werid streamlit thingy to cache 
-    singlife = Singlife()
-    return singlife
 
-singlife = init_singlife_class()
+# @st.cache_resource
+# def init_singlife_class():
+#     # Usually u just have to init with this line, werid streamlit thingy to cache 
+#     singlife = Singlife()
+#     return singlife
+
+# singlife = init_singlife_class()
 
 @contextmanager
 def st_capture(output_func):
@@ -86,7 +87,7 @@ with container:
                 with st_capture(output.code):
 
                     # This is how to use the class
-                    results = singlife.generateScript(query=user_input, model_name=model, video_style=video_style)
+                    results = generate(user_input)
                     st.write(results)
                     st.write(f'Type of Results: {type(results)}')
 
