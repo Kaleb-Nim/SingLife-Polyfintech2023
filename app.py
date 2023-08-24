@@ -43,7 +43,6 @@ from langchain.chains.openai_functions import (
 from langchain.schema import HumanMessage, AIMessage, ChatMessage
 from lcserve import serving
 
-load_dotenv("./.env")
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
 PINECONE_ENVIRONMENT= os.getenv("PINECONE_ENVIRONMENT")
@@ -168,7 +167,11 @@ class VideoGenerator:
 @serving
 def generate(input: str) -> dict:
     videoGenerator = VideoGenerator(llm=ChatOpenAI(model_name=MODEL_NAME, temperature=TEMPERATURE))
-    return videoGenerator.generate(input)
+    output = videoGenerator.generate(input)
+    all_subtitles = []
+    for scene in output["list_of_scenes"]:
+        all_subtitles.append("".join(scene["subtitles"]))
+    return output
 
 @serving
 def ask(input: str) -> str:
