@@ -11,6 +11,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { ChevronRight, Facebook, Instagram, Loader2 } from "lucide-react";
 import { useToast } from "./ui/use-toast";
+import axios from "axios";
 
 const fakeText = `
 <div style="margin-bottom: 8px; font-weight:bold;">Further Reading:</div>
@@ -65,6 +66,19 @@ const Prompt = () => {
       description: "You may now share this link with others!",
     });
   }
+  async function hitEndpoint() {
+    setLoading(true);
+    try {
+      const endpoint = "http://0.0.0.0:8080/generate";
+      await axios.post(endpoint, {
+        input: input,
+      });
+    } catch (error) {
+      console.error("endpoint error", error);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <div
       id="prompt"
@@ -82,7 +96,7 @@ const Prompt = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              getVideo();
+              hitEndpoint();
             }}
           >
             <Input

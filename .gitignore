@@ -23,7 +23,8 @@ dist
 
 # Ignore the output video from Git but not videos you import into src/.
 out
-
+elliott-frontend-next/
+elliott-transcribe/
 parts/
 sdist/
 var/
