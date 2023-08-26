@@ -42,7 +42,7 @@ from langchain.chains.openai_functions import (
     create_structured_output_chain,
 )
 from langchain.schema import HumanMessage, AIMessage, ChatMessage
-from lcserve import serving
+# from lcserve import serving
 
 
 from elevenlabs import generate as generate_voice, set_api_key, voices
@@ -66,6 +66,19 @@ PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
 # ELEVENLABS
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
 set_api_key(ELEVENLABS_API_KEY)
+
+# APP
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 MODEL_NAME = "gpt-4-0613"
 TEMPERATURE = 0.0
@@ -197,8 +210,12 @@ class VideoGenerator:
         return results
 
 
-@serving
-def generate(input: str) -> dict:
+class InputModel(BaseModel):
+    input: str
+
+@app.post("/generate")
+def generate(inputBody: InputModel) -> dict:
+    input = inputBody.input
     videoGenerator = VideoGenerator(
         llm=ChatOpenAI(model_name=MODEL_NAME, temperature=TEMPERATURE)
     )
