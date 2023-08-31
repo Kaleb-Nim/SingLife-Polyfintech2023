@@ -10,8 +10,8 @@ from io import StringIO
 
 # Setting page title and header
 st.set_page_config(page_title="AVA", page_icon=":robot_face:")
-st.markdown("<h1 style='text-align: center;'>SINGen -Your personal video GPT 😬</h1>", unsafe_allow_html=True)
-
+st.markdown("<h1 style='text-align: center;'>Custom Knowledge Base Retrival & JsonOuput 😬</h1>", unsafe_allow_html=True)
+st.image('./src/pine_cone_embedding.jpg', use_column_width=True)
 
 # @st.cache_resource
 # def init_singlife_class():
