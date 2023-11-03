@@ -97,6 +97,7 @@ const Prompt = () => {
             onSubmit={(e) => {
               e.preventDefault();
               hitEndpoint();
+              getVideo();
             }}
           >
             <Input
