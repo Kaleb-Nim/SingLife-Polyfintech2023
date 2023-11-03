@@ -42,8 +42,8 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: elliott-frontend/node-app
-          path: dist # This should be your distribution path, not the root path
+          name: node-app
+          path: elliott-frontend/dist # This should be your distribution path, not the root path
 
   # Deploy the application to Azure
   deploy:
@@ -57,7 +57,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: elliott-frontend/node-app
+          name: node-app
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
