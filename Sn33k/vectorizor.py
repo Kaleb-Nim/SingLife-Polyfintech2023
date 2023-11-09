@@ -35,17 +35,23 @@ def init_pinecone(api_key, index_name, dimension):
     return pinecone.Index(index_name)
 
 # Create embeddings and populate the index
-def create_and_index_embeddings(data, model, index):
+def create_and_index_embeddings(data, model, index: pinecone.Index):
     print(data)
     batch_size = 32
     for i in range(0, len(data), batch_size):
         text_batch = [item["text"] for item in data[i:i+batch_size]]
+        
+        source_batch = [item["source"] for item in data[i:i+batch_size]]
+        title_batch = [item["title"] for item in data[i:i+batch_size]]
+        
         ids_batch = [str(n) for n in range(i, i+min(batch_size, len(data)-i))]
-        res = openai.Embedding.create(input=text_batch, engine=model)
-        embeds = [record["embedding"] for record in res["data"]]
+        res = openai.embeddings.create(input=text_batch, model=model)
+        embeds = [record.embedding for record in res.data]
 
-        # prep metadata and upsert batch
-        meta = [{'text': line} for line in text_batch]
+        # prep metadata and upsert batch, add source and title and text itself to metadata
+        meta = []
+        for j in range(len(ids_batch)):
+            meta.append({"source": source_batch[j], "title": title_batch[j], "text": text_batch[j]})
 
         to_upsert = zip(ids_batch, embeds, meta)
         
@@ -59,8 +65,8 @@ if __name__ == "__main__":
     MODEL = init_openai(OPENAI_API_KEY)
 
     # Get embeddings dimension
-    sample_embedding = openai.Embedding.create(input="sample text", engine=MODEL)["data"][0]["embedding"]
-    EMBEDDING_DIMENSION = len(sample_embedding)
+    # sample_embedding = openai.embeddings.create(input="sample text", model=MODEL)["data"][0]["embedding"]
+    EMBEDDING_DIMENSION = 1536
 
     # Initialize Pinecone index
     chatgpt_index = init_pinecone(PINECONE_API_KEY, INDEX_NAME, EMBEDDING_DIMENSION)

@@ -6,6 +6,10 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from tqdm.auto import tqdm
 import tiktoken
 import pdfplumber
+import pandas as pd
+
+url_df = pd.read_csv('data/URL_cleaned.csv')
+print(url_df[url_df['title']=="nikkoam-global-green-bond"]['url'].values[0])
 
 tokenizer = tiktoken.get_encoding('cl100k_base')
 
@@ -38,6 +42,7 @@ def process_pdf_files(folder_path):
     for pdf_file in tqdm(pdf_files):
         try:
             file_path = os.path.join(folder_path, pdf_file)
+            pdf_name = pdf_file.split('.')[0]
 
             # Load the PDF content
             with pdfplumber.open(file_path) as pdf:
@@ -56,7 +61,8 @@ def process_pdf_files(folder_path):
                 documents.append({
                     'id': f'{uid}-{i}',
                     'text': chunk,
-                    'source': file_path
+                    'source': url_df[url_df['title']==pdf_name]['url'].values[0],
+                    'title': pdf_name,
                 })
 
             # Delete the PDF file after processing (optional)

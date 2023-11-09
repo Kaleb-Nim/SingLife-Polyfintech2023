@@ -30,7 +30,6 @@ def process_html_files(folder_path):
         length_function=tiktoken_len,
         separators=['\n\n', '\n', ' ', '']
     )
-
     documents = []
 
     # Process each HTML file
