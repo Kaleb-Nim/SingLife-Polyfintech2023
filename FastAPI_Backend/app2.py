@@ -7,6 +7,7 @@ import openai
 from PineconeUtils.Queryer import PineconeQuery
 from dotenv import load_dotenv
 import os
+from llm.chains import chat
 # Load variables from the .env file
 load_dotenv('.env')
 
@@ -48,7 +49,13 @@ async def hello(request: Request, name: str = Form(...)):
 @app.post('/query')
 async def query(query:str):
     relevant_documents = pineconeQuery.query(query=query)
-    return {"query":query,"relevant_documents":relevant_documents}
+    relevant_documents_str = pineconeQuery.concatDocuments(relevant_documents)
+
+    sources = pineconeQuery.extractDocumentSources(relevant_documents)
+    # Run the LLM 
+    video_script = chat(relevant_documents_str,query=query)
+
+    return {"query":query,"relevant_documents":relevant_documents,"video_script":video_script,"sources":sources}
 
 if __name__ == '__main__':
     uvicorn.run('main:app', host='0.0.0.0', port=8000)

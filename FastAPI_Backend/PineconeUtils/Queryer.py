@@ -99,4 +99,25 @@ class PineconeQuery:
         results_dict = results.to_dict()
         matched_docs = results_dict["matches"]
         return matched_docs
+    
+    @staticmethod
+    def concatDocuments(relevant_document:list[dict]) -> str:
+        """Concatenate the relevant documents into a single string for prompt generation"""
+
+        relevant_documents_str = ""
+        for i, d in enumerate(relevant_document):
+            # print(f"\n## Document {i}\n")
+            # print(d.page_content)
+            relevant_documents_str += f'\n## Document {i}\n {d["metadata"]["text"]}'
+        
+        return relevant_documents_str
+    
+    @staticmethod
+    def extractDocumentSources(relevant_document:list[dict]) ->list[dict]:
+        """Extracts all the document from the relevant sources and formats to list of dict with url and title"""
+        document_sources = []
+        for i, d in enumerate(relevant_document):
+            document_sources.append({"url":d["metadata"]["source"],"title":d["metadata"]["title"]})
+        
+        return document_sources
 
