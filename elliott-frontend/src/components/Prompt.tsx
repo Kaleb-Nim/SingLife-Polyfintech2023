@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import {
   Card,
   CardContent,
@@ -11,7 +11,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { ChevronRight, Facebook, Instagram, Loader2 } from "lucide-react";
 import { useToast } from "./ui/use-toast";
-import axios from "axios";
+// import axios from "axios";
 
 import useAutosizeTextArea from "./ui/useAutosizeTextArea";
 
@@ -110,25 +110,25 @@ const Prompt = () => {
       description: "You may now share this link with others!",
     });
   }
-  async function hitEndpoint() {
-    if (name && value) {
-      return;
-    }
-    setLoading(true);
-    setSource("");
-    try {
-      const endpoint = "./vite.svg";
-      await axios.post(endpoint, {
-        // input: input,
-      });
-    } catch (error) {
-      console.error("endpoint error", error);
-    } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
-  }
+  // async function hitEndpoint() {
+  //   if (name && value) {
+  //     return;
+  //   }
+  //   setLoading(true);
+  //   setSource("");
+  //   try {
+  //     const endpoint = "./vite.svg";
+  //     await axios.post(endpoint, {
+  //       // input: input,
+  //     });
+  //   } catch (error) {
+  //     console.error("endpoint error", error);
+  //   } finally {
+  //     setTimeout(() => {
+  //       setLoading(false);
+  //     }, 1000);
+  //   }
+  // }
   return (
     <div id="prompt" className="flex justify-center w-full h-fit">
       <Card className="min-w-[350px] flex mx-auto max-w-[750px] flex-col md:flex-row">

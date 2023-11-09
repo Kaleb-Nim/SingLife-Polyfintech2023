@@ -1,5 +1,5 @@
 import Prompt from "./components/Prompt";
-import Chatbot from "./components/Chatbot";
+// import Chatbot from "./components/Chatbot";
 // import Textarea from "./components/Textarea";
 // import { Toaster } from "./components/ui/toaster";
 
