@@ -84,7 +84,7 @@ const Prompt = () => {
     setSource("");
     setTimeout(() => {
       setSource("./Singlife SFF Demo Full.mp4");
-    }, 7000);
+    }, 6500);
     setTimeout(() => {
       setLoading(false);
       // setInput("");
@@ -218,7 +218,7 @@ const Prompt = () => {
                 ></video>
               </div>
               <div className="flex flex-col">
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-gray-500 font-bold mt-4">
                   Share with others:
                 </span>
                 <div className="flex gap-2 mt-2">
