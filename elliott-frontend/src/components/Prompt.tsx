@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Card,
   CardContent,
@@ -13,37 +13,81 @@ import { ChevronRight, Facebook, Instagram, Loader2 } from "lucide-react";
 import { useToast } from "./ui/use-toast";
 import axios from "axios";
 
+import useAutosizeTextArea from "./ui/useAutosizeTextArea";
+
 const fakeText = `
-<div style="margin-bottom: 8px; font-weight:bold;">Further Reading:</div>
-Travel Insurance: <br/>https://singlife.com/en/travel-insurance
+<div style="margin-bottom: 8px; font-weight:bold;">Sources:</div>
+your-guide-to-life-insurance-english: <br/>https://singlife.com/content/dam/public/sg/documents/consumer-guides/your-guide-to-life-insurance-english.pdf
 <br />
 <br />
-Travel Coverage: <br/>https://singlife.com/en/form-library#&travel-insurance
+your-guide-to-life-insurance: <br/>https://singlife.com/content/dam/public/sg/documents/documents/your-guide-to-life-insurance.pdf
 <br />
 <br />
-Why you need to buy travel insurance:<br/> https://singlife.com/en/blog/money/2023/why-you-need-to-buy-travel-insurance
+YGTHI_Chinese:<br/> https://singlife.com/content/dam/public/sg/documents/consumer-guides/YGTHI_Chinese.pdf
 `;
 
 const pipedText = `
-<div style="margin-bottom: 8px; font-weight:bold;">Further Reading:</div>
-Travel Insurance: <br/><a class="underline text-blue-500" href='https://singlife.com/en/travel-insurance'>https://singlife.com/en/travel-insurance</a>
+<div style="margin-bottom: 8px; font-weight:bold;">Sources:</div>
+your-guide-to-life-insurance-english: <br/><a target="_blank" class="underline text-blue-500" href='https://singlife.com/content/dam/public/sg/documents/consumer-guides/your-guide-to-life-insurance-english.pdf'>https://singlife.com/content/dam/public/sg/documents/consumer-guides/your-guide-to-life-insurance-english.pdf</a>
 <br />
 <br />
-Travel Coverage:<br/> <a class="underline text-blue-500" href='https://singlife.com/en/form-library#&travel-insurance'>https://singlife.com/en/form-library#&travel-insurance</a>
+your-guide-to-life-insurance:<br/> <a target="_blank" class="underline text-blue-500" href='https://singlife.com/content/dam/public/sg/documents/documents/your-guide-to-life-insurance.pdf'>https://singlife.com/content/dam/public/sg/documents/documents/your-guide-to-life-insurance.pdf</a>
 <br />
 <br />
-Why you need to buy travel insurance:<br/> <a class="underline text-blue-500" href='https://singlife.com/en/blog/money/2023/why-you-need-to-buy-travel-insurance'>https://singlife.com/en/blog/money/2023/why-you-need-to-buy-travel-insurance</a>
+YGTHI_Chinese:<br/> <a target="_blank" class="underline text-blue-500" href='https://singlife.com/content/dam/public/sg/documents/consumer-guides/YGTHI_Chinese.pdf'>https://singlife.com/content/dam/public/sg/documents/consumer-guides/YGTHI_Chinese.pdf</a>
 `;
 
 const Prompt = () => {
-  const [loading, setLoading] = React.useState(false);
-  const [textContent, setTextContent] = React.useState("");
-  const [input, setInput] = React.useState("");
+  const [loading, setLoading] = useState(false);
+  const [textContent, setTextContent] = useState("");
+  const [name, setName] = useState<string>("");
+  const [age, setAge] = useState<Number | string>("");
+  const [value, setValue] = useState<string>("");
+  const [needs, setNeeds] = useState<string>("");
+  const [lifestyle, setLifestyle] = useState<string>("");
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const textAreaNeedsRef = useRef<HTMLTextAreaElement>(null);
+  const textAreaLifestyleRef = useRef<HTMLTextAreaElement>(null);
+
+  const [source, setSource] = useState<string>("");
+
+  useAutosizeTextArea(textAreaRef.current, value);
+  useAutosizeTextArea(textAreaNeedsRef.current, needs);
+  useAutosizeTextArea(textAreaLifestyleRef.current, lifestyle);
+
+  const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const val = evt.target?.value;
+    setValue(val);
+  };
+
+  const handleNeedsChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const val = evt.target?.value;
+    setNeeds(val);
+  };
+
+  const handleLifestyleChange = (
+    evt: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const val = evt.target?.value;
+    setLifestyle(val);
+  };
+
   const getVideo = async () => {
     setLoading(true);
+    if (!name && !value) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 100);
+      return;
+    }
+    setLoading(true);
+    setSource("");
+    setTimeout(() => {
+      setSource("./Singlife SFF Demo Full.mp4");
+    }, 7000);
     setTimeout(() => {
       setLoading(false);
-      setInput("");
+      // setInput("");
       // create text streaming effect
       let i = 0;
       const interval = setInterval(() => {
@@ -54,7 +98,7 @@ const Prompt = () => {
           setTextContent(pipedText);
         }
       }, 12);
-    }, 35000);
+    }, 1000);
   };
 
   const { toast } = useToast();
@@ -67,69 +111,113 @@ const Prompt = () => {
     });
   }
   async function hitEndpoint() {
+    if (name && value) {
+      return;
+    }
     setLoading(true);
+    setSource("");
     try {
-      const endpoint = "http://0.0.0.0:8080/generate";
+      const endpoint = "./vite.svg";
       await axios.post(endpoint, {
-        input: input,
+        // input: input,
       });
     } catch (error) {
       console.error("endpoint error", error);
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     }
   }
   return (
-    <div
-      id="prompt"
-      className="flex items-center justify-center w-full h-screen translate-y-full"
-    >
-      <Card className="w-[40vw]">
-        <CardHeader>
-          <CardTitle>Enter a Prompt 🔥🚀</CardTitle>
-          <CardDescription>
-            Our state of the art AI will generate an informercial based on your
-            prompt and the custom knowledge base from Singlife documents
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              hitEndpoint();
-              getVideo();
-            }}
-          >
-            <Input
-              placeholder="Enter the user prompt"
-              value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
+    <div id="prompt" className="flex justify-center w-full h-fit">
+      <Card className="min-w-[350px] flex mx-auto max-w-[750px] flex-col md:flex-row">
+        <div className="min-w-[350px] max-w-[350px] w-full">
+          <CardHeader>
+            <CardTitle>SINGen - Generate Infomercial</CardTitle>
+            <CardDescription>
+              Our state of the art AI will generate an infomercial based on your
+              prompt and the custom knowledge base from Singlife documents
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form
+              className="flex flex-col items-start justify-start gap-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                // hitEndpoint();
+                getVideo();
               }}
-            />
-            <Button disabled={loading} className="mt-4" type="submit">
-              {loading && <Loader2 className="mr-2 animate-spin" />}
-              Generate
-              {!loading && <ChevronRight />}
-            </Button>
-            {loading && (
-              <div className="mt-2 text-sm font-normal text-slate-400">
-                Video is being generated... this may take a few minutes...
-              </div>
-            )}
-          </form>
-        </CardContent>
+            >
+              <Input
+                placeholder="Name of Client"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+              <Input
+                placeholder="Age of Client (Optional)"
+                type="number"
+                value={age?.toString()}
+                onChange={(e) => {
+                  setAge(e.target.value);
+                }}
+              />
+              <textarea
+                id="prompt-text"
+                className="max-h-[150px] resize-none flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                onChange={handleChange}
+                placeholder="Concerns"
+                ref={textAreaRef}
+                rows={1}
+                value={value}
+              />
+              <textarea
+                id="prompt-text"
+                className="max-h-[150px] resize-none flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                onChange={handleNeedsChange}
+                placeholder="Needs (Optional)"
+                ref={textAreaNeedsRef}
+                rows={1}
+                value={needs}
+              />
+              <textarea
+                id="prompt-text"
+                className="max-h-[150px] resize-none flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                onChange={handleLifestyleChange}
+                placeholder="Lifestyle (Optional)"
+                ref={textAreaLifestyleRef}
+                rows={1}
+                value={lifestyle}
+              />
+
+              <Button disabled={loading} className="mt-4" type="submit">
+                {loading && <Loader2 className="mr-2 animate-spin" />}
+                Generate
+                {!loading && <ChevronRight />}
+              </Button>
+              {loading && (
+                <div className="mt-2 text-sm font-normal text-slate-400">
+                  Video is being generated... this may take a few minutes...
+                </div>
+              )}
+            </form>
+          </CardContent>
+        </div>
 
         {textContent && (
-          <CardFooter>
-            <div className="flex items-start">
-              <video
-                autoPlay
-                controls
-                src="/video1.mp4"
-                className="h-[500px]"
-              ></video>
-              <div className="flex flex-col ml-6">
+          <CardFooter className="p-6 w-full">
+            <div className="flex items-start w-full flex-col">
+              <div className="w-full aspect-video">
+                <video
+                  autoPlay
+                  controls
+                  src={source}
+                  className="w-full aspect-video"
+                ></video>
+              </div>
+              <div className="flex flex-col">
                 <span className="text-sm text-gray-500">
                   Share with others:
                 </span>
@@ -159,7 +247,7 @@ const Prompt = () => {
                 </div>
                 <p
                   dangerouslySetInnerHTML={{ __html: textContent }}
-                  className="mt-4 text-sm text-gray-500"
+                  className="mt-4 text-sm text-gray-500 break-all"
                 ></p>
               </div>
             </div>

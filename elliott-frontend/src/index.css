@@ -80,7 +80,7 @@
 
 html {
   height: 100%;
-  font-family: "Lexend", sans-serif;
+  font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -89,8 +89,13 @@ body {
   scroll-behavior: smooth;
 }
 
+body,
+#body {
+  background-image: linear-gradient(120deg, #90bafc 0%, #afe3fc 100%);
+}
+
 .bg {
-  animation: slide 3s ease-in-out infinite alternate;
+  animation: slide 104s ease-in-out infinite alternate;
   background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
   bottom: 0;
   left: -50%;
@@ -103,11 +108,11 @@ body {
 
 .bg2 {
   animation-direction: alternate-reverse;
-  animation-duration: 4s;
+  animation-duration: 105s;
 }
 
 .bg3 {
-  animation-duration: 5s;
+  animation-duration: 106s;
 }
 
 @keyframes slide {
