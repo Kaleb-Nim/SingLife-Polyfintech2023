@@ -5,6 +5,7 @@ def formatQuery(user_information:BaseModel)->dict:
     """Takes in user information and formats it to a query, depending if the keys exist or not
     user_info must contain the following keys:
             name: str,
+            age:Optional[int] = None,
             concerns:str,
             needs:Optional[str] = None,
             lifestyle:Optional[str] = None,
@@ -25,8 +26,18 @@ def formatQuery(user_information:BaseModel)->dict:
     PINECONE_QUERY_TEMPLATE = """{concerns}|"""
 
     # If needs are
+    AGE_TEMPLATE = """Currently, my customer is {age} years old.\n"""
     NEEDS_TEMPLATE = """Additionally, he needs the following:\n{needs}\n"""
     LIFESTYLE_TEMPLATE = """He also has the following lifestyle:\n{lifestyle}\n"""
+    
+    # Check if age key exists
+    if user_information.get("age"):
+        age_index = FINAL_QUERY_TEMPLATE.find("|")
+        FINAL_QUERY_TEMPLATE = FINAL_QUERY_TEMPLATE[:age_index] + AGE_TEMPLATE.format(age=user_information['age']) + FINAL_QUERY_TEMPLATE[age_index:]
+
+        # Add the age to the pinecone query
+        age_index2 = PINECONE_QUERY_TEMPLATE.find("|")
+        PINECONE_QUERY_TEMPLATE = PINECONE_QUERY_TEMPLATE[:age_index2] + AGE_TEMPLATE.format(age=user_information['age']) + PINECONE_QUERY_TEMPLATE[age_index2:]
 
     # Check if needs key exists
     if user_information.get("needs"):

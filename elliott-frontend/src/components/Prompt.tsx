@@ -11,7 +11,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { ChevronRight, Facebook, Instagram, Loader2 } from "lucide-react";
 import { useToast } from "./ui/use-toast";
-// import axios from "axios";
+import axios from "axios";
 
 import useAutosizeTextArea from "./ui/useAutosizeTextArea";
 
@@ -37,27 +37,33 @@ your-guide-to-life-insurance:<br/> <a target="_blank" class="underline text-blue
 YGTHI_Chinese:<br/> <a target="_blank" class="underline text-blue-500" href='https://singlife.com/content/dam/public/sg/documents/consumer-guides/YGTHI_Chinese.pdf'>https://singlife.com/content/dam/public/sg/documents/consumer-guides/YGTHI_Chinese.pdf</a>
 `;
 
+interface Source {
+  url: string;
+  title: string;
+}
+
 const Prompt = () => {
   const [loading, setLoading] = useState(false);
   const [textContent, setTextContent] = useState("");
   const [name, setName] = useState<string>("");
-  const [age, setAge] = useState<Number | string>("");
-  const [value, setValue] = useState<string>("");
+  const [age, setAge] = useState<string>("");
+  const [concerns, setConcerns] = useState<string>("");
   const [needs, setNeeds] = useState<string>("");
   const [lifestyle, setLifestyle] = useState<string>("");
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const textAreaNeedsRef = useRef<HTMLTextAreaElement>(null);
   const textAreaLifestyleRef = useRef<HTMLTextAreaElement>(null);
 
-  const [source, setSource] = useState<string>("");
+  const [source, setSource] = useState<Source | null>(null);
+  const [videoSource, setVideoSource] = useState<string>("");
 
-  useAutosizeTextArea(textAreaRef.current, value);
+  useAutosizeTextArea(textAreaRef.current, concerns);
   useAutosizeTextArea(textAreaNeedsRef.current, needs);
   useAutosizeTextArea(textAreaLifestyleRef.current, lifestyle);
 
   const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = evt.target;
-    setValue(value);
+    setConcerns(value);
   };
 
   const handleNeedsChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -72,20 +78,32 @@ const Prompt = () => {
     setLifestyle(value);
   };
 
+  const handleAgeChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = evt.target.value;
+
+    // Check if the entered value is a valid number
+    if (!isNaN(Number(inputValue))) {
+      setAge(inputValue);
+    } else {
+      // If not a valid number, set age to an empty string
+      setAge("");
+    }
+  };
+
   const getVideo = async () => {
     setLoading(true);
-    if (!name && !value) {
+    if (!name && !concerns) {
       setTimeout(() => {
         setLoading(false);
       }, 100);
       return;
     }
     setLoading(true);
-    setSource("");
+    setVideoSource("");
     try {
       // Simulating video fetch
       setTimeout(() => {
-        setSource(source);
+        setVideoSource(videoSource);
       }, 6500);
 
       setTimeout(() => {
@@ -109,7 +127,35 @@ const Prompt = () => {
   };
 
   const hitEndpoint = async () => {
-    
+    try {
+      if (!name && !concerns) {
+        alert("Missing Input Values!");
+        return;
+      }
+      let response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_FASTAPI}/query`,
+        {
+          name,
+          age: parseInt(age),
+          needs,
+          lifestyle,
+          concerns,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(response);
+      setSource(response.data.sources)
+      setTextContent(`Hi ${source}`)
+      return response;
+    } catch (error) {
+      console.error(error);
+      return;
+    }
   };
 
   const { toast } = useToast();
@@ -152,10 +198,8 @@ const Prompt = () => {
               <Input
                 placeholder="Age of Client (Optional)"
                 type="number"
-                value={age?.toString()}
-                onChange={(e) => {
-                  setAge(e.target.value);
-                }}
+                value={age}
+                onChange={handleAgeChange}
               />
               <textarea
                 id="prompt-text"
@@ -164,7 +208,7 @@ const Prompt = () => {
                 placeholder="Concerns"
                 ref={textAreaRef}
                 rows={1}
-                value={value}
+                value={concerns}
               />
               <textarea
                 id="prompt-text"
@@ -206,7 +250,7 @@ const Prompt = () => {
                 <video
                   autoPlay
                   controls
-                  src={source}
+                  src={videoSource}
                   className="w-full aspect-video"
                 ></video>
               </div>

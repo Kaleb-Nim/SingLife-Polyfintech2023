@@ -14,6 +14,7 @@ from pydantic import BaseModel
 from typing import Optional
 # Load variables from the .env file
 load_dotenv('.env')
+from fastapi.middleware.cors import CORSMiddleware
 
 # Set the openai api key
 client = AsyncAzureOpenAI(
@@ -30,6 +31,13 @@ PINECONE_ENVIRONMENT= os.getenv("PINECONE_ENVIRONMENT")
 pineconeQuery = PineconeQuery(PINECONE_API_KEY,PINECONE_ENVIRONMENT,INDEX_NAME)
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
@@ -55,6 +63,7 @@ async def hello(request: Request, name: str = Form(...)):
 
 class UserInfo(BaseModel):
     name: str
+    age: Optional[int] = None
     concerns: str
     needs: Optional[str] = None
     lifestyle: Optional[str] = None
@@ -64,10 +73,11 @@ class UserInfo(BaseModel):
 async def query(UserInfo:UserInfo):
     """Sample UserInfo must contain the following keys:
         name: str,
+        age: Optional[int] = None,
         concerns:str,
         needs:Optional[str] = None,
         lifestyle:Optional[str] = None,
-    """
+    """    
     query_dict = formatQuery(UserInfo) 
     relevant_documents = pineconeQuery.query(query=query_dict['pinecone_query'])
 
