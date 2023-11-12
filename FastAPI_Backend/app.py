@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import uvicorn
 import openai
+from openai import AsyncAzureOpenAI
 from PineconeUtils.Queryer import PineconeQuery
 from dotenv import load_dotenv
 import os
@@ -11,18 +12,21 @@ from llm.chains import generate_video
 from utils import formatQuery,parse_json_output
 from pydantic import BaseModel
 from typing import Optional
-
 # Load variables from the .env file
 load_dotenv('.env')
 
+# Set the openai api key
+client = AsyncAzureOpenAI(
+    azure_endpoint=os.getenv("OPENAI_API_ENDPOINT"), 
+    api_key=os.getenv("OPENAI_API_KEY"),  
+    api_version=os.getenv("OPENAI_API_VERSION"),
+)
+
 # Access the variables
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
 PINECONE_ENVIRONMENT= os.getenv("PINECONE_ENVIRONMENT")
 
-# Set the openai api key
-openai.api_key = OPENAI_API_KEY
 pineconeQuery = PineconeQuery(PINECONE_API_KEY,PINECONE_ENVIRONMENT,INDEX_NAME)
 
 app = FastAPI()
@@ -80,4 +84,4 @@ async def query(UserInfo:UserInfo):
     return {"query":query_dict['user_query'],"relevant_documents":relevant_documents,"video_script":video_script_json,"sources":sources}
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', host='0.0.0.0', port=8000)
+    uvicorn.run('main:app', host='0.0.0.0', port=8000, reload=True)

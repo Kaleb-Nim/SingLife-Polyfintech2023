@@ -66,7 +66,8 @@ def parse_json_output(output):
     try:
         json_ouput = output.function_call.arguments
         json_ouput = json.loads(json_ouput)
+        return json_ouput
     except Exception as e:
         print(e)
     
-    return json_ouput
+    return ""

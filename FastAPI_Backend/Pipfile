@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+langchain = "*"
+gunicorn = "*"
+whisper-timestamped = "*"
+elevenlabs = "*"
+pydantic = "*"
+pydantic-core = "*"
+websockets = "*"
+dtw-python = "*"
+tiktoken = "*"
+pinecone-client = "*"
+openai = "*"
+fastapi = "*"
+uvicorn = "*"
+jinja2 = "*"
+python-multipart = "*"
+python-dotenv = "*"
+pandas = "*"
+numpy = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"

@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import pinecone
 import openai
+from openai import AzureOpenAI
 import os
 import json
 from time import time 
@@ -14,6 +15,13 @@ from pinecone.index import Index
 # Data processing stuff
 import pandas as pd
 
+print(load_dotenv('../.env'))
+
+client = AzureOpenAI(
+    azure_endpoint=os.getenv("OPENAI_API_ENDPOINT"), 
+    api_key=os.getenv("OPENAI_API_KEY"),  
+    api_version=os.getenv("OPENAI_API_VERSION"),
+)
 
 class PineconeQuery:
     """Main class to query both text/sentence/images with pinecone"""
@@ -90,7 +98,8 @@ class PineconeQuery:
         if not isinstance(query,str):
             raise TypeError(f"Query must be a string, got {type(query)}")
         
-        res = openai.embeddings.create(input=query, model='text-embedding-ada-002')
+        res = client.embeddings.create(input=query, model=os.getenv("OPENAI_API_EMBED"))
+        print(res)
         query_embedding = res.data[0].embedding
         # Get the top 3 results
         results = self.index.query(query_embedding,top_k=top_k,include_metadata=True)
