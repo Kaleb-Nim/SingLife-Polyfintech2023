@@ -56,20 +56,20 @@ const Prompt = () => {
   useAutosizeTextArea(textAreaLifestyleRef.current, lifestyle);
 
   const handleChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const val = evt.target?.value;
-    setValue(val);
+    const { value } = evt.target;
+    setValue(value);
   };
 
   const handleNeedsChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const val = evt.target?.value;
-    setNeeds(val);
+    const { value } = evt.target;
+    setNeeds(value);
   };
 
   const handleLifestyleChange = (
     evt: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    const val = evt.target?.value;
-    setLifestyle(val);
+    const { value } = evt.target;
+    setLifestyle(value);
   };
 
   const getVideo = async () => {
@@ -82,23 +82,34 @@ const Prompt = () => {
     }
     setLoading(true);
     setSource("");
-    setTimeout(() => {
-      setSource("./Singlife SFF Demo Full.mp4");
-    }, 6500);
-    setTimeout(() => {
+    try {
+      // Simulating video fetch
+      setTimeout(() => {
+        setSource(source);
+      }, 6500);
+
+      setTimeout(() => {
+        setLoading(false);
+
+        let i = 0;
+        const interval = setInterval(() => {
+          setTextContent(fakeText.slice(0, i));
+          i++;
+          if (i > fakeText.length) {
+            clearInterval(interval);
+            setTextContent(pipedText);
+          }
+        }, 12);
+      }, 1000);
+    } catch (error) {
+      console.error("Error fetching video:", error);
       setLoading(false);
-      // setInput("");
-      // create text streaming effect
-      let i = 0;
-      const interval = setInterval(() => {
-        setTextContent(fakeText.slice(0, i));
-        i++;
-        if (i > fakeText.length) {
-          clearInterval(interval);
-          setTextContent(pipedText);
-        }
-      }, 12);
-    }, 1000);
+      // Handle error, show a toast, etc.
+    }
+  };
+
+  const hitEndpoint = async () => {
+    
   };
 
   const { toast } = useToast();
@@ -110,25 +121,7 @@ const Prompt = () => {
       description: "You may now share this link with others!",
     });
   }
-  // async function hitEndpoint() {
-  //   if (name && value) {
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   setSource("");
-  //   try {
-  //     const endpoint = "./vite.svg";
-  //     await axios.post(endpoint, {
-  //       // input: input,
-  //     });
-  //   } catch (error) {
-  //     console.error("endpoint error", error);
-  //   } finally {
-  //     setTimeout(() => {
-  //       setLoading(false);
-  //     }, 1000);
-  //   }
-  // }
+
   return (
     <div id="prompt" className="flex justify-center w-full h-fit">
       <Card className="min-w-[350px] flex mx-auto max-w-[750px] flex-col md:flex-row">
@@ -145,8 +138,8 @@ const Prompt = () => {
               className="flex flex-col items-start justify-start gap-3"
               onSubmit={(e) => {
                 e.preventDefault();
-                // hitEndpoint();
-                getVideo();
+                hitEndpoint();
+                // getVideo();
               }}
             >
               <Input
