@@ -9,12 +9,7 @@ import {
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import {
-  ChevronRight,
-  Facebook,
-  Instagram,
-  Loader2,
-} from "lucide-react";
+import { ChevronRight, Facebook, Instagram, Loader2 } from "lucide-react";
 import { useToast } from "./ui/use-toast";
 import axios from "axios";
 import TypewriterMarkdown from "./Typewriter";
@@ -43,9 +38,7 @@ const Prompt = () => {
   const textAreaNeedsRef = useRef<HTMLTextAreaElement>(null);
   const textAreaLifestyleRef = useRef<HTMLTextAreaElement>(null);
 
-  const [videoSource, _] = useState<string>(
-    "./Singlife SFF Demo Full.mp4"
-  );
+  const [videoSource, _] = useState<string>("./Singlife SFF Demo Full.mp4");
 
   useAutosizeTextArea(textAreaRef.current, concerns);
   useAutosizeTextArea(textAreaNeedsRef.current, needs);
@@ -102,6 +95,7 @@ const Prompt = () => {
     try {
       if (!name && !concerns) {
         alert("Missing Input Values!");
+        setLoading(false);
         return;
       }
       let response = await axios.post(
