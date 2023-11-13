@@ -201,12 +201,13 @@ async def generateVoice(VoiceBody: VoiceBody):
     allText = "\n".join(VoiceBody.subtitles)
     voiceList = voices()
     selectedVoice = random.choices(voiceList)
-    audio = generate_voice(text=allText, voice=selectedVoice[0])
-    current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    blob_name = f"audio_{current_time}_{uuid.uuid4().hex}.mp3"
-    blob_client = blob_service_client.get_blob_client(container="audio", blob=blob_name)
-    blob_client.upload_blob(audio, overwrite=True)
-    blob_uri = blob_client.url
+    # audio = generate_voice(text=allText, voice=selectedVoice[0])
+    # current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    # blob_name = f"audio_{current_time}_{uuid.uuid4().hex}.mp3"
+    # blob_client = blob_service_client.get_blob_client(container="audio", blob=blob_name)
+    # blob_client.upload_blob(audio, overwrite=True)
+    # blob_uri = blob_client.url
+    blob_uri = "https://singen.blob.core.windows.net/audio/audio_2023-11-13_23-48-35_a1d9accc6ed945f195ff1daa2635d50e.mp3"
     return {"audio": blob_uri}
 
 

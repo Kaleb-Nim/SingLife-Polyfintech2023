@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import {
   Card,
   CardContent,
@@ -11,14 +11,12 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import {
   ChevronRight,
-  CornerDownLeft,
   Facebook,
   Instagram,
   Loader2,
 } from "lucide-react";
 import { useToast } from "./ui/use-toast";
 import axios from "axios";
-import Markdown from "react-markdown";
 import TypewriterMarkdown from "./Typewriter";
 
 import useAutosizeTextArea from "./ui/useAutosizeTextArea";
@@ -45,7 +43,7 @@ const Prompt = () => {
   const textAreaNeedsRef = useRef<HTMLTextAreaElement>(null);
   const textAreaLifestyleRef = useRef<HTMLTextAreaElement>(null);
 
-  const [videoSource, setVideoSource] = useState<string>(
+  const [videoSource, _] = useState<string>(
     "./Singlife SFF Demo Full.mp4"
   );
 
