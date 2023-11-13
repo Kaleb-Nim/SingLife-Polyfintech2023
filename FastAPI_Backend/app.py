@@ -88,7 +88,7 @@ async def query(UserInfo:UserInfo):
 
 
     # Run the LLM for video generation
-    video_script = generate_video(relevant_documents_str,query=query_dict['user_query'])
+    video_script = await generate_video(relevant_documents_str,query=query_dict['user_query'])
     video_script_json = parse_json_output(video_script)
 
     return {"query":query_dict['user_query'],"relevant_documents":relevant_documents,"video_script":video_script_json,"sources":sources}

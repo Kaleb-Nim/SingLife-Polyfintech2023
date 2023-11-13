@@ -56,7 +56,6 @@ async def relevantDocumentFilter(relevant_documents:list[dict],query:str):
     )
 
 import asyncio
-from openai import AsyncOpenAI
 
 client = AsyncAzureOpenAI(
     azure_endpoint=os.getenv("OPENAI_API_ENDPOINT"), 
@@ -76,7 +75,6 @@ async def generate_video(relevant_documents:str,query:str)->dict:
     prompt = VIDEO_SCRIPT_PROMPT.format(query=query,relevant_documents=relevant_documents,VIDEO_SCRIPT_JSON_OUTPUT=VIDEO_SCRIPT_JSON_OUTPUT)
     completion = await client.chat.completions.create(
         model=os.getenv("OPENAI_API_ENGINE"),
-        response_format={"type": "json_object"},
         temperature=0,
         messages=[
             {"role": "user", "content": prompt}
