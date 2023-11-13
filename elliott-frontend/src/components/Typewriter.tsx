@@ -23,7 +23,7 @@ const TypewriterMarkdown: React.FC<TypewriterMarkdownProps> = ({
       if (index === markdownText.length -1) {
         clearInterval(intervalId);
       }
-    }, 25); // Adjust the interval as needed
+    }, 20); // Adjust the interval as needed
 
     return () => clearInterval(intervalId);
   }, [markdownText]);

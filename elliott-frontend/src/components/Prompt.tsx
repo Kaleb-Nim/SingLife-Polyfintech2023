@@ -23,31 +23,14 @@ import TypewriterMarkdown from "./Typewriter";
 
 import useAutosizeTextArea from "./ui/useAutosizeTextArea";
 
-const fakeText = `
-<div style="margin-bottom: 8px; font-weight:bold;">Sources:</div>
-your-guide-to-life-insurance-english: <br/>https://singlife.com/content/dam/public/sg/documents/consumer-guides/your-guide-to-life-insurance-english.pdf
-<br />
-<br />
-your-guide-to-life-insurance: <br/>https://singlife.com/content/dam/public/sg/documents/documents/your-guide-to-life-insurance.pdf
-<br />
-<br />
-YGTHI_Chinese:<br/> https://singlife.com/content/dam/public/sg/documents/consumer-guides/YGTHI_Chinese.pdf
-`;
-
-const pipedText = `
-<div style="margin-bottom: 8px; font-weight:bold;">Sources:</div>
-your-guide-to-life-insurance-english: <br/><a target="_blank" class="underline text-blue-500" href='https://singlife.com/content/dam/public/sg/documents/consumer-guides/your-guide-to-life-insurance-english.pdf'>https://singlife.com/content/dam/public/sg/documents/consumer-guides/your-guide-to-life-insurance-english.pdf</a>
-<br />
-<br />
-your-guide-to-life-insurance:<br/> <a target="_blank" class="underline text-blue-500" href='https://singlife.com/content/dam/public/sg/documents/documents/your-guide-to-life-insurance.pdf'>https://singlife.com/content/dam/public/sg/documents/documents/your-guide-to-life-insurance.pdf</a>
-<br />
-<br />
-YGTHI_Chinese:<br/> <a target="_blank" class="underline text-blue-500" href='https://singlife.com/content/dam/public/sg/documents/consumer-guides/YGTHI_Chinese.pdf'>https://singlife.com/content/dam/public/sg/documents/consumer-guides/YGTHI_Chinese.pdf</a>
-`;
-
 interface Source {
   url: string;
   title: string;
+}
+
+interface Scene {
+  scene: string;
+  subtitles: string[];
 }
 
 const Prompt = () => {
@@ -62,8 +45,9 @@ const Prompt = () => {
   const textAreaNeedsRef = useRef<HTMLTextAreaElement>(null);
   const textAreaLifestyleRef = useRef<HTMLTextAreaElement>(null);
 
-  const [source, setSource] = useState<Source | null>(null);
-  const [videoSource, setVideoSource] = useState<string>("");
+  const [videoSource, setVideoSource] = useState<string>(
+    "./Singlife SFF Demo Full.mp4"
+  );
 
   useAutosizeTextArea(textAreaRef.current, concerns);
   useAutosizeTextArea(textAreaNeedsRef.current, needs);
@@ -98,55 +82,25 @@ const Prompt = () => {
     }
   };
 
-  const getVideo = async () => {
-    setLoading(true);
-    if (!name && !concerns) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 100);
-      return;
-    }
-    setLoading(true);
-    setVideoSource("");
-    try {
-      // Simulating video fetch
-      setTimeout(() => {
-        setVideoSource(videoSource);
-      }, 6500);
-
-      setTimeout(() => {
-        setLoading(false);
-
-        let i = 0;
-        const interval = setInterval(() => {
-          setTextContent(fakeText.slice(0, i));
-          i++;
-          if (i > fakeText.length) {
-            clearInterval(interval);
-            setTextContent(pipedText);
-          }
-        }, 12);
-      }, 1000);
-    } catch (error) {
-      console.error("Error fetching video:", error);
-      setLoading(false);
-      // Handle error, show a toast, etc.
-    }
-  };
-
   const formatSources = async (rawSource: Source[]) => {
     let output: string[] = [];
-    output.push(`**Sources:**&nbsp;`);
+    output.push(`**Sources:**`);
 
     rawSource.forEach(async (e: Source) => {
       output.push(`${e.title}:`);
       output.push(`[${e.url}](${e.url})`);
     });
-    return output.join("\n\n\n");
+    return setTextContent(output.join("\n\n"));
   };
+
+  async function generateVideo(scenesList: Scene) {
+    console.log(scenesList);
+    return;
+  }
 
   const hitEndpoint = async () => {
     setLoading(true);
+    setTextContent("");
     try {
       if (!name && !concerns) {
         alert("Missing Input Values!");
@@ -170,9 +124,8 @@ const Prompt = () => {
 
       console.log(response);
       console.log(response.data.sources);
-      let formattedSource = await formatSources(response.data.sources);
-      setSource(response.data.sources);
-      setTextContent(`${formattedSource}`);
+      await formatSources(response.data.sources);
+      await generateVideo(response.data.video_script.list_of_scenes);
       setLoading(false);
       return response;
     } catch (error) {
@@ -284,29 +237,29 @@ const Prompt = () => {
                 <div className="flex gap-2 mt-2">
                   <Button
                     variant={"outline"}
-                    onClick={() => copyLink("https://imgur.com/xSnj7KR.mp4")}
+                    onClick={() => copyLink(videoSource)}
                   >
                     <Facebook className="text-blue-600" />
                   </Button>
                   <Button
                     variant={"outline"}
-                    onClick={() => copyLink("https://imgur.com/xSnj7KR.mp4")}
+                    onClick={() => copyLink(videoSource)}
                   >
                     <img
                       src="/whatsapp.png"
-                      alt="whatsap"
+                      alt="whatsapp"
                       className="w-6 h-6"
                     />
                   </Button>
                   <Button
                     variant={"outline"}
-                    onClick={() => copyLink("https://imgur.com/xSnj7KR.mp4")}
+                    onClick={() => copyLink(videoSource)}
                   >
                     <Instagram className="text-purple-500" />
                   </Button>
                 </div>
                 <div id="markdownContainer">
-                  <TypewriterMarkdown markdownText={textContent}/>
+                  <TypewriterMarkdown markdownText={textContent} />
                 </div>
               </div>
             </div>
