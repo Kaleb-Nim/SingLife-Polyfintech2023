@@ -23,6 +23,8 @@ python-dotenv = "*"
 pandas = "*"
 numpy = "*"
 azure-storage-blob = "*"
+urllib3 = "*"
+uuid = "*"
 
 [dev-packages]
 
