@@ -192,5 +192,23 @@ async def generateVideo(VideoBody: VideoBody):
     return {"video": blob_storage_array}
 
 
+class VoiceBody(BaseModel):
+    subtitles: list[str]
+
+
+@app.post("/generateVoice")
+async def generateVoice(VoiceBody: VoiceBody):
+    allText = "\n".join(VoiceBody.subtitles)
+    voiceList = voices()
+    selectedVoice = random.choices(voiceList)
+    audio = generate_voice(text=allText, voice=selectedVoice[0])
+    current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    blob_name = f"audio_{current_time}_{uuid.uuid4().hex}.mp3"
+    blob_client = blob_service_client.get_blob_client(container="audio", blob=blob_name)
+    blob_client.upload_blob(audio, overwrite=True)
+    blob_uri = blob_client.url
+    return {"audio": blob_uri}
+
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
