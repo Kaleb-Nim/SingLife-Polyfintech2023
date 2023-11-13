@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import uvicorn
-import openai
+import requests
 from openai import AsyncAzureOpenAI
 from PineconeUtils.Queryer import PineconeQuery
 from dotenv import load_dotenv
@@ -12,6 +12,11 @@ from llm.chains import generate_video
 from utils import formatQuery,parse_json_output
 from pydantic import BaseModel
 from typing import Optional
+import random
+from elevenlabs import generate as generate_voice, set_api_key, voices
+from azure.storage.blob import BlobServiceClient
+from datetime import datetime
+
 # Load variables from the .env file
 load_dotenv('.env')
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,10 +28,23 @@ client = AsyncAzureOpenAI(
     api_version=os.getenv("OPENAI_API_VERSION"),
 )
 
-# Access the variables
+# PINECONE
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
 PINECONE_ENVIRONMENT= os.getenv("PINECONE_ENVIRONMENT")
+
+# HUGGINGFACE
+HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
+
+# ELEVENLABS
+ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
+set_api_key(ELEVENLABS_API_KEY)
+
+# AZURE
+AZURE_STORAGE_KEY = os.getenv("AZURE_STORAGE_KEY")
+connection_string = AZURE_STORAGE_KEY
+blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+account_name = connection_string.split(";")[1].split("=")[1]
 
 pineconeQuery = PineconeQuery(PINECONE_API_KEY,PINECONE_ENVIRONMENT,INDEX_NAME)
 
@@ -92,6 +110,35 @@ async def query(UserInfo:UserInfo):
     video_script_json = parse_json_output(video_script)
 
     return {"query":query_dict['user_query'],"relevant_documents":relevant_documents,"video_script":video_script_json,"sources":sources}
+
+@app.post("/generateMusic")
+async def generateMusic():
+    music_style = [
+        "slow pace loopable advertisement music"
+    ]
+    random_music = music_style[random.randint(0,len(music_style)-1)]
+    API_URL = "https://api-inference.huggingface.co/models/facebook/musicgen-small"
+    headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
+
+    def query(payload):
+        response = requests.post(API_URL, headers=headers, json=payload)
+        return response.content
+
+    audio_bytes = query({
+        "inputs": random_music,
+    })
+
+    current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    blob_name = f"demo_{current_time}.wav"
+
+    blob_client = blob_service_client.get_blob_client(
+        container="music", blob=blob_name
+    )
+    
+    blob_client.upload_blob(audio_bytes, overwrite=True)
+    blob_uri = blob_client.url
+    return blob_uri
+
 
 if __name__ == '__main__':
     uvicorn.run('main:app', host='0.0.0.0', port=8000, reload=True)
