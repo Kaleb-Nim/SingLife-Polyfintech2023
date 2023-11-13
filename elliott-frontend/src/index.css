@@ -123,3 +123,8 @@ body,
     transform: translateX(25%);
   }
 }
+
+#markdownContainer a {
+  text-decoration: underline;
+  color: rgb(59 130 246);
+}

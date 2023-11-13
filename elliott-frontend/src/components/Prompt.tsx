@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -9,9 +9,17 @@ import {
 } from "./ui/card";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { ChevronRight, Facebook, Instagram, Loader2 } from "lucide-react";
+import {
+  ChevronRight,
+  CornerDownLeft,
+  Facebook,
+  Instagram,
+  Loader2,
+} from "lucide-react";
 import { useToast } from "./ui/use-toast";
 import axios from "axios";
+import Markdown from "react-markdown";
+import TypewriterMarkdown from "./Typewriter";
 
 import useAutosizeTextArea from "./ui/useAutosizeTextArea";
 
@@ -126,7 +134,19 @@ const Prompt = () => {
     }
   };
 
+  const formatSources = async (rawSource: Source[]) => {
+    let output: string[] = [];
+    output.push(`**Sources:**&nbsp;`);
+
+    rawSource.forEach(async (e: Source) => {
+      output.push(`${e.title}:`);
+      output.push(`[${e.url}](${e.url})`);
+    });
+    return output.join("\n\n\n");
+  };
+
   const hitEndpoint = async () => {
+    setLoading(true);
     try {
       if (!name && !concerns) {
         alert("Missing Input Values!");
@@ -149,8 +169,11 @@ const Prompt = () => {
       );
 
       console.log(response);
-      setSource(response.data.sources)
-      setTextContent(`Hi ${source}`)
+      console.log(response.data.sources);
+      let formattedSource = await formatSources(response.data.sources);
+      setSource(response.data.sources);
+      setTextContent(`${formattedSource}`);
+      setLoading(false);
       return response;
     } catch (error) {
       console.error(error);
@@ -244,7 +267,7 @@ const Prompt = () => {
         </div>
 
         {textContent && (
-          <CardFooter className="p-6 w-full">
+          <CardFooter className="p-6 w-screen">
             <div className="flex items-start w-full flex-col">
               <div className="w-full aspect-video">
                 <video
@@ -282,10 +305,9 @@ const Prompt = () => {
                     <Instagram className="text-purple-500" />
                   </Button>
                 </div>
-                <p
-                  dangerouslySetInnerHTML={{ __html: textContent }}
-                  className="mt-4 text-sm text-gray-500 break-all"
-                ></p>
+                <div id="markdownContainer">
+                  <TypewriterMarkdown markdownText={textContent}/>
+                </div>
               </div>
             </div>
           </CardFooter>
