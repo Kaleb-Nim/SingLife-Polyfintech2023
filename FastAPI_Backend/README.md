@@ -19,7 +19,7 @@ pipenv run uvicorn app:app
 
 Build local docker image
 ```bash
-docker build -t singen-fastapi:lastest .
+docker build -t singen-fastapi .
 ```
 
 Login to the container registry

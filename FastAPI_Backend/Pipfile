@@ -23,6 +23,7 @@ pandas = "*"
 numpy = "*"
 azure-storage-blob = "*"
 urllib3 = "*"
+langchain = "*"
 
 [dev-packages]
 
