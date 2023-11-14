@@ -18,7 +18,6 @@ from azure.storage.blob import BlobServiceClient
 from datetime import datetime
 from urllib.parse import quote
 import json
-import uuid
 import whisper_timestamped as whisper
 
 # Load variables from the .env file
@@ -66,6 +65,16 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+def generate_uuid():
+    # Generate a random UUID
+    uuid = "{:08x}-{:04x}-{:04x}-{:04x}-{:012x}".format(
+        random.getrandbits(32),
+        random.getrandbits(16),
+        (random.getrandbits(12) & 0x0fff) | 0x4000,
+        (random.getrandbits(12) & 0x3fff) | 0x8000,
+        random.getrandbits(48)
+    )
+    return uuid
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
@@ -159,7 +168,7 @@ async def generateMusic():
     )
 
     current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    blob_name = f"music_{current_time}_{uuid.uuid4().hex}.wav"
+    blob_name = f"music_{current_time}_{generate_uuid()}.wav"
 
     blob_client = blob_service_client.get_blob_client(container="music", blob=blob_name)
 
@@ -186,7 +195,7 @@ async def generateVideo(VideoBody: VideoBody):
             videoLink = responseContent["videos"][0]["video_files"][0]["link"]
             videoResponse = requests.get(videoLink)
             current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            blob_name = f"{scene}_{current_time}_{uuid.uuid4().hex}.mp4"
+            blob_name = f"{scene}_{current_time}_{generate_uuid()}.mp4"
             blob_client = blob_service_client.get_blob_client(
                 container="video", blob=blob_name
             )
@@ -207,7 +216,7 @@ async def generateVoice(VoiceBody: VoiceBody):
     selectedVoice = random.choices(voiceList)
     current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     # audio = generate_voice(text=allText, voice=selectedVoice[0])
-    # blob_name = f"audio_{current_time}_{uuid.uuid4().hex}.mp3"
+    # blob_name = f"audio_{current_time}_{generate_uuid()}.mp3"
     # blob_client = blob_service_client.get_blob_client(container="audio", blob=blob_name)
     # blob_client.upload_blob(audio, overwrite=True)
     # blob_uri = blob_client.url
@@ -225,7 +234,7 @@ async def generateVoice(VoiceBody: VoiceBody):
         start, end = segment["start"], segment["end"]
         srt_file += f"{i + 1}\n00:00:{str(int(start)).replace('.', ',')} --> 00:00:{str(int(end)).replace('.', ',')}\n{segment['text'].strip()}\n"
     print(srt_file)
-    srt_blob_name = f"subtitles_{current_time}_{uuid.uuid4().hex}.srt"
+    srt_blob_name = f"subtitles_{current_time}_{generate_uuid()}.srt"
     srt_blob_client = blob_service_client.get_blob_client(container="srt", blob=srt_blob_name)
     srt_blob_client.upload_blob(srt_file, overwrite=True)
     srt_blob_uri = srt_blob_client.url
