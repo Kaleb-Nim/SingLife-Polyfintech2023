@@ -24,6 +24,7 @@ numpy = "*"
 azure-storage-blob = "*"
 urllib3 = "*"
 langchain = "*"
+torch = "*"
 
 [dev-packages]
 
