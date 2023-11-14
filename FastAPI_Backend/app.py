@@ -19,6 +19,7 @@ from datetime import datetime
 from urllib.parse import quote
 import json
 import uuid
+import whisper_timestamped as whisper
 
 # Load variables from the .env file
 load_dotenv(".env")
@@ -204,14 +205,31 @@ async def generateVoice(VoiceBody: VoiceBody):
     allText = "\n".join(VoiceBody.subtitles)
     voiceList = voices()
     selectedVoice = random.choices(voiceList)
+    current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     # audio = generate_voice(text=allText, voice=selectedVoice[0])
-    # current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     # blob_name = f"audio_{current_time}_{uuid.uuid4().hex}.mp3"
     # blob_client = blob_service_client.get_blob_client(container="audio", blob=blob_name)
     # blob_client.upload_blob(audio, overwrite=True)
     # blob_uri = blob_client.url
     blob_uri = "https://singen.blob.core.windows.net/audio/audio_2023-11-13_23-48-35_a1d9accc6ed945f195ff1daa2635d50e.mp3"
-    return {"audio": blob_uri}
+
+    # SRT FILE
+    whisper_audio = whisper.load_audio(blob_uri)
+    model = whisper.load_model("base")
+
+    result = whisper.transcribe(model, whisper_audio, language="en")
+
+    srt_file = ""
+
+    for i, segment in enumerate(result["segments"]):
+        start, end = segment["start"], segment["end"]
+        srt_file += f"{i + 1}\n00:00:{str(int(start)).replace('.', ',')} --> 00:00:{str(int(end)).replace('.', ',')}\n{segment['text'].strip()}\n"
+    print(srt_file)
+    srt_blob_name = f"subtitles_{current_time}_{uuid.uuid4().hex}.srt"
+    srt_blob_client = blob_service_client.get_blob_client(container="srt", blob=srt_blob_name)
+    srt_blob_client.upload_blob(srt_file, overwrite=True)
+    srt_blob_uri = srt_blob_client.url
+    return {"audio": blob_uri, "srt_file": srt_blob_uri}
 
 
 if __name__ == "__main__":
