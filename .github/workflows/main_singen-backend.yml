@@ -42,7 +42,7 @@ jobs:
         with:
           name: python-app
           path: |
-            release.zip
+            ./FastAPI_Backend/release.zip
             !venv/
 
   deploy:
@@ -60,7 +60,9 @@ jobs:
 
       - name: Unzip artifact for deployment
         working-directory: ./FastAPI_Backend
-        run: unzip release.zip
+        run: |
+          cd FastAPI_Backend
+          unzip release.zip
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
