@@ -122,6 +122,7 @@ const Prompt = () => {
       return response;
     } catch (error) {
       console.error(error);
+      setLoading(false);
       return;
     }
   };
