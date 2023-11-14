@@ -17,43 +17,23 @@ client = AsyncAzureOpenAI(
 def inquireChain(query:str) -> str:
     """So bascially askes"""
 
-async def relevantDocumentFilter(relevant_documents:list[dict],query:str):
+async def relevantDocumentFilter(relevant_documents:list[dict],query:str)->str:
     """Filters only the relevant documents by LLM"""
 
+    # Concatenate all the documents into one string
+    relevant_documents = [document["metadata"]["text"] for document in relevant_documents]
     # Async call to LLM for each document 
 
-    prompt = RELEVANT_DOCUMENT_FILTER_PROMPT.format(relevant_documents[0]["metadata"]["text"])
+    prompt = RELEVANT_DOCUMENT_FILTER_PROMPT.format(documents = relevant_documents,userPrompt=query)
     completion = await client.chat.completions.create(
         model=os.getenv("OPENAI_API_ENGINE"),
-        response_format={"type": "json_object"},
-        messages=[{"role":"system","content":"Role:You are an assistant check if documents information are relevant to the user question."},
+        messages=[{"role":"system","content":f"Role:You are an assistant to complie all documents information are relevant to the user question: {query}"},
                   {"role": "user", "content": prompt}
                 ],
-        tools= [
-            {
-                "name": "filter_relevant_documents",
-                "description": "Filters out documents that are not relevant to the user query, return True or False + explanation",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                    "isRelevantDocument": {
-                        "type": "boolean",
-                        "description": "True or False if document is relevant to user query"
-                    },
-                    "reason": {
-                        "type": "string",
-                        "description": "Reason you think the document is relevant or not relevant to the user query"
-                    }
-                    
-                    }
-                    },
-                    "required": ["isRelevantDocument","reason"]
-
-                }
-        ],
-        tool_choice={"type": "function", "function": {"name": "filter_relevant_documents"}}
-        
+        max_tokens = 1500
     )
+    print(f'Tokens used for relevantDocumentFilter: {completion.usage}')
+    return completion.choices[0].message.content
 
 import asyncio
 
@@ -94,7 +74,7 @@ async def generate_video(relevant_documents:str,query:str)->dict:
                         "properties": {
                             "scene": {
                             "type": "string",
-                            "description": "Scene description for video should be visual and general. Max 5 words"
+                            "description": "Scene description for video should be visual and general. Max 5 words\nExample:family trip skiing | accident bike crash"
                             },
                             "subtitles": {
                             "type": "array",
@@ -114,5 +94,5 @@ async def generate_video(relevant_documents:str,query:str)->dict:
         ],
         function_call={"name": "format_video_script"}
     )
-    print(f'Tokens used: {completion.usage}')
+    print(f'Tokens used VIDEO_SCRIPT_PROMPT: {completion.usage}')
     return completion.choices[0].message

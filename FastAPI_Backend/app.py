@@ -8,7 +8,7 @@ from openai import AsyncAzureOpenAI
 from PineconeUtils.Queryer import PineconeQuery
 from dotenv import load_dotenv
 import os
-from llm.chains import generate_video
+from llm.chains import generate_video,relevantDocumentFilter
 from utils import formatQuery, parse_json_output
 from pydantic import BaseModel
 from typing import Optional
@@ -118,14 +118,16 @@ async def query(UserInfo: UserInfo):
     query_dict = formatQuery(UserInfo)
     relevant_documents = pineconeQuery.query(query=query_dict["pinecone_query"])
 
-    relevant_documents_str = pineconeQuery.concatDocuments(relevant_documents)
-    sources = pineconeQuery.extractDocumentSources(relevant_documents)
+    new_relevant_documents = await relevantDocumentFilter(relevant_documents,query_dict["user_query"])
 
+    # relevant_documents_str = pineconeQuery.concatDocuments(relevant_documents)
+    sources = pineconeQuery.extractDocumentSources(relevant_documents)
+    
     # Filter out the relevant documents
 
     # Run the LLM for video generation
     video_script = await generate_video(
-        relevant_documents_str, query=query_dict["user_query"]
+        relevant_documents=new_relevant_documents, query=query_dict["user_query"]
     )
     video_script_json = parse_json_output(video_script)
 
@@ -134,6 +136,7 @@ async def query(UserInfo: UserInfo):
         "relevant_documents": relevant_documents,
         "video_script": video_script_json,
         "sources": sources,
+        "new_relevant_documents":new_relevant_documents
     }
 
 

@@ -30,8 +30,20 @@ VIDEO_SCRIPT_JSON_OUTPUT = """
         }
 """
 
-VIDEO_SCRIPT_PROMPT = """Goal:Generate 30-45sec video script based on custom knowledge base (Information below) and user query. Two components 1.Scene assets descriptions (Max 5 words) 2.Subtitle script 
-    Custom knowledge base:{relevant_documents}\n\nReturn the generated video script in the style/format: Funny and sarcastic\nFormat the video script to JSON object with list_of_scences, scenes and subtitles\nUsing the above information, generate a video script that addresses this user query:\n\n"{query}"."""
+VIDEO_SCRIPT_PROMPT = """Goal:Generate 30-45sec video script to generate a video to engage with a customer needs.\n\n
+RULES:
+1. Video script must be based on the "Custom knowledge base:" and "User query"
+2. Video Script must comprise of a) Video Script voice over text, b) Visual background video descriptions
+    2a) Scene description for video should be visual and general. Max 5 words\nExample:family trip skiing | accident bike crash
+3. Length of video script must be 30-45sec, 6 scenes or more, cannot be too short
+4. Format the video script to JSON object with list_of_scences, scenes and subtitles
+5. Curate the POV to be watched from the perspective of the customer (1st person)
+6. Style of video script should be funny and sarcastic
+7. Video script as much as possible to include specific financial product names from custom knowledge base, if any\n\n
+
+Custom knowledge base:\n-------------------------{relevant_documents}\n---------------------------------\n\n
+
+Stricly following the RULES: generate a video script to answer the User Query:"{query}"."""
 
 PINECONE_QUERY_FORMATTER = """Role: Help insurance customers figure out what's the best product to purchase given their needs. Product information are stored in PDFs of documents and the goal is to extract most\n
   Given the following user prompt, formulate a paragraph depicting what would be the most relevant to provide the user with an answer from a knowledge base.
@@ -48,12 +60,15 @@ PINECONE_QUERY_FORMATTER = """Role: Help insurance customers figure out what's t
     `
 """
 
-RELEVANT_DOCUMENT_FILTER_PROMPT="""Goal: Filter out documents based on the following rules:\n
-1. Documents must contain information that can help answering the user query
-Ask yourself, "Does this document contain information that would help answer the query? Give a short explanation of why or why not."
+RELEVANT_DOCUMENT_FILTER_PROMPT="""Goal: Identify relevant text information based on the following rules:\n
+1. Text must have some relevancy information that can help answering the user query
+2. Your final answer does not have to answer the use query. You just have to answer identify relevant text information that can help answering the user query, if any.
+3. Relevant output information to answer user context should be very exhaustive, as much as possible, ~1500 words
+4. You do not have to explan any reasoning for your answer, just provide the relevant text information that can help answering the user query immediately
+Ask yourself, "Does this document contain information that would help answer the query? "
 
-Document:
-{document}
+Documents:
+{documents}
 
-Give a short explanation as to why yo and return True or False.
+Return All relevant information as much as possible that could potentially help answer: {userPrompt} 
 """

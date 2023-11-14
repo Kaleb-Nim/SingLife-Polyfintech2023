@@ -61,7 +61,7 @@ class PineconeQuery:
     
 
 
-    def query(self,query:str,namespace:str=None,top_k:int = 2) -> list[dict]:
+    def query(self,query:str,namespace:str=None,top_k:int = 6) -> list[dict]:
         """Select a query and fetch the results
 
         Raises ValueError if namespace is not one of the following:
