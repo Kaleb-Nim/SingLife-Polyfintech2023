@@ -54,7 +54,7 @@ async def generate_video(relevant_documents:str,query:str)->dict:
 
     prompt = VIDEO_SCRIPT_PROMPT.format(query=query,relevant_documents=relevant_documents,VIDEO_SCRIPT_JSON_OUTPUT=VIDEO_SCRIPT_JSON_OUTPUT)
     completion = await client.chat.completions.create(
-        model=os.getenv("OPENAI_API_ENGINE"),
+        model="fintech-gpt4",
         temperature=0,
         messages=[
             {"role": "user", "content": prompt}
@@ -95,4 +95,5 @@ async def generate_video(relevant_documents:str,query:str)->dict:
         function_call={"name": "format_video_script"}
     )
     print(f'Tokens used VIDEO_SCRIPT_PROMPT: {completion.usage}')
+    print(f'VIDEO SCRIPT PROMPT:\n{prompt}\n------END-----',flush=True)
     return completion.choices[0].message

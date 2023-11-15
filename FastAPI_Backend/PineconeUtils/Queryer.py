@@ -117,7 +117,7 @@ class PineconeQuery:
         for i, d in enumerate(relevant_document):
             # print(f"\n## Document {i}\n")
             # print(d.page_content)
-            relevant_documents_str += f'\n## Document {i}\n {d["metadata"]["text"]}'
+            relevant_documents_str += f'\n## Document {i}\n {d["metadata"]["KeyInfo"]}'
         
         return relevant_documents_str
     

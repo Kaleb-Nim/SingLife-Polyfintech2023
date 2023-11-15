@@ -20,6 +20,7 @@ def tiktoken_len(text):
     )
     return len(tokens)
 
+
 def process_pdf_files(folder_path):
     # Get all files in the folder
     all_files = os.listdir(folder_path)
@@ -47,6 +48,7 @@ def process_pdf_files(folder_path):
             # Load the PDF content
             with pdfplumber.open(file_path) as pdf:
                 content = ' '.join(page.extract_text() for page in pdf.pages)
+
 
             # Generate a unique ID based on the file path
             m = hashlib.md5()
