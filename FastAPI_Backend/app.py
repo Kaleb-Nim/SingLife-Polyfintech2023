@@ -21,7 +21,7 @@ import json
 import whisper_timestamped as whisper
 
 # Load variables from the .env file
-load_dotenv(".env")
+print("App.py:", load_dotenv(".env"))
 from fastapi.middleware.cors import CORSMiddleware
 
 # Set the openai api key
@@ -191,8 +191,13 @@ async def generateVideo(VideoBody: VideoBody):
         )
         responseContent = json.loads(response.content)
         if len(responseContent["videos"]) > 0:
-            print(responseContent)
-            videoLink = responseContent["videos"][0]["video_files"][0]["link"]
+            videoLink = None
+            for video in responseContent["videos"][0]["video_files"]:
+                if video['quality'] == "hd":
+                    videoLink = video["link"]
+                    break
+            if not videoLink:
+                videoLink = responseContent["videos"][0]["video_files"][0]["link"]
             videoResponse = requests.get(videoLink)
             current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             blob_name = f"{scene}_{current_time}_{generate_uuid()}.mp4"
@@ -233,12 +238,20 @@ async def generateVoice(VoiceBody: VoiceBody):
     for i, segment in enumerate(result["segments"]):
         start, end = segment["start"], segment["end"]
         srt_file += f"{i + 1}\n00:00:{str(int(start)).replace('.', ',')} --> 00:00:{str(int(end)).replace('.', ',')}\n{segment['text'].strip()}\n"
-    print(srt_file)
     srt_blob_name = f"subtitles_{current_time}_{generate_uuid()}.srt"
     srt_blob_client = blob_service_client.get_blob_client(container="srt", blob=srt_blob_name)
     srt_blob_client.upload_blob(srt_file, overwrite=True)
     srt_blob_uri = srt_blob_client.url
     return {"audio": blob_uri, "srt_file": srt_blob_uri}
+
+
+class MovieBody(BaseModel):
+    audio: str
+    srt_file: str
+    music: str
+    video: list[str]
+    subtitles: list[str]
+
 
 
 if __name__ == "__main__":

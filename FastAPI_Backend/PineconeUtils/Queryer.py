@@ -15,7 +15,7 @@ from pinecone.index import Index
 # Data processing stuff
 import pandas as pd
 
-print(load_dotenv('../.env'))
+print("Queryer.py:",load_dotenv('./.env'))
 
 client = AzureOpenAI(
     azure_endpoint=os.getenv("OPENAI_API_ENDPOINT"), 

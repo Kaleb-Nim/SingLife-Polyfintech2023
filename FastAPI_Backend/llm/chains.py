@@ -6,7 +6,8 @@ import asyncio
 from dotenv import load_dotenv
 import os
 from .prompts import VIDEO_SCRIPT_PROMPT,VIDEO_SCRIPT_JSON_OUTPUT,RELEVANT_DOCUMENT_FILTER_PROMPT
-print(load_dotenv('../.env'))
+
+print("Chains.py:", load_dotenv("./.env"))
 
 client = AsyncAzureOpenAI(
     azure_endpoint=os.getenv("OPENAI_API_ENDPOINT"), 
@@ -15,7 +16,7 @@ client = AsyncAzureOpenAI(
 )
 
 def inquireChain(query:str) -> str:
-    """So bascially askes"""
+    """So basically asks"""
 
 async def relevantDocumentFilter(relevant_documents:list[dict],query:str)->str:
     """Filters only the relevant documents by LLM"""
@@ -27,7 +28,7 @@ async def relevantDocumentFilter(relevant_documents:list[dict],query:str)->str:
     prompt = RELEVANT_DOCUMENT_FILTER_PROMPT.format(documents = relevant_documents,userPrompt=query)
     completion = await client.chat.completions.create(
         model=os.getenv("OPENAI_API_ENGINE"),
-        messages=[{"role":"system","content":f"Role:You are an assistant to complie all documents information are relevant to the user question: {query}"},
+        messages=[{"role":"system","content":f"Role: You are an assistant to compile all documents information are relevant to the user question: {query}"},
                   {"role": "user", "content": prompt}
                 ],
         max_tokens = 1500
@@ -54,7 +55,8 @@ async def generate_video(relevant_documents:str,query:str)->dict:
 
     prompt = VIDEO_SCRIPT_PROMPT.format(query=query,relevant_documents=relevant_documents,VIDEO_SCRIPT_JSON_OUTPUT=VIDEO_SCRIPT_JSON_OUTPUT)
     completion = await client.chat.completions.create(
-        model="fintech-gpt4",
+        # model=os.getenv("OPENAI_API_ENGINE"),
+        model='fintech-gpt4',
         temperature=0,
         messages=[
             {"role": "user", "content": prompt}
@@ -74,7 +76,7 @@ async def generate_video(relevant_documents:str,query:str)->dict:
                         "properties": {
                             "scene": {
                             "type": "string",
-                            "description": "Scene description for video should be visual and general. Max 5 words\nExample:family trip skiing | accident bike crash"
+                            "description": "Scene description for video should be visual and general and not include the name of the user to describe what is said in the subtitles. Max 5 words\nExample: family trip skiing | accident bike crash"
                             },
                             "subtitles": {
                             "type": "array",
@@ -95,5 +97,4 @@ async def generate_video(relevant_documents:str,query:str)->dict:
         function_call={"name": "format_video_script"}
     )
     print(f'Tokens used VIDEO_SCRIPT_PROMPT: {completion.usage}')
-    print(f'VIDEO SCRIPT PROMPT:\n{prompt}\n------END-----',flush=True)
     return completion.choices[0].message

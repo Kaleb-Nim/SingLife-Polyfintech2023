@@ -25,6 +25,8 @@ azure-storage-blob = "*"
 urllib3 = "*"
 langchain = "*"
 torch = "*"
+ez-setup = "*"
+moviepy = "*"
 
 [dev-packages]
 

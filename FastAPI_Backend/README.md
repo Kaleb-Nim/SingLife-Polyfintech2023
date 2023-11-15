@@ -36,3 +36,8 @@ Pushes the image
 ```bash
 docker push singenfastapi.azurecr.io/singen-fastapi
 ```
+
+Pull if needed
+```bash
+docker pull singenfastapi.azurecr.io/singen-fastapi
+```
