@@ -27,6 +27,7 @@ langchain = "*"
 torch = "*"
 ez-setup = "*"
 moviepy = "*"
+srt = "*"
 
 [dev-packages]
 

@@ -15,10 +15,16 @@ from typing import Optional
 import random
 from elevenlabs import generate as generate_voice, set_api_key, voices
 from azure.storage.blob import BlobServiceClient
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.parse import quote
 import json
 import whisper_timestamped as whisper
+import srt
+import re
+import difflib
+from moviepy import editor
+from PIL import Image
+import numpy as np
 
 # Load variables from the .env file
 print("App.py:", load_dotenv(".env"))
@@ -65,16 +71,18 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+
 def generate_uuid():
     # Generate a random UUID
     uuid = "{:08x}-{:04x}-{:04x}-{:04x}-{:012x}".format(
         random.getrandbits(32),
         random.getrandbits(16),
-        (random.getrandbits(12) & 0x0fff) | 0x4000,
-        (random.getrandbits(12) & 0x3fff) | 0x8000,
-        random.getrandbits(48)
+        (random.getrandbits(12) & 0x0FFF) | 0x4000,
+        (random.getrandbits(12) & 0x3FFF) | 0x8000,
+        random.getrandbits(48),
     )
     return uuid
+
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
@@ -132,7 +140,7 @@ async def query(UserInfo: UserInfo):
 
     relevant_documents_str = pineconeQuery.concatDocuments(relevant_documents)
     sources = pineconeQuery.extractDocumentSources(relevant_documents)
-    
+
     # Filter out the relevant documents
 
     # Run the LLM for video generation
@@ -228,7 +236,7 @@ async def generateVideo(VideoBody: VideoBody):
         if len(responseContent["videos"]) > 0:
             videoLink = None
             for video in responseContent["videos"][0]["video_files"]:
-                if video['quality'] == "hd":
+                if video["quality"] == "hd":
                     videoLink = video["link"]
                     break
             if not videoLink:
@@ -255,12 +263,12 @@ async def generateVoice(VoiceBody: VoiceBody):
     voiceList = voices()
     selectedVoice = random.choices(voiceList)
     current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    # audio = generate_voice(text=allText, voice=selectedVoice[0])
-    # blob_name = f"audio_{current_time}_{generate_uuid()}.mp3"
-    # blob_client = blob_service_client.get_blob_client(container="audio", blob=blob_name)
-    # blob_client.upload_blob(audio, overwrite=True)
-    # blob_uri = blob_client.url
-    blob_uri = "https://singen.blob.core.windows.net/audio/audio_2023-11-13_23-48-35_a1d9accc6ed945f195ff1daa2635d50e.mp3"
+    audio = generate_voice(text=allText, voice=selectedVoice[0])
+    blob_name = f"audio_{current_time}_{generate_uuid()}.mp3"
+    blob_client = blob_service_client.get_blob_client(container="audio", blob=blob_name)
+    blob_client.upload_blob(audio, overwrite=True)
+    blob_uri = blob_client.url
+    # blob_uri = "https://singen.blob.core.windows.net/audio/audio_2023-11-13_23-48-35_a1d9accc6ed945f195ff1daa2635d50e.mp3"
 
     # SRT FILE
     whisper_audio = whisper.load_audio(blob_uri)
@@ -274,7 +282,9 @@ async def generateVoice(VoiceBody: VoiceBody):
         start, end = segment["start"], segment["end"]
         srt_file += f"{i + 1}\n00:00:{str(int(start)).replace('.', ',')} --> 00:00:{str(int(end)).replace('.', ',')}\n{segment['text'].strip()}\n"
     srt_blob_name = f"subtitles_{current_time}_{generate_uuid()}.srt"
-    srt_blob_client = blob_service_client.get_blob_client(container="srt", blob=srt_blob_name)
+    srt_blob_client = blob_service_client.get_blob_client(
+        container="srt", blob=srt_blob_name
+    )
     srt_blob_client.upload_blob(srt_file, overwrite=True)
     srt_blob_uri = srt_blob_client.url
     return {"audio": blob_uri, "srt_file": srt_blob_uri}
@@ -287,6 +297,161 @@ class MovieBody(BaseModel):
     video: list[str]
     subtitles: list[str]
 
+def split_text(text):
+    words = text.split()
+    lines = []
+    current_line = ''
+
+    for word in words:
+        if len(current_line + ' ' + word) <= 50:
+            if current_line == '':
+                current_line = word
+            else:
+                current_line += ' ' + word
+        else:
+            lines.append(current_line)
+            current_line = word
+
+    if current_line:
+        lines.append(current_line)
+
+    return '\n'.join(lines)
+
+def annotate(clip, txt, txt_color="white", fontsize=75, font="Arial-Bold", blur=False):
+    txt = split_text(txt)
+    txtclip = editor.TextClip(txt, fontsize=fontsize, font=font, color=txt_color)
+    txtclip = txtclip.set_pos(("center", clip.h - txtclip.h - 150))
+    if blur:
+        blur_size = 5
+        blur_txtclip = editor.TextClip(txt, fontsize=fontsize, font=font, color="black")
+        blur_txtclip = blur_txtclip.set_pos(
+            (
+                (clip.w - blur_txtclip.w) // 2 + blur_size,
+                clip.h - blur_txtclip.h - (150 - blur_size),
+            )
+        )
+        cvc = editor.CompositeVideoClip([clip, blur_txtclip, txtclip])
+    else:
+        cvc = editor.CompositeVideoClip([clip, txtclip])
+    return cvc.set_duration(clip.duration)
+
+
+def calculate_text_similarity(text1, text2):
+    # Create a Differ instance
+    differ = difflib.Differ()
+
+    # Compare the texts
+    diff = differ.compare(text1.split(), text2.split())
+
+    # Calculate the similarity ratio
+    similarity_ratio = difflib.SequenceMatcher(None, text1, text2).ratio()
+
+    return similarity_ratio
+
+
+def resizer(pic, newsize):
+    newsize = list(map(int, newsize))[::-1]
+    shape = pic.shape
+    if len(shape)==3:
+        newshape = (newsize[0],newsize[1], shape[2] )
+    else:
+        newshape = (newsize[0],newsize[1])
+        
+    pilim = Image.fromarray(pic)
+    resized_pil = pilim.resize(newsize[::-1], Image.LANCZOS)
+    #arr = np.fromstring(resized_pil.tostring(), dtype='uint8')
+    #arr.reshape(newshape)
+    return np.array(resized_pil)
+
+@app.post("/stitchVideos")
+async def stitchVideos(MovieBody: MovieBody):
+    print("Processing SRT")
+    srt_file_response = requests.get(MovieBody.srt_file)
+    srt_file = srt_file_response.content.decode("utf-8")
+    srt_parse = list(srt.parse(srt_file))
+    subs = []
+    count = 0
+    print("Processing Subtitles")
+    for srt_content in srt_parse:
+        start = srt_content.start
+        end = srt_content.end
+        duration = end - start
+        content = srt_content.content
+        sentences = re.split("[?.!]", content)
+        for idx, sentence in enumerate(sentences):
+            for i in range(count, len(MovieBody.subtitles)):
+                if calculate_text_similarity(MovieBody.subtitles[i], sentence) >= 0.7:
+                    new_sentence = MovieBody.subtitles[i]
+                    sentence_duration = duration * len(new_sentence) / len(content)
+                    if len(subs) > 0:
+                        currentStart = subs[-1][0][0]
+                    else:
+                        currentStart = timedelta(seconds=0)
+                    subs.append(
+                        ([[currentStart, currentStart + sentence_duration], new_sentence])
+                    )
+                    count += 1
+                    break
+    videoList = []
+    print(subs)
+    print("Processing Video")
+    for idx, video in enumerate(MovieBody.video):
+        print("start", subs[int(idx)][0][0])
+        print("end", subs[int(idx)][0][1])
+        duration = subs[int(idx)][0][1] - subs[int(idx)][0][0]
+        tempVideo = editor.VideoFileClip(video)
+        tempVideo = tempVideo.loop(duration = duration.total_seconds())
+        tempVideo = tempVideo.set_fps(30)
+        tempVideo = tempVideo.fl_image(lambda pic: resizer(pic.astype('uint8'), (1920, 1080)))
+        tempVideo = annotate(tempVideo, subs[idx][1], blur=True)
+        videoList.append(tempVideo)
+
+    print("Processing Audio & Music")
+    audio = editor.AudioFileClip(MovieBody.audio)
+    final_clip = editor.concatenate_videoclips(videoList)
+    final_clip = final_clip.set_audio(audio)
+
+    current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    blob_name = f"final_{current_time}_{generate_uuid()}.mp4"
+    final_clip.write_videofile(blob_name, fps=30, codec="libx264", audio_codec="aac")
+    with open(blob_name, 'rb') as f:
+        data = f.read()
+        f.close()
+    blob_client = blob_service_client.get_blob_client(container="final", blob=blob_name)
+
+    blob_client.upload_blob(data, overwrite=True)
+    blob_uri = blob_client.url
+    return {"final": blob_uri}
+    # for i in srt.parse(srt_file)
+    # video = editor.VideoFileClip(
+    #     "https://singen.blob.core.windows.net/video/Office%20desk%20with%20travel%20brochures_2023-11-15_16-49-30_3577eab1-6808-4b5a-8149-c3a4b6b32080.mp4"
+    # )
+    # # subs = [((0, 4), 'subs1'),
+    # #     ((4, 9), 'subs2'),
+    # #     ((9, 12), 'subs3'),
+    # #     ((12, 16), 'subs4')]
+    # subs = [((0, 4), "subs1")]
+    # annotated_clips = [
+    #     annotate(video.subclip(from_t, to_t), txt, blur=True)
+    #     for (from_t, to_t), txt in subs
+    # ]
+    # final_clip = editor.concatenate_videoclips(annotated_clips)
+    # # result = CompositeVideoClip([video, subtitles.set_pos(('center','bottom'))])
+
+    # final_clip.write_videofile("output.mp4", fps=video.fps)
+
+    # with open("output.mp4", 'rb') as f:
+    #     data = f.read()
+    #     f.close()
+
+    # current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    # blob_name = f"final_{current_time}_{generate_uuid()}.mp4"
+
+    # blob_client = blob_service_client.get_blob_client(container="final", blob=blob_name)
+
+    # blob_client.upload_blob(data, overwrite=True)
+    # blob_uri = blob_client.url
+    # return {"final": blob_uri}
 
 
 if __name__ == "__main__":

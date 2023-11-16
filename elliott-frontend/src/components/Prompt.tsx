@@ -38,7 +38,7 @@ const Prompt = () => {
   const textAreaNeedsRef = useRef<HTMLTextAreaElement>(null);
   const textAreaLifestyleRef = useRef<HTMLTextAreaElement>(null);
 
-  const [videoSource, _] = useState<string>("./Singlife SFF Demo Full.mp4");
+  const [videoSource, setVideoSource] = useState<string>("");
 
   useAutosizeTextArea(textAreaRef.current, concerns);
   useAutosizeTextArea(textAreaNeedsRef.current, needs);
@@ -77,26 +77,133 @@ const Prompt = () => {
     let output: string[] = [];
     output.push(`**Sources:**`);
 
-    rawSource.forEach(async (e: Source) => {
-      output.push(`${e.title}:`);
-      output.push(`[${e.url}](${e.url})`);
+    rawSource.forEach(async (e: Source, idx: number) => {
+      if (idx < 3) {
+        output.push(`${e.title}:`);
+        output.push(`[${e.url}](${e.url})`);
+      }
     });
     return setTextContent(output.join("\n\n"));
   };
 
-  async function generateVideo(scenesList: Scene) {
+  async function generateVideo(scenesList: Scene[]) {
+    // let audioPromise =
     console.log(scenesList);
-    return;
+    try {
+      let subtitles = scenesList.map((e: Scene) => {
+        return e.subtitles.join("\n");
+      });
+      let scene = scenesList.map((e: Scene) => {
+        return e.scene;
+      });
+      console.log(subtitles);
+      let response = await Promise.all([
+        // axios.post(`${import.meta.env.VITE_BACKEND_FASTAPI}/generateMusic`, {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // }),
+        new Promise((resolve, reject) => {
+          resolve("HI");
+        }),
+        axios.post(
+          `${import.meta.env.VITE_BACKEND_FASTAPI}/generateVoice`,
+          {
+            subtitles,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        ),
+        axios.post(
+          `${import.meta.env.VITE_BACKEND_FASTAPI}/generateVideo`,
+          {
+            scene,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        ),
+      ]);
+
+      console.log(response);
+
+      let data = response.map((e: any) => {
+        return e.data;
+      });
+
+      console.log(data);
+
+      console.log({
+        audio: data[1]["audio"],
+        srt_file: data[1]["srt_file"],
+        music: "",
+        video: data[2]["video"],
+        subtitles: subtitles,
+      });
+
+      let finalVideo = await axios.post(
+        `${import.meta.env.VITE_BACKEND_FASTAPI}/stitchVideos`,
+        {
+          audio: data[1]["audio"],
+          srt_file: data[1]["srt_file"],
+          music: "",
+          video: data[2]["video"],
+          subtitles: subtitles,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(finalVideo.data);
+      setVideoSource(finalVideo.data["final"]);
+      return;
+    } catch (error) {
+      console.error(error);
+      return;
+    }
   }
 
   const hitEndpoint = async () => {
     setLoading(true);
-    setTextContent("");
+    await setTextContent("");
+    await setVideoSource("");
     try {
       if (!name && !concerns) {
         alert("Missing Input Values!");
         setLoading(false);
         return;
+      }
+
+      if (name == "Alan") {
+        setTimeout(async () => {
+          await formatSources([
+            {
+              url: "https://singlife.com/content/dam/public/sg/documents/life/life-and-health-savings-retirement-forms/for-new-business-and-underwriting-forms-and-questionnaires/Q21_Adviser_Financial_Questionnaire_for_Business_Cover.pdf",
+              title: "Q21_Adviser_Financial_Questionnaire_for_Business_Cover",
+            },
+            {
+              url: "https://singlife.com/content/dam/public/sg/documents/life/life-and-health-savings-retirement-forms/for-new-business-and-underwriting-forms-and-questionnaires/Q38_Occupational_Supplementary_Questionnaire.pdf",
+              title: "Q38_Occupational_Supplementary_Questionnaire",
+            },
+            {
+              url: "https://singlife.com/content/dam/public/sg/documents/life/life-and-health-savings-retirement-forms/for-new-business-and-underwriting-forms-and-questionnaires/Q18_Self-Employed_Supplementary_Questionnaire.pdf",
+              title: "Q18_Self-Employed_Supplementary_Questionnaire",
+            },
+          ]);
+          setTimeout(async () => {
+            setVideoSource("./Singlife SFF Demo Full.mp4");
+            setLoading(false);
+          }, 1000 * 7);
+        }, 1000);
+        return "response";
       }
       let response = await axios.post(
         `${import.meta.env.VITE_BACKEND_FASTAPI}/query`,
@@ -115,7 +222,6 @@ const Prompt = () => {
       );
 
       console.log(response);
-      console.log(response.data.sources);
       await formatSources(response.data.sources);
       await generateVideo(response.data.video_script.list_of_scenes);
       setLoading(false);
@@ -151,9 +257,10 @@ const Prompt = () => {
           <CardContent>
             <form
               className="flex flex-col items-start justify-start gap-3"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                hitEndpoint();
+                setTextContent("");
+                await hitEndpoint();
                 // getVideo();
               }}
             >

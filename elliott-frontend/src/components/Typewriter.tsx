@@ -20,16 +20,18 @@ const TypewriterMarkdown: React.FC<TypewriterMarkdownProps> = ({
       setDisplayedText((prevText) => prevText + markdownText[index]);
       index++;
 
-      if (index === markdownText.length -1) {
+      if (index === markdownText.length - 1) {
         clearInterval(intervalId);
       }
-    }, 20); // Adjust the interval as needed
+    }, 15); // Adjust the interval as needed
 
     return () => clearInterval(intervalId);
   }, [markdownText]);
 
   return (
-    <ReactMarkdown className="mt-4 text-sm text-gray-500 break-all flex flex-col gap-1">
+    <ReactMarkdown
+      className="mt-4 text-sm text-gray-500 break-all flex flex-col gap-1"
+    >
       {displayedText}
     </ReactMarkdown>
   );
