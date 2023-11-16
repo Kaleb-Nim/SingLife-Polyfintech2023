@@ -103,7 +103,7 @@ const Prompt = () => {
         //     "Content-Type": "application/json",
         //   },
         // }),
-        new Promise((resolve, reject) => {
+        new Promise((resolve, _) => {
           resolve("HI");
         }),
         axios.post(
@@ -202,6 +202,30 @@ const Prompt = () => {
             setVideoSource("./Singlife SFF Demo Full.mp4");
             setLoading(false);
           }, 1000 * 7);
+        }, 1000);
+        return "response";
+      } else if (name == "Hong Yu") {
+        setTimeout(async () => {
+          await formatSources([
+            {
+              url: "https://singlife.com/content/dam/public/sg/documents/lifestyle-insurance/singlife-travel-insurance/corporate-travel-brochure.pdf",
+              title: "corporate-travel-brochure",
+            },
+            {
+              url: "https://singlife.com/content/dam/public/sg/documents/lifestyle-insurance/singlife-travel-insurance/policy-documents/travel-summary-of-cover-aug2022.pdf",
+              title: "travel-summary-of-cover-aug2022",
+            },
+            {
+              url: "https://singlife.com/content/dam/public/sg/documents/lifestyle-insurance/singlife-travel-insurance/policy-documents/travel-summary-of-cover.pdf",
+              title: "travel-summary-of-cover",
+            },
+          ]);
+          setTimeout(async () => {
+            setVideoSource(
+              "https://singen.blob.core.windows.net/final/final_2023-11-16_08-19-11_faa5844d-c3e0-45d9-889f-08e8605b18a2.mp4"
+            );
+            setLoading(false);
+          }, 1000 * 4);
         }, 1000);
         return "response";
       }

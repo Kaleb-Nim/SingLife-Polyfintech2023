@@ -352,10 +352,6 @@ def calculate_text_similarity(text1, text2):
 def resizer(pic, newsize):
     newsize = list(map(int, newsize))[::-1]
     shape = pic.shape
-    if len(shape)==3:
-        newshape = (newsize[0],newsize[1], shape[2] )
-    else:
-        newshape = (newsize[0],newsize[1])
         
     pilim = Image.fromarray(pic)
     resized_pil = pilim.resize(newsize[::-1], Image.LANCZOS)
@@ -365,6 +361,18 @@ def resizer(pic, newsize):
 
 @app.post("/stitchVideos")
 async def stitchVideos(MovieBody: MovieBody):
+    print("Process Scene")
+    new_subtitles = [x for x in MovieBody.subtitles]
+    new_video = [x for x in MovieBody.video]
+    for idx, subtitle in enumerate(MovieBody.subtitles):
+        sentences = re.split(r'(?<=[.!?])\s+', subtitle)
+        new_subtitles.pop(idx)
+        popped_vid = new_video.pop(idx)
+        for sentence in sentences:
+            new_subtitles.insert(idx, sentence)
+            new_video.insert(idx, popped_vid)
+    print(new_subtitles)
+    print(new_video)
     print("Processing SRT")
     srt_file_response = requests.get(MovieBody.srt_file)
     srt_file = srt_file_response.content.decode("utf-8")
@@ -377,11 +385,11 @@ async def stitchVideos(MovieBody: MovieBody):
         end = srt_content.end
         duration = end - start
         content = srt_content.content
-        sentences = re.split("[?.!]", content)
+        sentences = re.split(r'(?<=[.!?])\s+', content)
         for idx, sentence in enumerate(sentences):
-            for i in range(count, len(MovieBody.subtitles)):
-                if calculate_text_similarity(MovieBody.subtitles[i], sentence) >= 0.7:
-                    new_sentence = MovieBody.subtitles[i]
+            for i in range(count, len(new_subtitles)):
+                if calculate_text_similarity(new_subtitles[i], sentence) >= 0.7:
+                    new_sentence = new_subtitles[i]
                     sentence_duration = duration * len(new_sentence) / len(content)
                     if len(subs) > 0:
                         currentStart = subs[-1][0][0]
@@ -395,7 +403,7 @@ async def stitchVideos(MovieBody: MovieBody):
     videoList = []
     print(subs)
     print("Processing Video")
-    for idx, video in enumerate(MovieBody.video):
+    for idx, video in enumerate(new_video):
         print("start", subs[int(idx)][0][0])
         print("end", subs[int(idx)][0][1])
         duration = subs[int(idx)][0][1] - subs[int(idx)][0][0]
