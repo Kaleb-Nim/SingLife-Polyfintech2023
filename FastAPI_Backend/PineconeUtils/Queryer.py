@@ -99,13 +99,13 @@ class PineconeQuery:
             raise TypeError(f"Query must be a string, got {type(query)}")
         
         res = client.embeddings.create(input=query, model=os.getenv("OPENAI_API_EMBED"))
-        print(res)
         query_embedding = res.data[0].embedding
         # Get the top 3 results
         results = self.index.query(query_embedding,top_k=top_k,include_metadata=True)
-        print('results: ', results)
         
         results_dict = results.to_dict()
+        print('Number of relevant documents pulled', len(results_dict))
+
         matched_docs = results_dict["matches"]
         return matched_docs
     
